@@ -15,10 +15,10 @@ pipeline {
             steps {
                 //This sh step runs the Python command to compile your application and
                 //its calc library into byte code files, which are placed into the sources workspace directory
-                sh 'python -m py_compile sources/add2vals.py sources/calc.py'
+                sh 'python -m py_compile DjangoWebProject2/sources/add2vals.py DjangoWebProject2/sources/calc.py'
                 //This stash step saves the Python source code and compiled byte code files from the sources
                 //workspace directory for use in later stages.
-                stash(name: 'compiled-results', includes: 'sources/*.py*')
+                stash(name: 'compiled-results', includes: 'DjangoWebProject2/sources/*.py*')
             }
         }
         stage('Test') {
@@ -35,7 +35,7 @@ pipeline {
                 //unit tests (defined in test_calc.py) on the "calc" library’s add2 function.
                 //The --junit-xml test-reports/results.xml option makes py.test generate a JUnit XML report,
                 //which is saved to test-reports/results.xml
-                sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
+                sh 'py.test --verbose --junit-xml test-reports/results.xml DjangoWebProject2/sources/test_calc.py'
             }
             post {
                 always {
@@ -74,7 +74,7 @@ pipeline {
                         success {
                             //This archiveArtifacts step archives the standalone executable file and exposes this file
                             //through the Jenkins interface.
-                            archiveArtifacts "${env.BUILD_ID}/sources/dist/add2vals"
+                            archiveArtifacts "${env.BUILD_ID}DjangoWebProject2/sources/dist/add2vals"
                             sh "docker run --rm -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
                         }
                     }
