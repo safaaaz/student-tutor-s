@@ -25,12 +25,13 @@ SECRET_KEY = 'dbe17a0d-f694-4c3e-b97e-4eadd85a5268'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = []
 
 # Application references
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
 INSTALLED_APPS = [
-    'app',
+    
     # Add your apps here to enable them
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app',
 ]
+
+AUTH_USER_MODEL = 'app.tutor'
+#AUTH_USER_MODEL = 'app.student' 
 
 # Middleware framework
 # https://docs.djangoproject.com/en/2.1/topics/http/middleware/
@@ -59,7 +64,7 @@ ROOT_URLCONF = 'DjangoWebProject2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

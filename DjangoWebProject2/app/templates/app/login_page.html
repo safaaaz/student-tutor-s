@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>loogin</title>
+</head>
+<body>
+         <form action="signup" method="post" class="form-horizontal">
+             {% csrf_token %}
+             <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="signup" class="btn btn-default" />
+                    </div>
+                </div>
+
+         </form>
+</body>
+</html>

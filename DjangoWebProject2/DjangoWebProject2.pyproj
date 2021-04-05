@@ -32,13 +32,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="app\admin\admin.py" />
-    <Compile Include="app\admin\apps.py" />
-    <Compile Include="app\admin\migrations\__init__.py" />
-    <Compile Include="app\admin\models.py" />
-    <Compile Include="app\admin\tests.py" />
-    <Compile Include="app\admin\views.py" />
-    <Compile Include="app\admin\__init__.py" />
+    <Compile Include="app\admin.py" />
     <Compile Include="app\forms.py" />
     <Compile Include="app\models.py" />
     <Compile Include="app\tests.py" />
@@ -53,10 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
-    <Folder Include="app\admin\" />
-    <Folder Include="app\admin\migrations\" />
-    <Folder Include="app\admin\templates\" />
-    <Folder Include="app\admin\templates\admin\" />
     <Folder Include="app\migrations\" />
     <Folder Include="app\static\" />
     <Folder Include="app\static\app\" />
@@ -68,10 +58,9 @@
     <Folder Include="DjangoWebProject2\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\admin\templates\admin\index.html" />
-    <Content Include="app\admin\templates\admin\test.html" />
+    <Content Include="app\templates\app\login_page.html" />
+    <Content Include="app\templates\app\signup.html" />
     <Content Include="requirements.txt" />
-    <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />
     <Content Include="app\static\app\content\bootstrap.min.css" />
     <Content Include="app\static\app\content\site.css" />

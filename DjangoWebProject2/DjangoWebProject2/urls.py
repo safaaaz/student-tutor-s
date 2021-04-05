@@ -6,8 +6,13 @@ from datetime import datetime
 from django.urls import path
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 from app import forms, views
 
+
+admin.autodiscover()
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -27,4 +32,10 @@ urlpatterns = [
          name='login'),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('admin/', admin.site.urls),
+    #path('app/signup', views.signup_view, name='signup'),
+
+    path('app/login_page', views.login_page, name='login'),
+    path('app/signup', views.signup_view, name='signup'),
+    path('app/signup1', views.signup1, name='signup1'),
+
 ]
