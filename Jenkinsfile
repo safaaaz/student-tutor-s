@@ -43,6 +43,5 @@ pipeline {
             }
         }
     }
-    commitChangeset = sh(returnStdout: true, script: 'git diff-tree --no-commit-id --name-status -r HEAD').trim()
     python -m py_compile sources/add2vals.py sources/calc.py
 }
