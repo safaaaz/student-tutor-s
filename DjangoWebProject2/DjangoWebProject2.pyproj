@@ -44,6 +44,15 @@
     <Compile Include="DjangoWebProject2\settings.py" />
     <Compile Include="DjangoWebProject2\urls.py" />
     <Compile Include="DjangoWebProject2\wsgi.py" />
+    <Compile Include="sources\add2vals.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="sources\calc.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="sources\test_calc.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
@@ -56,6 +65,7 @@
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
     <Folder Include="DjangoWebProject2\" />
+    <Folder Include="sources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\templates\app\login_page.html" />
