@@ -15,10 +15,10 @@ pipeline {
             steps {
                 //This sh step runs the Python command to compile your application and
                 //its calc library into byte code files, which are placed into the sources workspace directory
-                sh 'python -m py_compile sources/add2vals.py sources/calc.py'
+                sh 'python -m py_compile DjangoWebProject2/sources/add2vals.py DjangoWebProject2/sources/calc.py'
                 //This stash step saves the Python source code and compiled byte code files from the sources
                 //workspace directory for use in later stages.
-                stash(name: 'compiled-results', includes: 'sources/*.py*')
+                stash(name: 'compiled-results', includes: 'DjangoWebProject2/sources/*.py*')
             }
         }
         stage('Test') {
@@ -35,7 +35,7 @@ pipeline {
                 //unit tests (defined in test_calc.py) on the "calc" library’s add2 function.
                 //The --junit-xml test-reports/results.xml option makes py.test generate a JUnit XML report,
                 //which is saved to test-reports/results.xml
-                sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
+                sh 'py.test --verbose --junit-xml test-reports/results.xml DjangoWebProject2/sources/test_calc.py'
             }
             post {
                 always {
@@ -47,37 +47,8 @@ pipeline {
                 }
             }
         }
-        stage('Deliver') {
-                    agent any
-                    //This environment block defines two variables which will be used later in the 'Deliver' stage.
-                    environment {
-                        VOLUME = '$(pwd)/sources:/src'
-                        IMAGE = 'cdrx/pyinstaller-linux:python2'
-                    }
-                    steps {
-                        //This dir step creates a new subdirectory named by the build number.
-                        //The final program will be created in that directory by pyinstaller.
-                        //BUILD_ID is one of the pre-defined Jenkins environment variables.
-                        //This unstash step restores the Python source code and compiled byte
-                        //code files (with .pyc extension) from the previously saved stash. image]
-                        //and runs this image as a separate container.
-                        dir(path: env.BUILD_ID) {
-                            unstash(name: 'compiled-results')
 
-                            //This sh step executes the pyinstaller command (in the PyInstaller container) on your simple Python application.
-                            //This bundles your add2vals.py Python application into a single standalone executable file
-                            //and outputs this file to the dist workspace directory (within the Jenkins home directory).
-                            sh "docker run --rm -v ${VOLUME} ${IMAGE} 'pyinstaller -F add2vals.py'"
-                        }
-                    }
-                    post {
-                        success {
-                            //This archiveArtifacts step archives the standalone executable file and exposes this file
-                            //through the Jenkins interface.
-                            archiveArtifacts "${env.BUILD_ID}/sources/dist/add2vals"
-                            sh "docker run --rm -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
-                        }
-                    }
+
         }
-    }
+    
 }
