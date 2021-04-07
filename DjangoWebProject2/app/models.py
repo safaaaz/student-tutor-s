@@ -9,20 +9,20 @@ from django.contrib.auth.models import User
 #User = settings.AUTH_USER_MODEL
 
 # Create your models here.
-#class student(User):
+class student(User):
     
-#    ids= models.IntegerField()
-#    name=models.CharField(max_length=50)
-#    #password=models.CharField(max_length=50)
-#    age=models.IntegerField()
-#    gender=models.CharField(max_length=50)
-#    #email=models.CharField(max_length=50)
-#    phone=models.IntegerField()
+    ids= models.IntegerField()
+    name=models.CharField(max_length=50)
+    #password=models.CharField(max_length=50)
+    age=models.IntegerField()
+    gender=models.CharField(max_length=50)
+    #email=models.CharField(max_length=50)
+    phone=models.IntegerField()
 
-#    pic=models.ImageField()
+    pic=models.ImageField()
 
-#    def __str__(self):
-#        return self.name
+    def __str__(self):
+        return self.name
 
 class tutor(User):
     #user_ptr = models.ForeignKey(User,on_delete='')
