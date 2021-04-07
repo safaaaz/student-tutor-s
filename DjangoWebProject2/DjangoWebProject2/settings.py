@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'app',
 ]
 
-AUTH_USER_MODEL = 'app.tutor'
+#AUTH_USER_MODEL = 'app.User'
 #AUTH_USER_MODEL = 'app.student' 
 
 # Middleware framework

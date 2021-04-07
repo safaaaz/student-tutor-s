@@ -12,7 +12,7 @@ from django.urls import reverse_lazy
 
 
 
-from .forms import tutorForm
+from .forms import tutorForm,studentForm
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
@@ -79,6 +79,19 @@ def signup_view(request):
     
     return render(request, 'app/signup.html',context)   
 
+def studentsignup(request):
+    form = studentForm()
+    if request.method=='POST':
+        form=studentForm(request.POST, request.FILES)
+        #print(form.errors)
+        if form.is_valid():
+            form.save()
+            #user = authenticate(username=username, password=raw_password)
+            #login(request, user)
+            return redirect('about')
+    context ={'form':form}
+    
+    return render(request, 'app/studentsignup.html',context) 
 class SignUpView(CreateView):
     form_class = tutorForm
     success_url = reverse_lazy('login')

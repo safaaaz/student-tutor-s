@@ -12,19 +12,19 @@ from .models import student,tutor
 #    model = student
 #    list_display = ['email', 'username']
 
-#admin.site.register(student,studentAdmin)
+admin.site.register(student)
 
-class tutorAdmin(UserAdmin):
-    add_form = tutorForm
-    form = tutorChangeForm
+#class tutorAdmin(UserAdmin):
+#    add_form = tutorForm
+#    form = tutorChangeForm
     
-    model = tutor
-    class Meta:
-        verbose_name = 'Edited Address'
-        verbose_name_plural = 'Edited Addresses'
-    list_display = ['email', 'username']
-    search_fields=['price','name']
-admin.site.register(tutor, tutorAdmin)
+#    model = tutor
+#    class Meta:
+#        verbose_name = 'Edited Address'
+#        verbose_name_plural = 'Edited Addresses'
+#    list_display = ['email', 'username']
+#    search_fields=['price','name']
+admin.site.register(tutor)
 
 
 #class YourModelAdmin(admin.ModelAdmin):

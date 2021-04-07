@@ -34,8 +34,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('app/signup', views.signup_view, name='signup'),
 
-    path('app/login_page', views.login_page, name='login'),
-    path('app/signup', views.signup_view, name='signup'),
+    #path('app/login', auth_views.LoginView.as_view(), name='login'),
+    path('app/login_page', views.login_page, name='signup'),
     path('app/signup1', views.signup1, name='signup1'),
-
+    path('app/studentsignup', views.studentsignup, name='studentsignup'),
 ]
