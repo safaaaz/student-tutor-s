@@ -17,7 +17,7 @@ admin.site.register(student)
 #class tutorAdmin(UserAdmin):
 #    add_form = tutorForm
 #    form = tutorChangeForm
-    
+ 
 #    model = tutor
 #    class Meta:
 #        verbose_name = 'Edited Address'

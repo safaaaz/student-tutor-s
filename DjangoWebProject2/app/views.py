@@ -3,7 +3,6 @@ Definition of views.
 """
 from django.urls import reverse_lazy
 from datetime import datetime
-from django.shortcuts import render
 from django.http import HttpRequest
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
@@ -15,6 +14,14 @@ from django.views.generic.edit import UpdateView
 from django.contrib.auth.models import User
 from .models import tutor,student
 from .forms import tutorForm,studentForm,tutorChangeForm,studentChangeForm
+from django.contrib import messages
+
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
+from django.template import Context
 
 def home(request):
     """Renders the home page."""
@@ -85,16 +92,25 @@ def signup_view(request):
 def studentsignup(request):
     form = studentForm()
     if request.method=='POST':
-        form=studentForm(request.POST, request.FILES)
+        form = studentForm(request.POST, request.FILES)
         #print(form.errors)
         if form.is_valid():
             form.save()
             #user = authenticate(username=username, password=raw_password)
             #login(request, user)
+            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            htmly = get_template('app/Email.html')
+            d = { 'username': username }
+            subject, from_email, to = 'welcome', 'your_email@gmail.com', email
+            html_content = htmly.render(d)
+            msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+            messages.success(request, f'Your account has been created ! You are now able to log in')
             return redirect('about')
-    context ={'form':form}
-    
-    return render(request, 'app/studentsignup.html',context) 
+        context ={'form':form}
+        return render(request, 'app/studentsignup.html',context)
 
 
 #@login_required

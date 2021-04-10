@@ -36,7 +36,7 @@ urlpatterns = [
 
     #path('app/login', auth_views.LoginView.as_view(), name='login'),
     path('app/login_page', views.login_page, name='signup'),
-    path('app/signup', views.signup_view, name='signup_view'),
+    
     path('app/studentsignup', views.studentsignup, name='studentsignup'),
     path('app/profile', views.profile.as_view(template_name='app/profile.html'), name='profile'),
 
