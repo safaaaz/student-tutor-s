@@ -1,7 +1,7 @@
 """
 Definition of views.
 """
-
+from django.urls import reverse_lazy
 from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpRequest
@@ -9,10 +9,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.views import generic
+from django.views.generic.edit import UpdateView
+from django.contrib.auth.models import User
+from .models import tutor,student
+from .forms import tutorForm,studentForm,tutorChangeForm,studentChangeForm
 
-
-
-from .forms import tutorForm,studentForm
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
@@ -92,11 +95,62 @@ def studentsignup(request):
     context ={'form':form}
     
     return render(request, 'app/studentsignup.html',context) 
-class SignUpView(CreateView):
-    form_class = tutorForm
-    success_url = reverse_lazy('login')
-    template_name = 'app/signup.html'
 
+
+#@login_required
+#def profile(request):
+#    #form = tutorChangeForm(request)
+
+#            #user = authenticate(username=username, password=raw_password)
+#            #login(request, user)
+#           # return redirect('about')
+#    if request.method=='POST':
+#            form = tutorChangeForm(request.POST,instance=request.User)
+#    #       p_form = profileupform(request.POST,request.FILES,instance=request.User.profile)
+#            if form.is_valid():
+#                 form.save()
+#    #            p_form.save()
+#    #            messages.success(request, 'Your account has been updated!')
+#                 return redirect('profile')
+#    else:
+#            form = tutorChangeForm(instance=request.user)
+#    #       p_form = profileupform(instance=request.user)
+#            context ={'form':form}
+#            return render(request,'app/profile.html',context)
+
+#class studentprofile(UpdateView):
+#    model = student
+#    form = studentChangeForm
+#    template_name = 'profile.html'
+#    fields = ['email','age','phone','pic']
+#    success_url = reverse_lazy('home') # This is where the user will be 
+#                                       # redirected once the form
+#                                       # is successfully filled in
+
+#    def get_object(self, **kwargs):
+#        '''This method will load the object
+#           that will be used to load the form
+#           that will be edited'''
+#        return self.request.user
+   
+
+
+class profile(UpdateView):
+    model = tutor
+    form = tutorChangeForm
+    template_name = 'profile.html'
+    fields = ['email','price','age','phone']
+
+    success_url = reverse_lazy('home') # This is where the user will be 
+                                       # redirected once the form
+                                       # is successfully filled in
+
+    def get_object(self, **kwargs):
+        '''This method will load the object
+           that will be used to load the form
+           that will be edited'''
+        return self.request.user
+   
 def login_page(request):
 
     return render(request,'app/login_page.html')

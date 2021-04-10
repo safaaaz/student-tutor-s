@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿{% extends "app/layout.html" %}
+
+<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -24,5 +26,12 @@
                 </div>
 
          </form>
+        {% for item in tutor %}
+  <tr>
+    <td>{{ item.name }}</td>
+    <td>{{ item.email }}</td>
+
+  </tr>
+{% endfor %} 
 </body>
 </html>

@@ -1,0 +1,23 @@
+﻿
+{% extends "app/layout.html" %}
+
+  
+
+{% block title %}Edit your profile{% endblock %}
+
+{% block content %}
+
+    {% if form.errors %}
+        <p class="errors">Please correct the errors below: {{ form.non_field_errors }}</p>
+    {% endif %}
+
+    <h1>Edit your profile</h1>
+
+    <form method="post" action="" class="form-input">
+        {% csrf_token %}
+        {{form.as_p}}
+        <div class="submit">
+            <input class="cta" type="submit" value="Save"/>
+        </div>
+    </form>
+{% endblock %}

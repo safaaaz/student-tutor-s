@@ -9,6 +9,9 @@ from django.contrib.auth.models import User
 #User = settings.AUTH_USER_MODEL
 
 # Create your models here.
+
+
+
 class student(User):
     
     ids= models.IntegerField()
@@ -25,6 +28,7 @@ class student(User):
         return self.name
 
 class tutor(User):
+
     #user_ptr = models.ForeignKey(User,on_delete='')
     idt=models.IntegerField(default=00)
     #username=models.CharField(max_length=20,unique=True)
@@ -33,18 +37,20 @@ class tutor(User):
     age=models.IntegerField(default=00)
     gender=models.CharField(max_length=10,default='')
     price=models.IntegerField(default=45)
+    #courses = models.ManyToManyField(course)
     field=models.FileField()
     image=models.ImageField()
     #email=models.EmailField()
     phone=models.IntegerField(default=00)
-
+    is_ok= models.BooleanField(default=False)
+    
 
 
     def __str__(self):
         return self.name 
 
 class course(models.Model):
-    tutor = models.ManyToManyField(tutor)
+    tutor = models.ForeignKey(tutor,on_delete=models.CASCADE)
     name=models.CharField(max_length=30)
 
     def __str__(self):

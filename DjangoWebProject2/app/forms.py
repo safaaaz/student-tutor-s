@@ -2,7 +2,7 @@
 Definition of forms.
 """
 
-from django import forms
+
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import ugettext_lazy as _
 
@@ -28,7 +28,7 @@ class tutorForm(forms.ModelForm):
     class Meta:
         model = tutor
         fields = ['idt','name','username','password','age','price','field','image','email','phone',]
-        verbose_name='tutor'
+
 class tutorChangeForm(UserChangeForm):
     class Meta:
         model = tutor
@@ -37,7 +37,7 @@ class tutorChangeForm(UserChangeForm):
 class studentForm(UserCreationForm):
     class Meta:
         model = student
-        fields = ['ids','name','username','password','age','gender','email','phone','pic',]
+        fields = ['ids','name','password','age','gender','email','phone','pic']
 
 class studentChangeForm(UserChangeForm):
     class Meta:
