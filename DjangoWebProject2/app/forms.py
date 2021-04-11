@@ -27,12 +27,12 @@ class BootstrapAuthenticationForm(AuthenticationForm):
 class tutorForm(forms.ModelForm):
     class Meta:
         model = tutor
-        fields = ['idt','name','username','password','age','price','field','image','email','phone',]
+        fields = ['idt','name','username','password','age','price','field','image','email','phone','courses',]
 
 class tutorChangeForm(UserChangeForm):
     class Meta:
         model = tutor
-        fields = ['idt','name','username','password','age','price','field','image','email','phone']
+        fields = ['idt','name','username','password','age','price','field','image','email','phone','courses']
 
 class studentForm(UserCreationForm):
     class Meta:

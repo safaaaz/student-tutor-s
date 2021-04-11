@@ -39,7 +39,7 @@ def home(request):
 def show(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
-    stu = tutor.objects.get(name='ahmad')
+    stu = tutor.objects.get(name='asma')
     return render(
         request,
         'app/show.html',
