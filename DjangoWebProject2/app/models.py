@@ -6,6 +6,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 
+
 #User = settings.AUTH_USER_MODEL
 
 # Create your models here.
@@ -26,6 +27,8 @@ class student(User):
 
     def __str__(self):
         return self.name
+    class Meta:
+        db_table = 'students'
 
 class tutor(User):
 
@@ -43,11 +46,18 @@ class tutor(User):
     #email=models.EmailField()
     phone=models.IntegerField(default=00)
     is_ok= models.BooleanField(default=False)
+    courses=models.CharField(max_length=100,default='')
+
     
 
 
     def __str__(self):
-        return self.name 
+        return self.name
+    class Meta:
+        db_table = 'totur'
+
+    
+       
 
 class course(models.Model):
     tutor = models.ForeignKey(tutor,on_delete=models.CASCADE)

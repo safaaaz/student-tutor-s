@@ -16,6 +16,10 @@ admin.autodiscover()
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('show/', views.show, name='show'),
+   # path('login/s', views.s, name='s'),
+   # path('totur/s',views.s,name='s'),
+
     path('contact/', views.contact, name='contact'),
     path('about/', views.about, name='about'),
     path('login/',

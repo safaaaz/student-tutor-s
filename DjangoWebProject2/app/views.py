@@ -22,17 +22,28 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
+from app.models import tutor
+from django.shortcuts import render
+from .models import tutor
 
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
+    stu = tutor.objects.all()
     return render(
         request,
         'app/index.html',
-        {
-            'title':'Home Page',
-            'year':datetime.now().year,
-        }
+       {'stu':stu}
+    )
+
+def show(request):
+    """Renders the home page."""
+    assert isinstance(request, HttpRequest)
+    stu = tutor.objects.get(name='asma')
+    return render(
+        request,
+        'app/show.html',
+       {'stu':stu}
     )
 
 def contact(request):
@@ -60,6 +71,20 @@ def about(request):
             'year':datetime.now().year,
         }
     )
+
+def s(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/s.html',
+        {
+            'title':'the toturs:',
+            'message':'ok',
+            'year':datetime.now().year,
+        }
+    )
+
 
 def signup1(request):
      form = tutorForm()
@@ -170,3 +195,4 @@ class profile(UpdateView):
 def login_page(request):
 
     return render(request,'app/login_page.html')
+
