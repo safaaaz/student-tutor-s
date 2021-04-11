@@ -6,5 +6,10 @@
 <h3>{{ message }}</h3>
 
 <p>Use this area to provide additional information.</p>
-
+<table >
+<tr><th>Column 1</th>
+{% for queue in tutor %}
+        <tr><td>{%queue.name%}</td></tr>
+{% endfor %}
+</table>
 {% endblock %}
