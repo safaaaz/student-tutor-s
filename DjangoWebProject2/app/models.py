@@ -43,7 +43,7 @@ class tutor(User):
     #email=models.EmailField()
     phone=models.IntegerField(default=00)
     is_ok= models.BooleanField(default=False)
-    course=models.CharField(max_length=100,default='')
+    
 
 
     def __str__(self):
