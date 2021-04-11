@@ -6,6 +6,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 
+
 #User = settings.AUTH_USER_MODEL
 
 # Create your models here.
@@ -47,7 +48,11 @@ class tutor(User):
 
 
     def __str__(self):
-        return self.name 
+        return self.name
+    #class Meta:
+    #    db_table = 'totur'
+    
+       
 
 class course(models.Model):
     tutor = models.ForeignKey(tutor,on_delete=models.CASCADE)
