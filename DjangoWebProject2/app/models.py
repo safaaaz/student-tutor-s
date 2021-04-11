@@ -54,7 +54,7 @@ class tutor(User):
     def __str__(self):
         return self.name
     class Meta:
-        db_table = 'totur'
+        db_table = 'tutors'
 
     
        

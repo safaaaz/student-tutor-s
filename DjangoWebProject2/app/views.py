@@ -15,8 +15,8 @@ from django.contrib.auth.models import User
 from .models import tutor,student
 from .forms import tutorForm,studentForm,tutorChangeForm,studentChangeForm
 from django.contrib import messages
-
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
@@ -39,7 +39,7 @@ def home(request):
 def show(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
-    stu = tutor.objects.get(name='asma')
+    stu = tutor.objects.get(name='3339')
     return render(
         request,
         'app/show.html',
@@ -107,12 +107,15 @@ def signup_view(request):
         if form.is_valid():
             
             form.save()
+
             #user = authenticate(username=username, password=raw_password)
             #login(request, user)
             return redirect('about')
     context ={'form':form}
     
     return render(request, 'app/signup.html',context)   
+
+
 
 def studentsignup(request):
     form = studentForm()
@@ -174,6 +177,31 @@ def studentsignup(request):
 #           that will be edited'''
 #        return self.request.user
    
+
+def login(request):
+    if request.user.is_authenticated:
+        return render(request, 'app/index.html')
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        #k=student.objects.all()
+        if user is not None:
+            auth_login(request,user)
+            if student.objects.filter(username=user.username):
+                
+                return redirect('home')
+            elif tutor.objects.filter(username=user.username):
+                return render(request, 'app/tutorpage.html')
+            else:
+                print("i am admin!!")
+        else:
+            form = AuthenticationForm(request.POST)
+            return render(request, 'app/login.html', {'form': form})
+    else:
+        form = AuthenticationForm()
+        return render(request, 'app/login.html', {'form': form})
+
 
 
 class profile(UpdateView):

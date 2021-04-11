@@ -24,10 +24,10 @@ class BootstrapAuthenticationForm(AuthenticationForm):
                                    'placeholder':'Password'}))
 
 
-class tutorForm(forms.ModelForm):
+class tutorForm(UserCreationForm):
     class Meta:
         model = tutor
-        fields = ['idt','name','username','password','age','price','field','image','email','phone','courses',]
+        fields = ['idt','name','username','age','price','field','image','email','phone','courses',]
 
 class tutorChangeForm(UserChangeForm):
     class Meta:
