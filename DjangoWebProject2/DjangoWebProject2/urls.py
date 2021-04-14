@@ -35,7 +35,7 @@ urlpatterns = [
          #),
          ,name='login'),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
-    path('admin/', admin.site.urls),
+    path('login/admin', admin.site.urls),
     path('app/signup', views.signup_view, name='signup'),
 
     #path('app/login', auth_views.LoginView.as_view(), name='login'),

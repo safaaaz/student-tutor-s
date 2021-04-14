@@ -1,6 +1,7 @@
 """
 Definition of views.
 """
+from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from datetime import datetime
 from django.http import HttpRequest
@@ -25,6 +26,8 @@ from django.template import Context
 from app.models import tutor
 from django.shortcuts import render
 from .models import tutor
+from django.contrib import admin
+
 
 def home(request):
     """Renders the home page."""
@@ -194,7 +197,7 @@ def login(request):
             elif tutor.objects.filter(username=user.username):
                 return render(request, 'app/tutorpage.html')
             else:
-                print("i am admin!!")
+                return HttpResponseRedirect('admin')
         else:
             form = AuthenticationForm(request.POST)
             return render(request, 'app/login.html', {'form': form})
