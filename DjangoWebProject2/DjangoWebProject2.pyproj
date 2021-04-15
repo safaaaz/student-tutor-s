@@ -68,6 +68,7 @@
     <Folder Include="sources\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\app\delete_account.html" />
     <Content Include="app\templates\app\email.html" />
     <Content Include="app\templates\app\login_page.html" />
     <Content Include="app\templates\app\password_reset.html" />
