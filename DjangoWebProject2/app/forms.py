@@ -37,9 +37,17 @@ class tutorChangeForm(UserChangeForm):
 class studentForm(UserCreationForm):
     class Meta:
         model = student
-        fields = ['ids','name','username','password','age','gender','email','phone','pic',]
+        fields = ['ids','name','username','age','gender','email','phone','pic',]
 
 class studentChangeForm(UserChangeForm):
     class Meta:
         model = student
         fields = ['ids','name','password','age','gender','email','phone','pic']
+
+
+
+
+class UserDeleteForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [] 

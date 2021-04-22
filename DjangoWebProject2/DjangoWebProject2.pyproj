@@ -4,7 +4,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Name>DjangoWebProject2</Name>
     <RootNamespace>DjangoWebProject2</RootNamespace>
-    <InterpreterId>MSBuild|MyDjangoEnv|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
     <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup>
@@ -68,8 +68,14 @@
     <Folder Include="sources\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\app\delete_account.html" />
     <Content Include="app\templates\app\email.html" />
     <Content Include="app\templates\app\login_page.html" />
+    <Content Include="app\templates\app\password_reset.html" />
+    <Content Include="app\templates\app\password_reset_complete.html" />
+    <Content Include="app\templates\app\password_reset_confirm.html" />
+    <Content Include="app\templates\app\password_reset_done.html" />
+    <Content Include="app\templates\app\password_reset_email.txt" />
     <Content Include="app\templates\app\profile.html" />
     <Content Include="app\templates\app\show.html" />
     <Content Include="app\templates\app\signup.html" />

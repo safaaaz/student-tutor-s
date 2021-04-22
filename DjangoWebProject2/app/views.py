@@ -27,8 +27,40 @@ from app.models import tutor
 from django.shortcuts import render
 from .models import tutor
 from django.contrib import admin
+#########################################################
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.models import User
+from django.template.loader import render_to_string
+from django.db.models.query_utils import Q
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+
+from .forms import UserDeleteForm
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.contrib import messages
 
 
+@login_required
+def deleteuser(request):
+    if request.method == 'POST':
+        delete_form = UserDeleteForm(request.POST, instance=request.user)
+        user = request.user
+        user.delete()
+        messages.info(request, 'Your account has been deleted.')
+        return redirect('home')
+    else:
+        delete_form = UserDeleteForm(instance=request.user)
+
+    context = {
+        'delete_form': delete_form
+    }
+
+    return render(request, 'app/delete_account.html', context)
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
@@ -42,7 +74,7 @@ def home(request):
 def show(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
-    stu = tutor.objects.get(name='3339')
+    stu = tutor.objects.get(name='aya')
     return render(
         request,
         'app/show.html',
