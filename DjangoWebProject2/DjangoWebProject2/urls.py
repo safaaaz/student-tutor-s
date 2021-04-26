@@ -17,6 +17,7 @@ admin.autodiscover()
 urlpatterns = [
     path('', views.home, name='home'),
     path('show/', views.show, name='show'),
+     path('CheckOut/', views.CheckOut, name='CheckOut'),
    # path('login/s', views.s, name='s'),
    # path('totur/s',views.s,name='s'),
 
