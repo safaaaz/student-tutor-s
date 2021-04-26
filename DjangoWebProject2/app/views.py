@@ -62,6 +62,7 @@ def deleteuser(request):
 
     return render(request, 'app/delete_account.html', context)
 def home(request):
+
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
     stu = tutor.objects.all()
@@ -72,9 +73,10 @@ def home(request):
     )
 
 def show(request):
+
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
-    stu = tutor.objects.get(name='aya')
+    stu = tutor.objects.get(name='wewe')
     return render(
         request,
         'app/show.html',
@@ -255,6 +257,10 @@ class profile(UpdateView):
            that will be edited'''
         return self.request.user
    
+def addchart(request):
+    x=request.POST.getlist('course')
+    print(x)
+    return render(request, 'app/addchart.html') 
 def login_page(request):
 
     return render(request,'app/login_page.html')

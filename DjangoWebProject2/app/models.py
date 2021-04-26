@@ -12,23 +12,16 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-
-class student(User):
+class course(models.Model):
     
-    ids= models.IntegerField()
-    name=models.CharField(max_length=50)
-    #password=models.CharField(max_length=50)
-    age=models.IntegerField()
-    gender=models.CharField(max_length=50)
-    #email=models.CharField(max_length=50)
-    phone=models.IntegerField()
-
-    pic=models.ImageField()
+    name=models.CharField(max_length=30)
 
     def __str__(self):
         return self.name
     class Meta:
-        db_table = 'students'
+        db_table = 'course'
+
+
 
 class tutor(User):
 
@@ -47,7 +40,7 @@ class tutor(User):
     phone=models.IntegerField(default=00)
     is_ok= models.BooleanField(default=False)
     courses=models.CharField(max_length=100,default='')
-
+    coursees = models.ManyToManyField(course)
     
 
 
@@ -56,12 +49,28 @@ class tutor(User):
     class Meta:
         db_table = 'tutors'
 
-    
-       
 
-class course(models.Model):
-    tutor = models.ForeignKey(tutor,on_delete=models.CASCADE)
-    name=models.CharField(max_length=30)
+class student(User):
+    
+    ids= models.IntegerField()
+    name=models.CharField(max_length=50)
+    #password=models.CharField(max_length=50)
+    age=models.IntegerField()
+    gender=models.CharField(max_length=50)
+    #email=models.CharField(max_length=50)
+    phone=models.IntegerField()
+    chart = models.ManyToManyField(tutor)
+    pic=models.ImageField()
 
     def __str__(self):
         return self.name
+    class Meta:
+        db_table = 'students'
+
+
+
+
+    
+       
+
+

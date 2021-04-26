@@ -2,8 +2,8 @@ from django.contrib import admin
 
 from django.contrib.auth.admin import UserAdmin
 
-from .forms import tutorForm,studentForm,studentChangeForm
-from .models import student,tutor
+from .forms import tutorForm,studentForm,studentChangeForm,tutorChangeForm
+from .models import student,tutor,course
 
 
 #class studentAdmin(UserAdmin):
@@ -14,15 +14,25 @@ from .models import student,tutor
 
 admin.site.register(student)
 
+class UserProfileInline(admin.StackedInline):
+    model = tutor
+    filter_horizontal = ('coursees',)
+
 class tutorAdmin(UserAdmin):
 
     model = tutor
     class Meta:
         verbose_name = 'tutor'
-    list_display = ['username','is_ok']
+    list_display = ['username','is_ok','get_courses','field']
     search_fields=['price','name']
+    list_editable = ('is_ok',)
+    inlines = [UserProfileInline]
+
+    def get_courses(self, obj):
+        return "\n".join([p.name for p in obj.coursees.all()])
 admin.site.register(tutor,tutorAdmin)
 
+admin.site.register(course)
 
 #class YourModelAdmin(admin.ModelAdmin):
    # pass

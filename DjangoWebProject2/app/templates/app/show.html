@@ -2,13 +2,21 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <form action="addchart" method="post" class="form-horizontal">
     <meta charset="utf-8" />
+        {% csrf_token %}
     <title>the detils:</title>
     <h1>the name is: {{stu.name}}</h1>
     <h1> the age: {{stu.age}}</h1>
     <h1>  the price: {{stu.price}}</h1>
     <h1>  name of course: {{stu.courses}}</h1>
-    
+     <h1>{% for area in stu.coursees.all %}<input type="checkbox" id="cource" name="course" value={{ area }}>{{ area }}<br/>{% endfor %}</h1>
+                 <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="add to chart" class="btn btn-default" />
+                    </div>
+                </div>
+    </form>
 
 </head>
 <body>

@@ -10,7 +10,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 
 
-from .models import tutor,student
+from .models import tutor,student,course
 
 class BootstrapAuthenticationForm(AuthenticationForm):
     """Authentication form which uses boostrap CSS."""
@@ -24,12 +24,15 @@ class BootstrapAuthenticationForm(AuthenticationForm):
                                    'placeholder':'Password'}))
 
 
+
 class tutorForm(UserCreationForm):
+    the_choices = forms.ModelMultipleChoiceField(queryset=course.objects.all(), required=False, widget  = forms.CheckboxSelectMultiple)
     class Meta:
         model = tutor
-        fields = ['idt','name','username','age','price','field','image','email','phone','courses',]
+        fields = ['idt','name','username','age','price','field','image','email','phone','courses','coursees']
 
 class tutorChangeForm(UserChangeForm):
+    the_choices = forms.ModelMultipleChoiceField(queryset=course.objects.all(), required=False, widget  = forms.CheckboxSelectMultiple)
     class Meta:
         model = tutor
         fields = ['idt','name','username','password','age','price','field','image','email','phone','courses']

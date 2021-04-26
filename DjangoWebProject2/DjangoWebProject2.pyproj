@@ -4,7 +4,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Name>DjangoWebProject2</Name>
     <RootNamespace>DjangoWebProject2</RootNamespace>
-    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|MyDjangoEnv|$(MSBuildProjectFullPath)</InterpreterId>
     <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup>
@@ -68,6 +68,7 @@
     <Folder Include="sources\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\app\addchart.html" />
     <Content Include="app\templates\app\delete_account.html" />
     <Content Include="app\templates\app\email.html" />
     <Content Include="app\templates\app\login_page.html" />
@@ -117,15 +118,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Interpreter Include="env\">
-      <Id>env</Id>
-      <Version>3.7</Version>
-      <Description>env (Python 3.7 (64-bit))</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>X64</Architecture>
-    </Interpreter>
     <Interpreter Include="MyDjangoEnv\">
       <Id>MyDjangoEnv</Id>
       <Version>3.7</Version>
