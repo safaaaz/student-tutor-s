@@ -61,6 +61,8 @@ class student(User):
     phone=models.IntegerField()
     chart = models.ManyToManyField(tutor)
     pic=models.ImageField()
+    tutors = models.ManyToManyField(tutor, through='cart')
+
 
     def __str__(self):
         return self.name
@@ -68,7 +70,13 @@ class student(User):
         db_table = 'students'
 
 
-
+class cart(models.Model):
+    student = models.ForeignKey(student, on_delete=models.CASCADE)
+    tutor=models.ForeignKey(tutor, on_delete=models.CASCADE)
+    date_shop = models.DateField()
+    courses=model.ArrayField()
+    numlessons=models.IntegerField()
+    price=models.IntegerField()
 
     
        
