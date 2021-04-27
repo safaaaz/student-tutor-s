@@ -44,7 +44,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-
 @login_required
 def deleteuser(request):
     if request.method == 'POST':
@@ -76,7 +75,15 @@ def show(request):
 
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
+<<<<<<< HEAD
+<<<<<<< HEAD
+    stu = tutor.objects.get(name='fatme2')
+=======
     stu = tutor.objects.get(name='wewe')
+>>>>>>> 9185268aca36f0682d191d345d10544d9f6d0fc6
+=======
+    stu = tutor.objects.get(name='wewe')
+>>>>>>> 9185268aca36f0682d191d345d10544d9f6d0fc6
     return render(
         request,
         'app/show.html',
@@ -265,3 +272,7 @@ def login_page(request):
 
     return render(request,'app/login_page.html')
 
+   
+def CheckOut(request):
+   
+    return render(request,'app/CheckOut.html')
