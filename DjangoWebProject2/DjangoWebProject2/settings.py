@@ -40,8 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'django_filters',
     
 ]
+    # ...
+    
 
 #AUTH_USER_MODEL = 'app.User'
 #AUTH_USER_MODEL = 'app.student' 

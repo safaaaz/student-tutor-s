@@ -5,8 +5,8 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
-
-
+import django_filters 
+from django_filters import FilterSet
 #User = settings.AUTH_USER_MODEL
 
 # Create your models here.
@@ -41,9 +41,7 @@ class tutor(User):
     is_ok= models.BooleanField(default=False)
     courses=models.CharField(max_length=100,default='')
     coursees = models.ManyToManyField(course)
-    
-
-
+    rate=models.IntegerField(default=00)
     def __str__(self):
         return self.name
     class Meta:
@@ -59,9 +57,9 @@ class student(User):
     gender=models.CharField(max_length=50)
     #email=models.CharField(max_length=50)
     phone=models.IntegerField()
-    chart = models.ManyToManyField(tutor)
+    #chart = models.ManyToManyField(tutor)
     pic=models.ImageField()
-    tutors = models.ManyToManyField(tutor, through='cart')
+    #tutors = models.ManyToManyField(tutor)
 
 
     def __str__(self):
@@ -69,14 +67,27 @@ class student(User):
     class Meta:
         db_table = 'students'
 
+        
+class ProductFilter(django_filters.FilterSet):
+    price = django_filters.NumberFilter()
+    price__gt = django_filters.NumberFilter(field_name='price', lookup_expr='gt')
+    price__lt = django_filters.NumberFilter(field_name='price', lookup_expr='lt')
+    rate = django_filters.NumberFilter()
+    rate__gt = django_filters.NumberFilter(field_name='rate', lookup_expr='gt')
+    rate__lt = django_filters.NumberFilter(field_name='rate', lookup_expr='lt')
+    manufacturer__name = django_filters.CharFilter(lookup_expr='icontains')
 
-class cart(models.Model):
-    student = models.ForeignKey(student, on_delete=models.CASCADE)
-    tutor=models.ForeignKey(tutor, on_delete=models.CASCADE)
-    date_shop = models.DateField()
-    courses=model.ArrayField()
-    numlessons=models.IntegerField()
-    price=models.IntegerField()
+    class Meta:
+        model = tutor
+        fields = ['price','rate']
+
+#class cart(models.Model):
+#    student = models.ForeignKey(student, on_delete=models.CASCADE)
+#    tutor=models.ForeignKey(tutor, on_delete=models.CASCADE)
+#    date_shop = models.DateField()
+#    courses=model.ArrayField()
+#    numlessons=models.IntegerField()
+#    price=models.IntegerField()
 
     
        

@@ -1,6 +1,4 @@
-"""
-Definition of urls for DjangoWebProject2.
-"""
+
 
 from datetime import datetime
 from django.urls import path,include
@@ -8,19 +6,22 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
+from app import models
 from app import forms, views
 from django.contrib.auth import views as auth_views
-
+from django_filters.views import object_filter
 admin.autodiscover()
 
 urlpatterns = [
     path('', views.home, name='home'),
     path('show/', views.show, name='show'),
+    path('template/', views.product_list,name='template'),
+
+
      path('CheckOut/', views.CheckOut, name='CheckOut'),
    # path('login/s', views.s, name='s'),
    # path('totur/s',views.s,name='s'),
-
+    path('Search/', views.Search, name='Search'),
     path('contact/', views.contact, name='contact'),
     path('about/', views.about, name='about'),
     path('login/',

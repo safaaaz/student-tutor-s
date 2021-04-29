@@ -4,7 +4,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Name>DjangoWebProject2</Name>
     <RootNamespace>DjangoWebProject2</RootNamespace>
-    <InterpreterId>MSBuild|MyDjangoEnv|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
     <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup>
@@ -68,17 +68,11 @@
     <Folder Include="sources\" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-<<<<<<< HEAD
     <Content Include="app\templates\app\CheckOut.html" />
-=======
     <Content Include="app\templates\app\addchart.html" />
->>>>>>> 9185268aca36f0682d191d345d10544d9f6d0fc6
-=======
-    <Content Include="app\templates\app\addchart.html" />
->>>>>>> 9185268aca36f0682d191d345d10544d9f6d0fc6
     <Content Include="app\templates\app\delete_account.html" />
     <Content Include="app\templates\app\email.html" />
+    <Content Include="app\templates\app\list_product.html" />
     <Content Include="app\templates\app\login_page.html" />
     <Content Include="app\templates\app\password_reset.html" />
     <Content Include="app\templates\app\password_reset_complete.html" />
@@ -86,9 +80,11 @@
     <Content Include="app\templates\app\password_reset_done.html" />
     <Content Include="app\templates\app\password_reset_email.txt" />
     <Content Include="app\templates\app\profile.html" />
+    <Content Include="app\templates\app\Search.html" />
     <Content Include="app\templates\app\show.html" />
     <Content Include="app\templates\app\signup.html" />
     <Content Include="app\templates\app\studentsignup.html" />
+    <Content Include="app\templates\app\template.html" />
     <Content Include="app\templates\app\tutorpage.html" />
     <Content Include="requirements.txt" />
     <Content Include="app\static\app\content\bootstrap.css" />
@@ -126,8 +122,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-<<<<<<< HEAD
     <Interpreter Include="env\">
       <Id>env</Id>
       <Version>3.8</Version>
@@ -137,10 +131,6 @@
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
       <Architecture>X86</Architecture>
     </Interpreter>
-=======
->>>>>>> 9185268aca36f0682d191d345d10544d9f6d0fc6
-=======
->>>>>>> 9185268aca36f0682d191d345d10544d9f6d0fc6
     <Interpreter Include="MyDjangoEnv\">
       <Id>MyDjangoEnv</Id>
       <Version>3.7</Version>

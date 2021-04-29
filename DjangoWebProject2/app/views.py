@@ -1,6 +1,7 @@
 """
 Definition of views.
 """
+from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from datetime import datetime
@@ -13,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.views import generic
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.models import User
-from .models import tutor,student
+from .models import tutor,student,ProductFilter
 from .forms import tutorForm,studentForm,tutorChangeForm,studentChangeForm
 from django.contrib import messages
 from django.contrib.auth import login as auth_login
@@ -43,6 +44,7 @@ from .forms import UserDeleteForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, redirect
 
 @login_required
 def deleteuser(request):
@@ -75,15 +77,9 @@ def show(request):
 
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
-<<<<<<< HEAD
-<<<<<<< HEAD
-    stu = tutor.objects.get(name='fatme2')
-=======
-    stu = tutor.objects.get(name='wewe')
->>>>>>> 9185268aca36f0682d191d345d10544d9f6d0fc6
-=======
-    stu = tutor.objects.get(name='wewe')
->>>>>>> 9185268aca36f0682d191d345d10544d9f6d0fc6
+
+    stu = tutor.objects.all()
+
     return render(
         request,
         'app/show.html',
@@ -276,3 +272,33 @@ def login_page(request):
 def CheckOut(request):
    
     return render(request,'app/CheckOut.html')
+
+def Search(request):
+    #query = request.GET.get('query')
+    instock = request.GET.get('instock')
+    price_from = request.GET.get('price_from', 0)
+    price_to = request.GET.get('price_to', 100000)
+    sorting = request.GET.get('sorting', '-date_added')
+    products = tutor.objects.filter().filter(price__gte=price_from).filter(price__lte=price_to)
+
+    #if instock:
+     #   products = products.filter(num_available__gte=1)
+
+    context = {
+        #'query': query,
+        'products': products.order_by(sorting),
+        'instock': instock,
+        'price_from': price_from,
+        'price_to': price_to,
+        'sorting': sorting
+    }
+
+    return render(request, 'app/Search.html',context)
+
+
+
+
+def product_list(request):
+    
+    f = ProductFilter(request.GET, queryset=tutor.objects.all())
+    return render(request, 'app/template.html', {'filter': f})
