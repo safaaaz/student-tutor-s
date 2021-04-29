@@ -59,9 +59,9 @@ class student(User):
     gender=models.CharField(max_length=50)
     #email=models.CharField(max_length=50)
     phone=models.IntegerField()
-    chart = models.ManyToManyField(tutor)
+    #chart = models.ManyToManyField(tutor)
     pic=models.ImageField()
-    tutors = models.ManyToManyField(tutor, through='cart')
+    #tutors = models.ManyToManyField(tutor)
 
 
     def __str__(self):
@@ -70,13 +70,13 @@ class student(User):
         db_table = 'students'
 
 
-class cart(models.Model):
-    student = models.ForeignKey(student, on_delete=models.CASCADE)
-    tutor=models.ForeignKey(tutor, on_delete=models.CASCADE)
-    date_shop = models.DateField()
-    courses=model.ArrayField()
-    numlessons=models.IntegerField()
-    price=models.IntegerField()
+#class cart(models.Model):
+#    student = models.ForeignKey(student, on_delete=models.CASCADE)
+#    tutor=models.ForeignKey(tutor, on_delete=models.CASCADE)
+#    date_shop = models.DateField()
+#    courses=model.ArrayField()
+#    numlessons=models.IntegerField()
+#    price=models.IntegerField()
 
     
        
