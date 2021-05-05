@@ -23,7 +23,7 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
-from app.models import tutor
+from app.models import tutor,cart
 from django.shortcuts import render
 from .models import tutor
 from django.contrib import admin
@@ -76,10 +76,15 @@ def home(request):
        {'stu':stu}
     )
 
+def back(request):
+    return home(request)
+
 def show(request):
 
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
+    print(request.POST.get('sts.name'))
+    stu = tutor.objects.get(name='fefe')
 
     stu = tutor.objects.get(name='rawan')
 
@@ -150,7 +155,8 @@ def signup_view(request):
         if form.is_valid():
             
             form.save()
-
+            print(request.POST.getlist('coursees'))
+            form.coursees.add(request.POST.getlist('coursees'))
             #user = authenticate(username=username, password=raw_password)
             #login(request, user)
             return redirect('about')
@@ -271,15 +277,34 @@ class profile(UpdateView):
            that will be edited'''
         return self.request.user
    
-def addchart(request):
+def addchart(request,**kwargs):
     x=request.POST.getlist('course')
-    print(x)
+    s=student.objects.filter(username=request.user.username)
+    print(tutor.objects.filter(id=request.POST.get('stuname')))
+    print(s)
+    if s.count()==0:
+        print("noo")
+    else:
+        t=tutor.objects.filter(id=request.POST.get('stuname'))
+        y=cart.objects.create(student=s[0],tutor=t[0],price=t[0].price)
+        y.courses.create(name=request.POST.getlist('course'))
+    # y.courses.set(request.POST.getlist('course'))
+    #y.save()
     return render(request, 'app/addchart.html') 
+
+def ourcart(request):
+    s=student.objects.filter(username=request.user.username)
+    stu = cart.objects.filter(student=s[0])
+    return render(request, 'app/ourcart.html',{'stu':stu}) 
 def login_page(request):
 
     return render(request,'app/login_page.html')
 
-   
+def tutorstud(request):
+    s=tutor.objects.filter(username=request.user.username)
+    stu = cart.objects.filter(tutor=s[0])
+    return render(request, 'app/showstud.html',{'stu':stu}) 
+
 def CheckOut(request):
    
     return render(request,'app/CheckOut.html')

@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import tutorForm,studentForm,studentChangeForm,tutorChangeForm
-from .models import student,tutor,course
+from .models import student,tutor,course,cart
 
 
 #class studentAdmin(UserAdmin):
@@ -13,6 +13,7 @@ from .models import student,tutor,course
 #    list_display = ['email', 'username']
 
 admin.site.register(student)
+admin.site.register(cart)
 
 class UserProfileInline(admin.StackedInline):
     model = tutor

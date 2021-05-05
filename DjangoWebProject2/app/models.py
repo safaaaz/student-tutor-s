@@ -6,6 +6,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from .models import *
+from datetime import datetime
 
 
 
@@ -66,7 +67,7 @@ class student(User):
     gender=models.CharField(max_length=50)
     #email=models.CharField(max_length=50)
     phone=models.IntegerField()
-    #chart = models.ManyToManyField(tutor)
+    #chart = models.ManyToManyField(tutor,through='cart')
     pic=models.ImageField()
     #tutors = models.ManyToManyField(tutor)
 
@@ -77,13 +78,14 @@ class student(User):
         db_table = 'students'
 
 
-#class cart(models.Model):
-#    student = models.ForeignKey(student, on_delete=models.CASCADE)
-#    tutor=models.ForeignKey(tutor, on_delete=models.CASCADE)
-#    date_shop = models.DateField()
-#    courses=model.ArrayField()
-#    numlessons=models.IntegerField()
-#    price=models.IntegerField()
+class cart(models.Model):
+    student = models.ForeignKey(student, on_delete=models.CASCADE)
+    tutor=models.ForeignKey(tutor, on_delete=models.CASCADE)
+    date_shop = models.DateField(default=datetime.now)
+    courses=models.ManyToManyField(course)
+    numlessons=models.IntegerField(default=1)
+    price=models.IntegerField()
+    done=models.BooleanField(default=False)
 
     
        

@@ -6,18 +6,16 @@
     <meta charset="utf-8" />
         {% csrf_token %}
     <title>the detils:</title>
+            <input type='hidden'  name=stuname id="stuname" step="1" value="{{stu.id}}" />
+
     <h1>the name is: {{stu.name}}</h1>
     <h1> the age: {{stu.age}}</h1>
     <h1>  the price: {{stu.price}}</h1>
     <h1>  name of course: {{stu.courses}}</h1>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
      <li><a href="{% url 'CheckOut' %}">Buy</a></li>
   
-       
-=======
-=======
->>>>>>> 9185268aca36f0682d191d345d10544d9f6d0fc6
+
      <h1>{% for area in stu.coursees.all %}<input type="checkbox" id="cource" name="course" value={{ area }}>{{ area }}<br/>{% endfor %}</h1>
                  <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
@@ -25,10 +23,6 @@
                     </div>
                 </div>
     </form>
-<<<<<<< HEAD
->>>>>>> 9185268aca36f0682d191d345d10544d9f6d0fc6
-=======
->>>>>>> 9185268aca36f0682d191d345d10544d9f6d0fc6
 
 </head>
 <body>
