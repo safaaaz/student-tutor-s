@@ -246,14 +246,20 @@ def login(request):
         return render(request, 'app/login.html', {'form': form})
 
 
-
+def prof(request):
+    s=tutor.objects.filter(username=request.user.username)
+    #print(s[0].image)
+    return render(request, 'app/profile.html',{'s':s[0]})
 class profile(UpdateView):
     model = tutor
     form = tutorChangeForm
+    
     template_name = 'profile.html'
+    #template_name = 'profile.html'
+
 
     #print(form.idt)
-    fields = ['email','price','age','phone','idt']
+    fields = ['email','price','age','phone','idt','image']
 
     success_url = reverse_lazy('home') # This is where the user will be 
                                        # redirected once the form

@@ -14,8 +14,8 @@
     <h1>Edit your profile</h1>
     <form method="post" action="" class="form-input">
         {% csrf_token %}
-        {{user.name}}
-
+        
+        <img src='{{ MEDIA_URL }}{{ s.image }}' height="70" width="70">
         <div class="submit">
             <input class="cta" type="submit" value="Save"/>
         </div>
