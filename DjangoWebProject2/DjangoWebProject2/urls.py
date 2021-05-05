@@ -8,10 +8,10 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
+from DjangoWebProject2 import settings
 from app import forms, views
 from django.contrib.auth import views as auth_views
-
+from app import static
 admin.autodiscover()
 
 urlpatterns = [
@@ -40,8 +40,10 @@ urlpatterns = [
     path('app/signup', views.signup_view, name='signup'),
 
     #path('app/login', auth_views.LoginView.as_view(), name='login'),
-    path('app/login_page', views.login_page, name='signup'),
+    path('app/login_page', views.login_page, name='signup1'),
     path('show/addchart', views.addchart, name='addchart'),
+    path('show/back', views.back, name='back'),
+    path('show/ourcart', views.ourcart, name='ourcart'),
     path('app/studentsignup', views.studentsignup, name='studentsignup'),
     path('app/profile', views.profile.as_view(template_name='app/profile.html'), name='profile'),
     ###################################################################33

@@ -62,20 +62,20 @@
     <Folder Include="app\static\app\content\" />
     <Folder Include="app\static\app\fonts\" />
     <Folder Include="app\static\app\scripts\" />
+    <Folder Include="app\static\images\" />
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
     <Folder Include="DjangoWebProject2\" />
     <Folder Include="sources\" />
   </ItemGroup>
   <ItemGroup>
-
+    <Content Include="app\static\images\دعوة.jpg" />
     <Content Include="app\templates\app\CheckOut.html" />
-
     <Content Include="app\templates\app\addchart.html" />
-
     <Content Include="app\templates\app\delete_account.html" />
     <Content Include="app\templates\app\email.html" />
     <Content Include="app\templates\app\login_page.html" />
+    <Content Include="app\templates\app\ourcart.html" />
     <Content Include="app\templates\app\password_reset.html" />
     <Content Include="app\templates\app\password_reset_complete.html" />
     <Content Include="app\templates\app\password_reset_confirm.html" />
@@ -122,7 +122,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-
     <Interpreter Include="MyDjangoEnv\">
       <Id>MyDjangoEnv</Id>
       <Version>3.7</Version>

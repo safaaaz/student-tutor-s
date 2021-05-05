@@ -1,11 +1,23 @@
-﻿{% extends "app/layout.html" %}
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+﻿
 <head>
-    <meta charset="utf-8" />
 
 
 </head>
 <body>
 
+        <meta charset="utf-8" />
+      <form method="POST" action="back" enctype='multipart/form-data'>
+              {% csrf_token %}
+
+        <div class="submit">
+            <input class="cta" type="submit" value="continue shopping"/>
+        </div>
+          </form>
+        <form method="POST" action="ourcart" enctype='multipart/form-data'>
+                {% csrf_token %}
+
+         <div class="submit">
+            <input class="cta" type="submit" value="to the cart"/>
+        </div>
+            </form>
 </body>
