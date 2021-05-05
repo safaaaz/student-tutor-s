@@ -83,6 +83,7 @@
     <Content Include="app\templates\app\password_reset_email.txt" />
     <Content Include="app\templates\app\profile.html" />
     <Content Include="app\templates\app\show.html" />
+    <Content Include="app\templates\app\showstud.html" />
     <Content Include="app\templates\app\signup.html" />
     <Content Include="app\templates\app\studentsignup.html" />
     <Content Include="app\templates\app\tutorpage.html" />

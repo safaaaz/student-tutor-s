@@ -272,7 +272,7 @@ def addchart(request,**kwargs):
     else:
         t=tutor.objects.filter(id=request.POST.get('stuname'))
         y=cart.objects.create(student=s[0],tutor=t[0],price=t[0].price)
-        y.courses.set(request.POST.getlist('course'))
+        y.courses.create(name=request.POST.getlist('course'))
     # y.courses.set(request.POST.getlist('course'))
     #y.save()
     return render(request, 'app/addchart.html') 
@@ -285,7 +285,11 @@ def login_page(request):
 
     return render(request,'app/login_page.html')
 
-   
+def tutorstud(request):
+    s=tutor.objects.filter(username=request.user.username)
+    stu = cart.objects.filter(tutor=s[0])
+    return render(request, 'app/showstud.html',{'stu':stu}) 
+
 def CheckOut(request):
    
     return render(request,'app/CheckOut.html')

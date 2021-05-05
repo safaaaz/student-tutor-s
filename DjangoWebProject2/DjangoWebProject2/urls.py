@@ -42,6 +42,7 @@ urlpatterns = [
     #path('app/login', auth_views.LoginView.as_view(), name='login'),
     path('app/login_page', views.login_page, name='signup1'),
     path('show/addchart', views.addchart, name='addchart'),
+    path('login/tutorstud', views.tutorstud, name='tutorstud'),
     path('show/back', views.back, name='back'),
     path('show/ourcart', views.ourcart, name='ourcart'),
     path('app/studentsignup', views.studentsignup, name='studentsignup'),

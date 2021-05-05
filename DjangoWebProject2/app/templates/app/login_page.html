@@ -1,11 +1,11 @@
-﻿
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
 <!DOCTYPE html>
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
+
     <title>loogin</title>
-</head>
+
 <body>
          <form action="signup" method="post" class="form-horizontal">
              {% csrf_token %}
@@ -33,4 +33,5 @@
   </tr>
 {% endfor %} 
 </body>
-</html>
+3
+{% endblock %}

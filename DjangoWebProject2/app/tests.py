@@ -36,7 +36,7 @@ class ViewTest(TestCase):
 
     def test_signup(self):
         """Tests the contact page."""
-        response = self.client.get('/app/signup')
+        response = self.client.get('/app/signup/')
         self.assertContains(response, 'signup_view', 3, 200)
 
     def test_show(self):

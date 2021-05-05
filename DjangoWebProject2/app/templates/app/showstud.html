@@ -1,0 +1,15 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+    {% for sts in stu %}
+
+<ul class="nav navbar-nav navbar-right">
+    <li><a >{{sts.student.name}}</a></li>
+    
+</ul>
+
+
+{% endfor %}
+{% endblock %}
+
