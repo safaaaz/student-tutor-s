@@ -12,10 +12,10 @@
     {% endif %}
 
     <h1>Edit your profile</h1>
-
     <form method="post" action="" class="form-input">
         {% csrf_token %}
-        {{form.as_p}}
+        {{user.name}}
+
         <div class="submit">
             <input class="cta" type="submit" value="Save"/>
         </div>

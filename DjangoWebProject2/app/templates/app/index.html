@@ -7,11 +7,17 @@
 
 <ul class="nav navbar-nav navbar-right">
     <li><a href="{% url 'show' %}">{{sts.name}}</a></li>
-    
+    <br><br>
+<img src='{{ MEDIA_URL }}{{ sts.image }}' height="50" width="50">
+<br><br>
 </ul>
 
 
 {% endfor %}
 
-
+<form action="{% url 'search' %}" method="POST">
+    {% csrf_token %} 
+    <input type="text" name="name">
+    <input type="submit" name="submit" value="Search">
+</form>
 {% endblock %}

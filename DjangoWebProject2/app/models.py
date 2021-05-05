@@ -5,6 +5,8 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+from .models import *
+
 
 
 #User = settings.AUTH_USER_MODEL
@@ -35,7 +37,7 @@ class tutor(User):
     price=models.IntegerField(default=45)
     #courses = models.ManyToManyField(course)
     field=models.FileField()
-    image=models.ImageField()
+    image=models.ImageField(upload_to='images', null=True, verbose_name="")
     #email=models.EmailField()
     phone=models.IntegerField(default=00)
     is_ok= models.BooleanField(default=False)
@@ -48,6 +50,11 @@ class tutor(User):
         return self.name
     class Meta:
         db_table = 'tutors'
+
+
+    def __str__(self):
+        return self.name + ": " + str(self.image)
+
 
 
 class student(User):

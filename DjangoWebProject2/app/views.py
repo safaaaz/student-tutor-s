@@ -39,6 +39,11 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 
+from django.shortcuts import render
+from .models import tutor
+#from .forms import ImageForm
+
+
 from .forms import UserDeleteForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -76,7 +81,7 @@ def show(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
 
-    stu = tutor.objects.get(name='wewe')
+    stu = tutor.objects.get(name='rawan')
 
     return render(
         request,
@@ -246,7 +251,9 @@ class profile(UpdateView):
     model = tutor
     form = tutorChangeForm
     template_name = 'profile.html'
-    fields = ['email','price','age','phone']
+
+    #print(form.idt)
+    fields = ['email','price','age','phone','idt']
 
     success_url = reverse_lazy('home') # This is where the user will be 
                                        # redirected once the form
@@ -270,3 +277,52 @@ def login_page(request):
 def CheckOut(request):
    
     return render(request,'app/CheckOut.html')
+
+
+
+
+
+def showimage(request):
+
+    lastimage= tutor.objects.last()
+
+    image= lastimage.image
+
+
+    form= ImageForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
+
+    
+    context= {'image': image,
+              'form': form
+              }
+    
+      
+    return render(request, 'app/image.html', context)
+
+
+
+
+
+import operator
+
+from django.db.models import Q
+
+def search_tutor(request):
+    """ search function  """
+    if request.method == "POST":
+        query_name = request.POST.get('name', None)
+        if query_name:
+            stu = tutor.objects.filter(name__contains=query_name)
+            
+            return render(
+        request,
+        'app/index.html',
+       {'stu':stu}
+    )
+
+    return render(request, 'app/index.html')
+
+
+

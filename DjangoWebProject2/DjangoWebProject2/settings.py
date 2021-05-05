@@ -73,6 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -136,3 +137,12 @@ EMAIL_HOST_PASSWORD="Nihol1111"
 
 STRIPE_PUBLIC_KEY = 'pk_test_51A9krCIdX0gthvYPY23IMIfysLt07RFfny1uHNORoqVO1OSEMzLFZUucsQ4Y4WunsP9s3b1espT6UpohrAprTqdQ00bOWtw0FI'
 STRIPE_PRIVATE_KEY = 'sk_test_51A9krCIdX0gthvYPwiuJz55q8RlWGhavNzafnKmxcfEiBwTOAOqA3B5ByO6dXGGS3TCVKJXg0mAWzkjkm6Dz7zAL00NEmkdm2Q'
+
+MEDIA_ROOT= os.path.join(BASE_DIR, 'media/')
+
+
+  
+
+
+
+     

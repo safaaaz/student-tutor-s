@@ -1,4 +1,11 @@
 {
-  "ExpandedNodes": [],
+  "ExpandedNodes": [
+    "",
+    "\\DjangoWebProject2",
+    "\\DjangoWebProject2\\ddd",
+    "\\DjangoWebProject2\\DjangoWebProject2",
+    "\\DjangoWebProject2\\MyDjangoEnv"
+  ],
+  "SelectedNode": "\\DjangoWebProject2\\DjangoWebProject2",
   "PreviewInSolutionExplorer": false
 }
