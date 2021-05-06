@@ -6,8 +6,9 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from app import models
+
 from app import forms, views
+
 from django.contrib.auth import views as auth_views
 
 from django.conf import settings
@@ -17,7 +18,6 @@ from django.conf.urls import url, include
 
 
 
-from app import static
 from django_filters.views import object_filter
 admin.autodiscover()
 
@@ -64,7 +64,7 @@ urlpatterns = [
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='app/password_reset_complete.html'), name='password_reset_complete'),  
  path("password_reset", auth_views.PasswordResetView.as_view(template_name='app/password_reset.html'), name="password_reset"),
      path('app/deleteuser', views.deleteuser, name='deleteuser'),
-
+     ]+ static(settings.MEDIA_URL, document_root= settings.STATIC_MEDIA)
  
 
 #urlpatterns = [
@@ -77,5 +77,4 @@ urlpatterns = [
 #] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 
 
-]+ static(settings.MEDIA_URL, document_root= settings.STATIC_MEDIA)
 

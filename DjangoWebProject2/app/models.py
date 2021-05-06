@@ -92,13 +92,14 @@ class ProductFilter(django_filters.FilterSet):
         model = tutor
         fields = ['price','rate']
 
-#class cart(models.Model):
-#    student = models.ForeignKey(student, on_delete=models.CASCADE)
-#    tutor=models.ForeignKey(tutor, on_delete=models.CASCADE)
-#    date_shop = models.DateField()
-#    courses=model.ArrayField()
-#    numlessons=models.IntegerField()
-#    price=models.IntegerField()
+class cart(models.Model):
+    student = models.ForeignKey(student, on_delete=models.CASCADE)
+    tutor=models.ForeignKey(tutor, on_delete=models.CASCADE)
+    date_shop = models.DateField(default=datetime.now)
+    courses=models.ManyToManyField(course)
+    numlessons=models.IntegerField(default=1)
+    price=models.IntegerField()
+    done=models.BooleanField(default=False)
 
     
        
