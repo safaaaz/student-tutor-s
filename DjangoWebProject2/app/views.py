@@ -24,7 +24,7 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
-from app.models import tutor
+from app.models import tutor,cart
 from django.shortcuts import render
 from .models import tutor
 from django.contrib import admin
@@ -39,6 +39,11 @@ from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
+
+from django.shortcuts import render
+from .models import tutor
+#from .forms import ImageForm
+
 
 from .forms import UserDeleteForm
 from django.contrib.auth.decorators import login_required
@@ -73,12 +78,20 @@ def home(request):
        {'stu':stu}
     )
 
+def back(request):
+    return home(request)
+
 def show(request):
 
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
 
     stu = tutor.objects.all()
+
+    print(request.POST.get('sts.name'))
+    stu = tutor.objects.get(name='fefe')
+
+    stu = tutor.objects.get(name='rawan')
 
     return render(
         request,
@@ -147,7 +160,8 @@ def signup_view(request):
         if form.is_valid():
             
             form.save()
-
+            print(request.POST.getlist('coursees'))
+            form.coursees.add(request.POST.getlist('coursees'))
             #user = authenticate(username=username, password=raw_password)
             #login(request, user)
             return redirect('about')
@@ -243,12 +257,20 @@ def login(request):
         return render(request, 'app/login.html', {'form': form})
 
 
-
+def prof(request):
+    s=tutor.objects.filter(username=request.user.username)
+    #print(s[0].image)
+    return render(request, 'app/profile.html',{'s':s[0]})
 class profile(UpdateView):
     model = tutor
     form = tutorChangeForm
+    
     template_name = 'profile.html'
-    fields = ['email','price','age','phone']
+    #template_name = 'profile.html'
+
+
+    #print(form.idt)
+    fields = ['email','price','age','phone','idt','image']
 
     success_url = reverse_lazy('home') # This is where the user will be 
                                        # redirected once the form
@@ -260,17 +282,86 @@ class profile(UpdateView):
            that will be edited'''
         return self.request.user
    
-def addchart(request):
+def addchart(request,**kwargs):
     x=request.POST.getlist('course')
-    print(x)
+    s=student.objects.filter(username=request.user.username)
+    print(tutor.objects.filter(id=request.POST.get('stuname')))
+    print(s)
+    if s.count()==0:
+        print("noo")
+    else:
+        t=tutor.objects.filter(id=request.POST.get('stuname'))
+        y=cart.objects.create(student=s[0],tutor=t[0],price=t[0].price)
+        y.courses.create(name=request.POST.getlist('course'))
+    # y.courses.set(request.POST.getlist('course'))
+    #y.save()
     return render(request, 'app/addchart.html') 
+
+def ourcart(request):
+    s=student.objects.filter(username=request.user.username)
+    stu = cart.objects.filter(student=s[0])
+    return render(request, 'app/ourcart.html',{'stu':stu}) 
 def login_page(request):
 
     return render(request,'app/login_page.html')
 
-   
+def tutorstud(request):
+    s=tutor.objects.filter(username=request.user.username)
+    stu = cart.objects.filter(tutor=s[0])
+    return render(request, 'app/showstud.html',{'stu':stu}) 
+
 def CheckOut(request):
    
+    return render(request,'app/CheckOut.html')
+
+
+
+
+
+def showimage(request):
+
+    lastimage= tutor.objects.last()
+
+    image= lastimage.image
+
+
+    form= ImageForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
+
+    
+    context= {'image': image,
+              'form': form
+              }
+    
+      
+    return render(request, 'app/image.html', context)
+
+
+
+
+
+import operator
+
+from django.db.models import Q
+
+def search_tutor(request):
+    """ search function  """
+    if request.method == "POST":
+        query_name = request.POST.get('name', None)
+        if query_name:
+            stu = tutor.objects.filter(name__contains=query_name)
+            
+            return render(
+        request,
+        'app/index.html',
+       {'stu':stu}
+    )
+
+    return render(request, 'app/index.html')
+
+
+
     return render(request,'app/CheckOut.html')
 
 def Search(request):

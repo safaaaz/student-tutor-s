@@ -7,6 +7,11 @@ from django.conf import settings
 from django.contrib.auth.models import User
 import django_filters 
 from django_filters import FilterSet
+from .models import *
+from datetime import datetime
+
+
+
 #User = settings.AUTH_USER_MODEL
 
 # Create your models here.
@@ -35,7 +40,7 @@ class tutor(User):
     price=models.IntegerField(default=45)
     #courses = models.ManyToManyField(course)
     field=models.FileField()
-    image=models.ImageField()
+    image=models.ImageField(upload_to='images', null=True, verbose_name="")
     #email=models.EmailField()
     phone=models.IntegerField(default=00)
     is_ok= models.BooleanField(default=False)
@@ -48,6 +53,11 @@ class tutor(User):
         db_table = 'tutors'
 
 
+    def __str__(self):
+        return self.name + ": " + str(self.image)
+
+
+
 class student(User):
     
     ids= models.IntegerField()
@@ -57,6 +67,7 @@ class student(User):
     gender=models.CharField(max_length=50)
     #email=models.CharField(max_length=50)
     phone=models.IntegerField()
+    #chart = models.ManyToManyField(tutor,through='cart')
     #chart = models.ManyToManyField(tutor)
     pic=models.ImageField()
     #tutors = models.ManyToManyField(tutor)

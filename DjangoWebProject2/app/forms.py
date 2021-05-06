@@ -26,10 +26,10 @@ class BootstrapAuthenticationForm(AuthenticationForm):
 
 
 class tutorForm(UserCreationForm):
-    the_choices = forms.ModelMultipleChoiceField(queryset=course.objects.all(), required=False, widget  = forms.CheckboxSelectMultiple)
+    coursees = forms.ModelMultipleChoiceField(queryset=course.objects.all(), required=False, widget  = forms.CheckboxSelectMultiple)
     class Meta:
         model = tutor
-        fields = ['idt','name','username','age','price','field','image','email','phone','courses','coursees']
+        fields = ['idt','name','username','age','price','field','image','email','phone','coursees']
 
 class tutorChangeForm(UserChangeForm):
     the_choices = forms.ModelMultipleChoiceField(queryset=course.objects.all(), required=False, widget  = forms.CheckboxSelectMultiple)
@@ -54,3 +54,6 @@ class UserDeleteForm(forms.ModelForm):
     class Meta:
         model = User
         fields = [] 
+
+
+
