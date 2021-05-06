@@ -5,7 +5,12 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+import django_filters 
+from django_filters import FilterSet
+from .models import *
 from datetime import datetime
+
+
 
 #User = settings.AUTH_USER_MODEL
 
@@ -35,19 +40,22 @@ class tutor(User):
     price=models.IntegerField(default=45)
     #courses = models.ManyToManyField(course)
     field=models.FileField()
-    image=models.ImageField()
+    image=models.ImageField(upload_to='images', null=True, verbose_name="")
     #email=models.EmailField()
     phone=models.IntegerField(default=00)
     is_ok= models.BooleanField(default=False)
     courses=models.CharField(max_length=100,default='')
     coursees = models.ManyToManyField(course)
-    
-
-
+    rate=models.IntegerField(default=00)
     def __str__(self):
         return self.name
     class Meta:
         db_table = 'tutors'
+
+
+    def __str__(self):
+        return self.name + ": " + str(self.image)
+
 
 
 class student(User):
@@ -60,6 +68,7 @@ class student(User):
     #email=models.CharField(max_length=50)
     phone=models.IntegerField()
     #chart = models.ManyToManyField(tutor,through='cart')
+    #chart = models.ManyToManyField(tutor)
     pic=models.ImageField()
     #tutors = models.ManyToManyField(tutor)
 
@@ -69,6 +78,19 @@ class student(User):
     class Meta:
         db_table = 'students'
 
+        
+class ProductFilter(django_filters.FilterSet):
+    price = django_filters.NumberFilter()
+    price__gt = django_filters.NumberFilter(field_name='price', lookup_expr='gt')
+    price__lt = django_filters.NumberFilter(field_name='price', lookup_expr='lt')
+    rate = django_filters.NumberFilter()
+    rate__gt = django_filters.NumberFilter(field_name='rate', lookup_expr='gt')
+    rate__lt = django_filters.NumberFilter(field_name='rate', lookup_expr='lt')
+    manufacturer__name = django_filters.CharFilter(lookup_expr='icontains')
+
+    class Meta:
+        model = tutor
+        fields = ['price','rate']
 
 class cart(models.Model):
     student = models.ForeignKey(student, on_delete=models.CASCADE)
