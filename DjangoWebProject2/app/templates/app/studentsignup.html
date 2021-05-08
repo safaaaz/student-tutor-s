@@ -1,25 +1,98 @@
 ﻿{% extends "app/layout.html" %}
 
 {% block content %}
+</style>
+<style>
+.b1 .glow-on-hover {
+    
+    height: 30px;
+     width: 20%;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 80px;
+    margin-bottom: -100px;
+    margin :2px;
+    margin-left: 500px;
+    
+   
+}
+.b1 .glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowingBone 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
 
-  <h2>Sign up student</h2>
+.b1 .glow-on-hover:active {
+    color: #000
+}
+
+.b1 .glow-on-hover:active:after {
+    background: transparent;
+}
+
+.b1 .glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.b1 .glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+ @keyframes glowingBone {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+</style>
+<style>
+body {
+    height:500px;
+   width: 120%;
+  background-image: url('https://cdn.hipwallpaper.com/i/8/53/vygBsh.jpg');
+  background-size: 1400px 700px;
+}
+</style>
+  <h2>Student Sign up </h2>
   <form method="POST" action="" enctype='multipart/form-data'>
     {% csrf_token %}
     {{ form.as_p }}
     {% if form.errors %}
     {% for field in form %}
-        {% for error in field.errors %}
-            <div class="alert alert-danger">
-                <strong>{{ error|escape }}</strong>
-            </div>
+       
         {% endfor %}
-    {% endfor %}
+ 
     {% for error in form.non_field_errors %}
         <div class="alert alert-danger">
             <strong>{{ error|escape }}</strong>
         </div>
     {% endfor %}
 {% endif %}
-    <button type="submit">Sign up</button>
+    <div class="b1">
+<button class="glow-on-hover" type="submit"> Signup</button>
+</div>
   </form>
 {% endblock %}

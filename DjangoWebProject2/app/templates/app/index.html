@@ -1,26 +1,243 @@
 {% extends "app/layout.html" %}
-
 {% block content %}
 
-    <li><a href="{% url 'template' %}">Search by special price /Rating</a></li>
+<style>
+body {
+   height:350px;
+   width: 120%;
+  background-image: url('https://cdn.hipwallpaper.com/i/8/53/vygBsh.jpg');
+  background-size: 1200px 700px;
+}
+</style>
 
-<form  method="post" class="form-horizontal">
+<style>/* FontAwesome for working BootSnippet :> */
 
-{% for sts in stu %}
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+#team {
+    height:500px;
+   width: 120%;
+    background-image: url('https://cdn.hipwallpaper.com/i/8/53/vygBsh.jpg');
+      background-size: 1400px 700px;
+}
 
-<ul class="nav navbar-nav navbar-right">
-    <li><a href="{% url 'show' %}">{{sts.name}}</a></li>
-    <br><br>
-<img src='{{ MEDIA_URL }}{{ sts.image }}' height="50" width="50">
-<br><br>
-</ul>
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #ffd800;
+    border-color: #108d6f;
+    box-shadow: none;
+    outline: none;
+}
 
-    </form>
-{% endfor %}
+.btn-primary {
+    color: #fff;
+    background-color: #ffd800;
+    border-color: #007b5e;
+}
+
+section {
+    padding: 60px 0;
+}
+
+section .section-title {
+    text-align: center;
+    color: #007b5e;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+#team .card {
+    border: none;
+    background: #ffffff;
+}
+
+.image-flip:hover .backside,
+.image-flip.hover .backside {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    border-radius: .25rem;
+}
+
+.image-flip:hover .frontside,
+.image-flip.hover .frontside {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.mainflip {
+    -webkit-transition: 1s;
+    -webkit-transform-style: preserve-3d;
+    -ms-transition: 1s;
+    -moz-transition: 1s;
+    -moz-transform: perspective(1000px);
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transition: 1s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.frontside {
+    position: relative;
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    z-index: 2;
+    margin-bottom: 30px;
+}
+
+.backside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -o-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+    -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+}
+
+.frontside,
+.backside {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: 1s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transition: 1s;
+    -moz-transform-style: preserve-3d;
+    -o-transition: 1s;
+    -o-transform-style: preserve-3d;
+    -ms-transition: 1s;
+    -ms-transform-style: preserve-3d;
+    transition: 1s;
+    transform-style: preserve-3d;
+}
+
+.frontside .card,
+.backside .card {
+    min-height: 312px;
+}
+
+.backside .card a {
+    font-size: 18px;
+    color: #007b5e !important;
+}
+
+.frontside .card .card-title,
+.backside .card .card-title {
+    color: #007b5e !important;
+}
+
+.frontside .card .card-body img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}</style>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 
 <form action="{% url 'search' %}" method="POST">
     {% csrf_token %} 
     <input type="text" name="name">
     <input type="submit" name="submit" value="Search">
 </form>
-{% endblock %}
+
+
+<section id="team" class="pb-5">
+    <div class="container">  
+<div class="row">  
+{% for sts in stu %}
+
+
+      
+    
+            <!-- Team member -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" >
+                    <div class="mainflip flip-0">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><li><a href="{% url 'show' %}"><img src='{{ MEDIA_URL }}{{ sts.image }}' alt="" style="width:100%"></a></li></p>
+                                    <h3 class="card-title">{{ sts.name }}</h3>
+                                   <h4> <p class="card-text">Phone: {{ sts.phone }}</p></h4>
+                                    <h4><p class="card-text">Price: {{ sts.price }}$</p></h4>
+                                    <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                         
+                        <div class="backside">
+                            <div class="card">
+                                <div class="card-body text-center mt-4">
+                                    <h1 class="card-title">{{sts.name}}</h1>
+                                    <p class="card-text">{{sts.phone}}</p>
+
+                                    <h6><a href="{% url 'show' %}">More Details?</a></h6>
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                            <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
+                                                <i class="fa fa-skype"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
+                                                <i class="fa fa-google"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           </div>
+
+            {% endfor %}
+ 
+        </div>
+    </div>
+
+
+      {% endblock %}  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

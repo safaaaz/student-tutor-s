@@ -89,9 +89,9 @@ def show(request):
     stu = tutor.objects.all()
 
     print(request.POST.get('sts.name'))
-    stu = tutor.objects.get(name='fefe')
+    stu = tutor.objects.get(name="Rami")
 
-    stu = tutor.objects.get(name='rawan')
+    stu = tutor.objects.get(name='Ayat')
 
     return render(
         request,
@@ -301,6 +301,7 @@ def ourcart(request):
     s=student.objects.filter(username=request.user.username)
     stu = cart.objects.filter(student=s[0])
     return render(request, 'app/ourcart.html',{'stu':stu}) 
+
 def login_page(request):
 
     return render(request,'app/login_page.html')

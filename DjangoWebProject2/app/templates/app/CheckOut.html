@@ -1,5 +1,14 @@
 <!DOCTYPE html>
+{% block content %}
 <html>
+<style>
+body {
+    height:310px;
+   width: 100%;
+  background-image: url('https://cdn.hipwallpaper.com/i/8/53/vygBsh.jpg');
+  background-size: 1400px 700px;
+}
+</style>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -19,7 +28,7 @@ body {
   display: flex;
   -ms-flex-wrap: wrap; /* IE10 */
   flex-wrap: wrap;
-  margin: 0 -16px;
+  margin: 0 -10px;
 }
 
 .col-25 {
@@ -111,7 +120,7 @@ span.price {
 </head>
 <body>
 
-<h2>Responsive Checkout Form</h2>
+
 
 <div class="row">
   <div class="col-75">
@@ -192,3 +201,5 @@ span.price {
 
 </body>
 </html>
+
+{% endblock %}
