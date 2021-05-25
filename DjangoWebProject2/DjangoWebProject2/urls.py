@@ -45,6 +45,7 @@ urlpatterns = [
              #}
          #),
          ,name='login'),
+    path('contact/sendtomanager', views.sendtomanager, name='sendtomanager'),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('login/admin', admin.site.urls),
     path('app/signup', views.signup_view, name='signup'),
