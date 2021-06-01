@@ -113,3 +113,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 /.vs/DjangoWebProject2/v16/.suoo
+/DjangoWebProject2/media/images/work_2_-_class_diagram.jpg
+/DjangoWebProject2/media/Assignment_3_2020.docx

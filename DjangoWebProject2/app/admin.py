@@ -14,6 +14,7 @@ from .models import student,tutor,course,cart
 
 admin.site.register(student)
 admin.site.register(cart)
+#admin.site.register(messages)
 
 class UserProfileInline(admin.StackedInline):
     model = tutor

@@ -294,7 +294,11 @@ def sendtomanager(request):
     ['safaaaz@ac.sce.ac.il'],
     fail_silently=True,
 )
-    return render(request, 'app/contact.html') 
+    return render(request, 'app/contact.html',{
+            'title':'Contact',
+            'message':'Your message has been sent to the administration',
+            'year':datetime.now().year,
+        }) 
 
 def addchart(request,**kwargs):
     x=request.POST.getlist('course')
