@@ -15,7 +15,14 @@ from datetime import datetime
 #User = settings.AUTH_USER_MODEL
 
 # Create your models here.
-
+class message(models.Model):
+    
+    title=models.CharField(max_length=90)
+    content=models.CharField(max_length=300)
+    def __str__(self):
+        return self.title
+    class Meta:
+        db_table = 'message'
 
 class course(models.Model):
     
@@ -41,12 +48,13 @@ class tutor(User):
     #courses = models.ManyToManyField(course)
     field=models.FileField()
     image=models.ImageField(upload_to='images', null=True, verbose_name="")
-    #email=models.EmailField()
+    email0=models.EmailField(null=True)
     phone=models.IntegerField(default=00)
     is_ok= models.BooleanField(default=False)
     courses=models.CharField(max_length=100,default='')
     coursees = models.ManyToManyField(course)
     rate=models.IntegerField(default=00)
+    messages = models.ManyToManyField(message)
     def __str__(self):
         return self.name
     class Meta:

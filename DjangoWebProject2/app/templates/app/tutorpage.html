@@ -16,4 +16,9 @@ body {
 
     <button type="submit">students</button>
   </form>
+ <form method="POST" action="messagest" enctype='multipart/form-data'>
+             {% csrf_token %}
+
+    <button type="submit">messages</button>
+  </form>
 {% endblock %}

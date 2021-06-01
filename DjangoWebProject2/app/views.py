@@ -91,9 +91,9 @@ def show(request):
     stu = tutor.objects.all()
 
     print(request.POST.get('sts.name'))
-    stu = tutor.objects.get(name="Rami")
+    stu = tutor.objects.get(name="soso")
 
-    stu = tutor.objects.get(name='Ayat')
+    #stu = tutor.objects.get(name='Ayat')
 
     return render(
         request,
@@ -163,7 +163,7 @@ def signup_view(request):
             
             form.save()
             print(request.POST.getlist('coursees'))
-            form.coursees.add(request.POST.getlist('coursees'))
+            #form.coursees.add(request.POST.getlist('coursees'))
             #user = authenticate(username=username, password=raw_password)
             #login(request, user)
             return redirect('about')
@@ -413,4 +413,7 @@ def product_list(request):
     f = ProductFilter(request.GET, queryset=tutor.objects.all())
     return render(request, 'app/template.html', {'filter': f})
 
+def messagest(request):
+    t=tutor.objects.filter(username=request.user.username)
+    return render(request, 'app/messagest.html', {'totur': t[0]})
 

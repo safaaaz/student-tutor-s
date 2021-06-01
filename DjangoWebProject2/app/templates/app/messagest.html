@@ -1,0 +1,13 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+<head>
+    <meta charset="utf-8" />
+    <title>my messages</title>
+</head>
+<body>
+     <h1>{% for message in totur.messages.all %}<input type="hidden" id="message" name="message" value={{ message }}><h2>{{ message.title }}</h2><h4>{{message.content}}</h4><br/>
+    ///////////////////////////////////////////////////<br/>{% endfor %}</h1>
+
+</body>
+{% endblock %}

@@ -54,6 +54,7 @@ urlpatterns = [
     path('app/login_page', views.login_page, name='login_page'),
     path('show/addchart', views.addchart, name='addchart'),
     path('login/tutorstud', views.tutorstud, name='tutorstud'),
+    path('login/messagest', views.messagest, name='messagest'),
     path('show/back', views.back, name='back'),
     path('show/ourcart', views.ourcart, name='ourcart'),
     path('app/studentsignup', views.studentsignup, name='studentsignup'),

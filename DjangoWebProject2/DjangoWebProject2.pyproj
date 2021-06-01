@@ -84,6 +84,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="app\templates\app\login_page.html" />
+    <Content Include="app\templates\app\messagest.html" />
     <Content Include="app\templates\app\ourcart.html" />
     <Content Include="app\templates\app\password_reset.html" />
     <Content Include="app\templates\app\password_reset_complete.html" />
