@@ -79,16 +79,61 @@ def home(request):
     assert isinstance(request, HttpRequest)
     stu = tutor.objects.all()
     s=student.objects.filter(username=request.user.username)
+    
+    instock = request.GET.get('instock')
+    price_from = request.GET.get('price_from', 0)
+    price_to = request.GET.get('price_to', 100000)
+    sorting = request.GET.get('sorting', '-date_added')
+    products = tutor.objects.filter().filter(price__gte=price_from).filter(price__lte=price_to)
+    stu=products
     if s:
+        context = {
+        #'query': query,
+        'products': products.order_by(sorting),
+        'instock': instock,
+        'price_from': price_from,
+        'price_to': price_to,
+        'sorting': sorting, 's':s[0],'stu':stu}
         return render(
         request,
-        'app/index.html',
-       {'stu':stu,'s':s[0]})
+        'app/index.html',context)
+
     else:
-         return render(
-        request,
-        'app/index.html',
-       {'stu':stu})
+        context = {
+        #'query': query,
+        'products': products.order_by(sorting),
+        'instock': instock,
+        'price_from': price_from,
+        'price_to': price_to,
+        'sorting': sorting, 
+       
+        'stu':stu}
+        return render(request,'app/index.html',context)
+
+
+
+
+
+
+
+
+
+
+
+    #if instock:
+     #   products = products.filter(num_available__gte=1)
+    if s:
+        
+
+        return render(request, 'app/Search.html',context)
+
+
+
+
+
+
+
+
 
 
 def back(request):
@@ -101,10 +146,10 @@ def show(request):
 
     stu = tutor.objects.all()
 
-    print(request.POST.get('sts.name'))
-    stu = tutor.objects.get(name="soso")
+   
+    stu = tutor.objects.get(name="Ayat")
 
-    stu = tutor.objects.get(name='Ayat')
+
     s=student.objects.filter(username=request.user.username)
     if s:
         return render(request,'app/show.html',{'stu':stu,'s':s[0]})
