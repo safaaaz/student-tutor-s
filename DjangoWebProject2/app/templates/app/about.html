@@ -1,18 +1,16 @@
 {% extends "app/layout.html" %}
 
 {% block content %}
-<style>
-body {
-    height: 1000px;
-   width: 100%;
-  background-image: url('https://cdn.hipwallpaper.com/i/8/53/vygBsh.jpg');
-  background-size: 1400px 700px;
-}
-</style>
+
 
 <h2>{{ title }}.</h2>
 <h3>{{ message }}</h3>
 
 <p>Use this area to provide additional information.</p>
+  <form action="" method="POST">
+{% if s %}
+        <body style="background-color:{{s.color}};">
+    {% endif %}
+            </form>
 
 {% endblock %}
