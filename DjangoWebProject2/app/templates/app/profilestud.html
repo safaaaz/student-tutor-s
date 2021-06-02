@@ -1,0 +1,33 @@
+﻿
+{% extends "app/layout.html" %}
+
+  
+
+{% block title %}Edit your profile{% endblock %}
+
+{% block content %}
+
+
+    {% if form.errors %}
+        <p class="errors">Please correct the errors below: {{ form.non_field_errors }}</p>
+    {% endif %}
+    <body style="background-color:{{s.color}};">
+    <h1>Edit your profile</h1>
+    <form method="post" action="updatestud" class="form-input">
+        {% csrf_token %}
+        
+        <img src='{{ MEDIA_URL }}{{ s.pic }}' height="70" width="70">
+        <div class="submit">
+            <input class="cta" type="submit" value="Save"/>
+        </div>
+        Select color:
+  <select id="mySelect" name="SEL">
+    <option value="red">red</option>
+    <option value="green">green</option>
+    <option value="white">white</option>
+    <option value="blue">blue</option>
+  </select>
+
+    </form>
+</body>
+{% endblock %}

@@ -1,13 +1,6 @@
 {% extends "app/layout.html" %}
 {% block content %}
-<style>
-body {
-    height:500px;
-   width: 120%;
-  background-image: url('https://cdn.hipwallpaper.com/i/8/53/vygBsh.jpg');
-  background-size: 1400px 700px;
-}
-</style>
+
 
 
     <h1 class="title">Search</h1>
@@ -70,4 +63,9 @@ body {
     {% with products as list_products %}
         {% include 'app/index.html' %}
     {% endwith %}
+<form action="" method="POST">
+{% if s %}
+        <body style="background-color:{{s.color}};">
+    {% endif %}
+            </form>
 {% endblock %}

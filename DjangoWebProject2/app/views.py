@@ -61,22 +61,33 @@ def deleteuser(request):
         return redirect('home')
     else:
         delete_form = UserDeleteForm(instance=request.user)
-
-    context = {
-        'delete_form': delete_form
+    s=student.objects.filter(username=request.user.username)
+    if s:
+        context = {
+        'delete_form': delete_form, 's':s[0]
     }
-
+        return render(request, 'app/delete_account.html', context)
+    context = {'delete_form': delete_form}
     return render(request, 'app/delete_account.html', context)
+
+
 def home(request):
 
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
     stu = tutor.objects.all()
-    return render(
+    s=student.objects.filter(username=request.user.username)
+    if s:
+        return render(
         request,
         'app/index.html',
-       {'stu':stu}
-    )
+       {'stu':stu,'s':s[0]})
+    else:
+         return render(
+        request,
+        'app/index.html',
+       {'stu':stu})
+
 
 def back(request):
     return home(request)
@@ -92,16 +103,25 @@ def show(request):
     stu = tutor.objects.get(name="Rami")
 
     stu = tutor.objects.get(name='Ayat')
-
-    return render(
-        request,
-        'app/show.html',
-       {'stu':stu}
-    )
+    s=student.objects.filter(username=request.user.username)
+    if s:
+        return render(request,'app/show.html',{'stu':stu,'s':s[0]})
+    return render(request,'app/show.html',{'stu':stu} )
 
 def contact(request):
     """Renders the contact page."""
     assert isinstance(request, HttpRequest)
+    s=student.objects.filter(username=request.user.username)
+    if s:
+        return render(
+        request,
+        'app/contact.html',
+        {
+            'title':'Contact',
+            'message':'Your contact page.',
+            'year':datetime.now().year,'s':s[0],
+        }
+    )
     return render(
         request,
         'app/contact.html',
@@ -112,9 +132,22 @@ def contact(request):
         }
     )
 
+
+
 def about(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
+    s=student.objects.filter(username=request.user.username)
+    if s:
+        return render(
+        request,
+        'app/about.html',
+        {
+            'title':'About',
+            'message':'Your application description page.',
+            'year':datetime.now().year,'s':s[0],
+        }
+    )
     return render(
         request,
         'app/about.html',
@@ -161,7 +194,7 @@ def signup_view(request):
             
             form.save()
             print(request.POST.getlist('coursees'))
-            form.coursees.add(request.POST.getlist('coursees'))
+            #form.coursees.add(request.POST.getlist('coursees'))
             #user = authenticate(username=username, password=raw_password)
             #login(request, user)
             return redirect('about')
@@ -259,8 +292,26 @@ def login(request):
 
 def prof(request):
     s=tutor.objects.filter(username=request.user.username)
+    if s:
     #print(s[0].image)
-    return render(request, 'app/profile.html',{'s':s[0]})
+        return render(request, 'app/profile.html',{'s':s[0]})
+    s=student.objects.filter(username=request.user.username)
+    return render(request, 'app/profilestud.html',{'s':s[0]})
+  
+def updatestud(request):
+    s=student.objects.filter(username=request.user.username).update(color=request.POST.get("SEL"))
+    
+    
+    s=student.objects.filter(username=request.user.username)
+ 
+    return render(request, 'app/profilestud.html',{'s':s[0]}) 
+
+
+
+
+
+
+
 class profile(UpdateView):
     model = tutor
     form = tutorChangeForm
@@ -293,14 +344,19 @@ def addchart(request,**kwargs):
         t=tutor.objects.filter(id=request.POST.get('stuname'))
         y=cart.objects.create(student=s[0],tutor=t[0],price=t[0].price)
         y.courses.create(name=request.POST.getlist('course'))
+        
     # y.courses.set(request.POST.getlist('course'))
     #y.save()
-    return render(request, 'app/addchart.html') 
+    if s:
+        return render(request, 'app/addchart.html',{'s':s[0]})
+    return render(request, 'app/addchart.html')
 
 def ourcart(request):
     s=student.objects.filter(username=request.user.username)
     stu = cart.objects.filter(student=s[0])
-    return render(request, 'app/ourcart.html',{'stu':stu}) 
+    if s:
+        return render(request, 'app/ourcart.html',{'stu':stu,'s':s[0]})
+    return render(request, 'app/ourcart.html',{'stu':stu})
 
 def login_page(request):
 
@@ -312,7 +368,9 @@ def tutorstud(request):
     return render(request, 'app/showstud.html',{'stu':stu}) 
 
 def CheckOut(request):
-   
+    s=tutor.objects.filter(username=request.user.username)
+    if s:
+        return render(request,'app/CheckOut.html',{'s':s[0]})
     return render(request,'app/CheckOut.html')
 
 
@@ -352,21 +410,22 @@ def search_tutor(request):
         query_name = request.POST.get('name', None)
         if query_name:
             stu = tutor.objects.filter(name__contains=query_name)
-            
-            return render(
-        request,
-        'app/index.html',
-       {'stu':stu}
-    )
+            s=student.objects.filter(username=request.user.username)
+            if s:
+                return render( request, 'app/index.html',  {'stu':stu,'s':s[0]})
+            return render( request, 'app/index.html',  {'stu':stu})
+
 
     return render(request, 'app/index.html')
 
 
 
-    return render(request,'app/CheckOut.html')
+    #return render(request,'app/CheckOut.html')
 
 def Search(request):
     #query = request.GET.get('query')
+    s=student.objects.filter(username=request.user.username)
+    
     instock = request.GET.get('instock')
     price_from = request.GET.get('price_from', 0)
     price_to = request.GET.get('price_to', 100000)
@@ -375,17 +434,28 @@ def Search(request):
 
     #if instock:
      #   products = products.filter(num_available__gte=1)
+    if s:
+        context = {
+        #'query': query,
+        'products': products.order_by(sorting),
+        'instock': instock,
+        'price_from': price_from,
+        'price_to': price_to,
+        'sorting': sorting, 's':s[0]
+    }
 
+        return render(request, 'app/Search.html',context)
     context = {
         #'query': query,
         'products': products.order_by(sorting),
         'instock': instock,
         'price_from': price_from,
         'price_to': price_to,
-        'sorting': sorting
+        'sorting': sorting,
     }
-
+    
     return render(request, 'app/Search.html',context)
+
 
 
 

@@ -71,6 +71,7 @@ class student(User):
     #chart = models.ManyToManyField(tutor)
     pic=models.ImageField()
     #tutors = models.ManyToManyField(tutor)
+    color=models.CharField(max_length=50,default="white")
 
 
     def __str__(self):

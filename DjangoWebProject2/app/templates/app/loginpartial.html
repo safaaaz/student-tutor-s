@@ -3,16 +3,17 @@
       outForm" action="/logout/" method="post" class="navbar-right">
     {% csrf_token %}
     <ul class="nav navbar-nav navbar-right">
+        
         <li><span class="navbar-brand">Hello {{ user.username }}!</span></li>
          <li>       <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a></li>
              <li>   <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a></li>
-        <li>   <a class="nav-item nav-link" href="{% url 'deleteuser' %}">Delete Account</a></li>
-      
-        
-
+        <li>   <a class="nav-item nav-link" href="{% url 'deleteuser' %}"> Delete Account</a></li>
     </ul>
-   
+
+
+
 </form>
+
 
 {% else %}
 

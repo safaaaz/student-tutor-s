@@ -1,24 +1,16 @@
 {% extends "app/layout.html" %}
 {% block content %}
 
-<style>
-body {
-   height:350px;
-   width: 120%;
-  background-image: url('https://cdn.hipwallpaper.com/i/8/53/vygBsh.jpg');
-  background-size: 1200px 700px;
-}
-</style>
+
+
+
+
+
+
 
 <style>/* FontAwesome for working BootSnippet :> */
 
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-#team {
-    height:500px;
-   width: 120%;
-    background-image: url('https://cdn.hipwallpaper.com/i/8/53/vygBsh.jpg');
-      background-size: 1400px 700px;
-}
 
 .btn-primary:hover,
 .btn-primary:focus {
@@ -149,18 +141,22 @@ section .section-title {
 
 <form action="{% url 'search' %}" method="POST">
     {% csrf_token %} 
-    <input type="text" name="name">
+    <input type="text" id="search" name="name">
     <input type="submit" name="submit" value="Search">
 </form>
 
+
+<form action="{% url 'updatestud' %}" method="POST">
+{% if s %}
+        <body style="background-color:{{s.color}};">
+    {% endif %}
+ </form>
 
 <section id="team" class="pb-5">
     <div class="container">  
 <div class="row">  
 {% for sts in stu %}
 
-
-      
     
             <!-- Team member -->
             <div class="col-xs-12 col-sm-6 col-md-4">
@@ -169,7 +165,7 @@ section .section-title {
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p><li><a href="{% url 'show' %}"><img src='{{ MEDIA_URL }}{{ sts.image }}' alt="" style="width:100%"></a></li></p>
+                                    <p><li><a href="{% url 'show' %}"><img src='{{ MEDIA_URL }}{{ sts.image }}' alt="" style="width:60%"></a></li></p>
                                     <h3 class="card-title">{{ sts.name }}</h3>
                                    <h4> <p class="card-text">Phone: {{ sts.phone }}</p></h4>
                                     <h4><p class="card-text">Price: {{ sts.price }}$</p></h4>

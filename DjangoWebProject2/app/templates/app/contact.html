@@ -1,14 +1,7 @@
 {% extends "app/layout.html" %}
 
 {% block content %}
-<style>
-body {
-    height: 1000px;
-   width: 100%;
-  background-image: url('https://cdn.hipwallpaper.com/i/8/53/vygBsh.jpg');
-  background-size: 1400px 700px;
-}
-</style>
+
 
 <h2>{{ title }}.</h2>
 <h3>{{ message }}</h3>
@@ -24,5 +17,9 @@ body {
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
-
+    <form action="" method="POST">
+{% if s %}
+        <body style="background-color:{{s.color}};">
+    {% endif %}
+            </form>
 {% endblock %}

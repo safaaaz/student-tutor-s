@@ -1,14 +1,6 @@
 ﻿{% extends "app/layout.html" %}
 
 {% block content %}
-<style>
-body {
-    height:500px;
-   width: 120%;
-  background-image: url('https://cdn.hipwallpaper.com/i/8/53/vygBsh.jpg');
-  background-size: 1400px 700px;
-}
-</style>
 
 
 {% for sts in stu %}
@@ -20,6 +12,10 @@ body {
 
 
 {% endfor %}
-
+  <form action="" method="POST">
+{% if s %}
+        <body style="background-color:{{s.color}};">
+    {% endif %}
+            </form>
 
 {% endblock %}

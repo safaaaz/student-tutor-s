@@ -91,6 +91,7 @@
     <Content Include="app\templates\app\password_reset_done.html" />
     <Content Include="app\templates\app\password_reset_email.txt" />
     <Content Include="app\templates\app\profile.html" />
+    <Content Include="app\templates\app\profilestud.html" />
     <Content Include="app\templates\app\Search.html" />
     <Content Include="app\templates\app\show.html" />
     <Content Include="app\templates\app\showstud.html" />
