@@ -173,18 +173,26 @@ section .section-title {
                                     <h3 class="card-title">{{ sts.name }}</h3>
                                    <h4> <p class="card-text">Phone: {{ sts.phone }}</p></h4>
                                     <h4><p class="card-text">Price: {{ sts.price }}$</p></h4>
+
                                     <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
                         </div>
                          
+
                         <div class="backside">
                             <div class="card">
                                 <div class="card-body text-center mt-4">
-                                    <h1 class="card-title">{{sts.name}}</h1>
+                                    <h1 class="card-title" >{{sts.name}}</h1>
                                     <p class="card-text">{{sts.phone}}</p>
+                                    <form action="show/"  method="POST">
+                                        {% csrf_token %}
+                                    <h6><a href="{% url 'show' %} ">More Details?</a></h6>
+                                        
+                               <input type="hidden" name="thetutor" value={{sts.username}} />
+                                            <button>details</button>
 
-                                    <h6><a href="{% url 'show' %}">More Details?</a></h6>
+                                        </form>
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
@@ -210,6 +218,7 @@ section .section-title {
                                 </div>
                             </div>
                         </div>
+                           
                     </div>
                 </div>
            </div>
