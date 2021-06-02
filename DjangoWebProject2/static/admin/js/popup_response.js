@@ -1,3 +1,4 @@
+/*global opener */
 (function() {
 
     'use strict';
@@ -25,17 +26,17 @@
     // default django popup_response.js
     var initData = JSON.parse(document.getElementById('django-admin-popup-response-constants').dataset.popupResponse);
     switch (initData.action) {
-        case 'change':
+    case 'change':
             if (typeof(openerRef.dismissChangeRelatedObjectPopup) === 'function') {
                 openerRef.dismissChangeRelatedObjectPopup(windowRef, initData.value, initData.obj, initData.new_value);
             }
-            break;
-        case 'delete':
+        break;
+    case 'delete':
             if (typeof(openerRef.dismissDeleteRelatedObjectPopup) === 'function') {
                 openerRef.dismissDeleteRelatedObjectPopup(windowRef, initData.value);
             }
-            break;
-        default:
+        break;
+    default:
             if (typeof(openerRef.dismissAddRelatedObjectPopup) === 'function') {
                 openerRef.dismissAddRelatedObjectPopup(windowRef, initData.value, initData.obj);
             }
@@ -43,7 +44,7 @@
                 // django 1.7 compatibility
                 openerRef.dismissAddAnotherPopup(windowRef, initData.value, initData.obj);
             }
-            break;
+        break;
     }
 
 })();

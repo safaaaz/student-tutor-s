@@ -7,15 +7,22 @@
 <h3>{{ message }}</h3>
 
 <address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
+    call us with this number
+    <br />
+    08-507138055
 </address>
 
 <address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    <form method="post" action="sendtomanager">
+                {% csrf_token %}
+
+<textarea rows="7" cols="40" name="sendmess"/>
+        write your message here
+        </textarea><br />
+        <input type="submit" value="send" />
+    </form>
+     <a href="mailto:Support@example.com"></a><br />
+     <a href="mailto:Marketing@example.com"></a>
 </address>
     <form action="" method="POST">
 {% if s %}

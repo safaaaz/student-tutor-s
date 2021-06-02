@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import tutorForm,studentForm,studentChangeForm,tutorChangeForm
-from .models import student,tutor,course,cart
+from .models import student,tutor,course,cart,message
 
 
 #class studentAdmin(UserAdmin):
@@ -14,10 +14,11 @@ from .models import student,tutor,course,cart
 
 admin.site.register(student)
 admin.site.register(cart)
+#admin.site.register(messages)
 
 class UserProfileInline(admin.StackedInline):
     model = tutor
-    filter_horizontal = ('coursees',)
+    filter_horizontal = ('coursees','messages')
 
 class tutorAdmin(UserAdmin):
 
@@ -34,6 +35,7 @@ class tutorAdmin(UserAdmin):
 admin.site.register(tutor,tutorAdmin)
 
 admin.site.register(course)
+admin.site.register(message)
 
 #class YourModelAdmin(admin.ModelAdmin):
    # pass

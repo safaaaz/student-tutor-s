@@ -51,6 +51,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 
+from django.core.mail import send_mail
+
 @login_required
 def deleteuser(request):
     if request.method == 'POST':
@@ -100,7 +102,7 @@ def show(request):
     stu = tutor.objects.all()
 
     print(request.POST.get('sts.name'))
-    stu = tutor.objects.get(name="Rami")
+    stu = tutor.objects.get(name="soso")
 
     stu = tutor.objects.get(name='Ayat')
     s=student.objects.filter(username=request.user.username)
@@ -333,6 +335,22 @@ class profile(UpdateView):
            that will be edited'''
         return self.request.user
    
+def sendtomanager(request):
+    print(request.POST.get('sendmess'))
+    #s=student.objects.filter(username=request.user.username)
+    send_mail(
+    'message from user '+request.user.username,
+    request.POST.get('sendmess'),
+    [request.user.email],
+    ['safaaaz@ac.sce.ac.il'],
+    fail_silently=True,
+)
+    return render(request, 'app/contact.html',{
+            'title':'Contact',
+            'message':'Your message has been sent to the administration',
+            'year':datetime.now().year,
+        }) 
+
 def addchart(request,**kwargs):
     x=request.POST.getlist('course')
     s=student.objects.filter(username=request.user.username)
@@ -464,3 +482,8 @@ def product_list(request):
     
     f = ProductFilter(request.GET, queryset=tutor.objects.all())
     return render(request, 'app/template.html', {'filter': f})
+
+def messagest(request):
+    t=tutor.objects.filter(username=request.user.username)
+    return render(request, 'app/messagest.html', {'totur': t[0]})
+

@@ -5,7 +5,7 @@
     <Name>DjangoWebProject2</Name>
     <RootNamespace>DjangoWebProject2</RootNamespace>
     <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
-    <InterpreterId>MSBuild|env1|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|MyDjangoEnv|$(MSBuildProjectFullPath)</InterpreterId>
     <TestFramework>Pytest</TestFramework>
     <SuppressConfigureTestFrameworkPrompt>true</SuppressConfigureTestFrameworkPrompt>
   </PropertyGroup>
@@ -84,6 +84,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="app\templates\app\login_page.html" />
+    <Content Include="app\templates\app\messagest.html" />
     <Content Include="app\templates\app\ourcart.html" />
     <Content Include="app\templates\app\password_reset.html" />
     <Content Include="app\templates\app\password_reset_complete.html" />
