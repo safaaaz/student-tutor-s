@@ -2,6 +2,92 @@
 {% block content %}
 
 
+<style>body {
+  		background: #FDFDFD;
+			font-family: "Segoe WP","Segoe UI", Helvetica, Arial, sans-serif;
+			text-align:center;
+		}
+		h1, h2 {
+			color: #888;
+			margin:0;
+			font-weight:normal;
+		}
+		h1{ padding-top: 1.5em; padding-bottom: 2em; } 
+		h2 {
+			clear:both;
+			color: #aaa;
+			padding: 2em 0 0.3em
+		}
+		em {
+			display: block;
+			margin: .5em auto 2em;
+			color: #bbb;
+		}
+
+		p, p a { 
+			color: #aaa;
+			text-decoration: none;
+		}
+		p a:hover,
+		p a:focus {
+			text-decoration: underline;
+		}
+		p + p { color: #bbb; margin-top: 2em;}
+		.detail {position: absolute; text-align: right; right: 5px; bottom: 5px; width: 50%;}
+		
+		a[href*="intent"] {
+			display:inline-block;
+			margin-top: 0.4em;
+		}
+
+		/*  
+		 * Rating styles
+		 */
+		.rating {
+			width: 226px;
+			margin: 0 auto 1em;
+			font-size: 45px;
+			overflow:hidden;
+		}
+.rating input {
+  float: right;
+  opacity: 0;
+  position: absolute;
+}
+		.rating a,
+    .rating label {
+			float:right;
+			color: #aaa;
+			text-decoration: none;
+			-webkit-transition: color .4s;
+			-moz-transition: color .4s;
+			-o-transition: color .4s;
+			transition: color .4s;
+		}
+.rating label:hover ~ label,
+.rating input:focus ~ label,
+.rating label:hover,
+		.rating a:hover,
+		.rating a:hover ~ a,
+		.rating a:focus,
+		.rating a:focus ~ a		{
+			color: orange;
+			cursor: pointer;
+		}
+		.rating2 {
+			direction: rtl;
+		}
+		.rating2 a {
+			float:none
+		}</style>
+
+
+
+
+
+
+
+
 <style><html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -179,6 +265,19 @@ path.two {
     }
 }
 }</style>
+
+
+
+
+	
+
+
+	
+
+
+
+
+
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
@@ -200,10 +299,14 @@ path.two {
       </div>
     </div>
   </div>
-      
-    <div class="wrapper">
-  <a class="cta" href={% url 'CheckOut' %}>
-    <span>Buy Now</span>
+
+   
+ 
+
+     <h1>{% for area in stu.coursees.all %}<input type="checkbox" id="cource" name="course" value={{ area }}>{{ area }}<br/>{% endfor %}</h1>
+                <div class="wrapper">
+  <a class="cta" href={% url 'ourcart' %}>
+    <span>Add to Cart</span>
     <span>
       <svg width="33px" height="23px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <g id="arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -224,6 +327,10 @@ path.two {
      <input type="hidden" name="stuname" value={{stu.username}}>
 
     <span><input class="cta" type="submit" value="add to Cart >"></span>
+              
+    <div class="wrapper">
+  <a class="cta" href={% url 'CheckOut' %}>
+    <span>Buy Now</span>
     <span>
       <svg width="33px" height="23px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <g id="arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -239,11 +346,22 @@ path.two {
 <!-- designed by me... enjoy! -->
 
     </form>
+ 
 
 </head>
   <form action="" method="POST">
 {% if s %}
         <body style="background-color:{{s.color}};">
+               <form>
+	<div class="rating rating2" name="rate"><!--
+		--><a href={% url 'ratings' %}  title="Give 5 stars">★</a><!--
+		--><a href={% url 'ratings' %}  title="Give 4 stars">★</a><!--
+		--><a href={% url 'ratings' %}  title="Give 3 stars">★</a><!--
+		--><a href={% url 'ratings' %}  title="Give 2 stars">★</a><!--
+		--><a href={% url 'ratings' %}  title="Give 1 star">★</a>
+	</div>
+
+</form>
     {% endif %}
             </form>
 

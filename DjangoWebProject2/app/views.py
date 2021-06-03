@@ -378,10 +378,23 @@ def updatestud(request):
     s=student.objects.filter(username=request.user.username).update(color=request.POST.get("SEL"),pic=img,name=request.POST.get('name'),email=request.POST.get('email'),phone=request.POST.get('phone'))
     
     
-    s=student.objects.filter(username=request.user.username)
+    s=student.objects.filter()
  
-    return render(request, 'app/profilestud.html',{'s':s[0]}) 
+    return render(request, 'app/profilestud.html',{'s':s[0]})
 
+
+
+def ratings(request):
+    oldrate=tutor.objects.filter(username=request.user.username).rate
+    
+    
+    addrate=tutor.objects.filter(username=request.user.username).update(rate=(request.POST.get("rate")+oldrate))
+    oldnumrate=tutor.objects.filter(username=request.user.username).numrate
+    n=tutor.objects.filter(username=request.user.username).update(numrate=oldnumrate+1)
+
+    s=tutor.objects.filter(username=request.user.username).update(avgrate=rate/numrate)
+    return render(request, 'app/profilestud.html',{'s':s[0]})
+    
 
 
 
