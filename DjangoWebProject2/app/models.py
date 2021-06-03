@@ -54,6 +54,9 @@ class tutor(User):
     courses=models.CharField(max_length=100,default='')
     coursees = models.ManyToManyField(course)
     rate=models.IntegerField(default=00)
+    numrate=models.IntegerField(default=00)
+    avgrate=models.IntegerField(default=00)
+
     messages = models.ManyToManyField(message)
     def __str__(self):
         return self.name
