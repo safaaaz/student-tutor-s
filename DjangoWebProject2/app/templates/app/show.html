@@ -292,7 +292,9 @@ path.two {
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <form action="addchart" method="post" name="stuname" class="form-horizontal">
+
+
+    <form action="addchart" method="post" class="form-horizontal">
     <meta charset="utf-8" />
         {% csrf_token %}
    
@@ -328,6 +330,15 @@ path.two {
     </span> 
   </a>
 </div>
+   
+ 
+
+     <h1>{% for area in stu.coursees.all %}<input type="checkbox" id="cource" name="course" value={{ area }}>{{ area }}<br/>{% endfor %}</h1>
+                <div class="wrapper">
+     how much lessons? <input type="number" name="numlessons" value="1" />
+     <input type="hidden" name="stuname" value={{stu.username}}>
+
+    <span><input class="cta" type="submit" value="add to Cart >"></span>
               
     <div class="wrapper">
   <a class="cta" href={% url 'CheckOut' %}>
@@ -356,4 +367,6 @@ path.two {
                
     {% endif %}
             </form>
+
+ {{message}}
 {% endblock %}

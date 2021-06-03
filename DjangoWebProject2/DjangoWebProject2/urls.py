@@ -28,6 +28,7 @@ urlpatterns = [
     path('app/updatestud', views.updatestud, name='updatestud'),
    
      path('CheckOut/', views.CheckOut, name='CheckOut'),
+     path('show/CheckOut', views.CheckOut, name='CheckOut1'),
    # path('login/s', views.s, name='s'),
    # path('totur/s',views.s,name='s'),
     path('Search/', views.home, name='Search'),
@@ -53,14 +54,24 @@ urlpatterns = [
     #path('app/login', auth_views.LoginView.as_view(), name='login'),
     path('app/login_page', views.login_page, name='login_page'),
     path('show/addchart', views.addchart, name='addchart'),
+    path('show/show/addchart', views.addchart, name='addchart1'),
     path('show/ratings', views.ratings, name='ratings'),
     
     path('login/tutorstud', views.tutorstud, name='tutorstud'),
     path('login/messagest', views.messagest, name='messagest'),
+    path('messagest', views.messagest, name='messagest1'),
+    path('CheckOut/buy', views.buy, name='buy'),
+    path('show/buy', views.buy, name='buy1'),
     path('show/back', views.back, name='back'),
+    path('show/show/back', views.back, name='back1'),
+    path('show/show/',views.show, name='show1'),
     path('show/ourcart', views.ourcart, name='ourcart'),
     path('app/studentsignup', views.studentsignup, name='studentsignup'),
     path('app/profile', views.prof, name='profile'),
+    path('CheckOut/deleteitem',views.deleteitem, name='deleteitem'),
+    path('show/deleteitem',views.deleteitem, name='deleteitem1'),
+
+    path('app/changet',views.changet, name='changet'),
     ###################################################################33
    # path('app/', include('django.contrib.auth.urls')),
  path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='app/password_reset_done.html'), name='password_reset_done'),

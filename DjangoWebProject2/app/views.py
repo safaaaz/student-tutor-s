@@ -42,6 +42,7 @@ from django.utils.encoding import force_bytes
 
 from django.shortcuts import render
 from .models import tutor
+from DjangoWebProject2 import settings
 #from .forms import ImageForm
 
 
@@ -77,55 +78,66 @@ def home(request):
 
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
-    stu = tutor.objects.all()
-    s=student.objects.filter(username=request.user.username)
-    
     instock = request.GET.get('instock')
     price_from = request.GET.get('price_from', 0)
     price_to = request.GET.get('price_to', 100000)
     sorting = request.GET.get('sorting', '-date_added')
-    products = tutor.objects.filter().filter(price__gte=price_from).filter(price__lte=price_to)
+    products = tutor.objects.filter(is_ok=True).filter(price__gte=price_from).filter(price__lte=price_to)
     stu=products
-    if s:
-        context = {
-        #'query': query,
-        'products': products.order_by(sorting),
-        'instock': instock,
-        'price_from': price_from,
-        'price_to': price_to,
-        'sorting': sorting, 's':s[0],'stu':stu}
-        return render(
-        request,
-        'app/index.html',context)
+    s = authenticate(request, username=request.user.username)
+    if request.user.is_authenticated:
+        s=tutor.objects.filter(username=request.user.username)
+        if s:
+            print('s is tutor')
+            return render(request,'app/tutorpage.html')
+        s=student.objects.filter(username=request.user.username)
+        if s:
+            print('s is student')
+            context = {
+            #'query': query,
+            'products': products.order_by(sorting),
+            'instock': instock,
+            'price_from': price_from,
+            'price_to': price_to,
+            'sorting': sorting, 's':s[0],'stu':stu}
+            return render(
+            request,
+            'app/index.html',context)
+        print('s is admin')
+        return HttpResponseRedirect('admin')
+    print('s is nothing')
+    context = {
+            #'query': query,
+            'products': products.order_by(sorting),
+            'instock': instock,
+            'price_from': price_from,
+            'price_to': price_to,
+            'sorting': sorting,'stu':stu}
+    return render(request,'app/index.html',context)
 
-    else:
-        context = {
-        #'query': query,
-        'products': products.order_by(sorting),
-        'instock': instock,
-        'price_from': price_from,
-        'price_to': price_to,
-        'sorting': sorting, 
-       
-        'stu':stu}
-        return render(request,'app/index.html',context)
+import datetime
+
+def deleteitem(request):
+    print('the tutor is ',request.POST.get('tutor'))
+    print('the date is',request.POST.get('date'))
+    print('the student is ',student.objects.filter(username=request.user.username)[0])
+
+  
+
+    #d = datetime.date(1997, request.POST.get('date'), 19)
+    s=cart.objects.filter(student=student.objects.filter(username=request.user.username)[0],tutor=tutor.objects.filter(name=request.POST.get('tutor'))[0])
+    print(s)
+    s.delete()
+    return render(request,'app/CheckOut.html',{'stu':cart.objects.filter(student=student.objects.filter(username=request.user.username)[0])})
+
+
+   
 
 
 
 
 
 
-
-
-
-
-
-    #if instock:
-     #   products = products.filter(num_available__gte=1)
-    if s:
-        
-
-        return render(request, 'app/Search.html',context)
 
 
 
@@ -258,7 +270,7 @@ def signup_view(request):
             #form.coursees.add(request.POST.getlist('coursees'))
             #user = authenticate(username=username, password=raw_password)
             #login(request, user)
-            return redirect('about',status=302)
+            return redirect('login')
     context ={'form':form}
     
     return render(request, 'app/signup.html',context)   
@@ -282,9 +294,9 @@ def studentsignup(request):
             html_content = htmly.render(d)
             msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
-            msg.send()
+            #msg.send()
             messages.success(request, f'Your account has been created ! You are now able to log in')
-            return redirect('about')
+            return redirect('login')
         context ={'form':form}
         return render(request, 'app/studentsignup.html',context)
     return render(request, 'app/studentsignup.html')
@@ -346,7 +358,7 @@ def login(request):
                 return HttpResponseRedirect('admin')
         else:
             form = AuthenticationForm(request.POST)
-            return render(request, 'app/login.html', {'form': form})
+            return render(request, 'app/login.html', {'form': form,'message':'Please enter a correct user name and password.'})
     else:
         form = AuthenticationForm()
         return render(request, 'app/login.html', {'form': form})
@@ -359,9 +371,11 @@ def prof(request):
         return render(request, 'app/profile.html',{'s':s[0]})
     s=student.objects.filter(username=request.user.username)
     return render(request, 'app/profilestud.html',{'s':s[0]})
-  
+import os
 def updatestud(request):
-    s=student.objects.filter(username=request.user.username).update(color=request.POST.get("SEL"))
+    img=request.POST.get('foto')
+    os.path.join(settings.MEDIA_ROOT, 'media/' , img)
+    s=student.objects.filter(username=request.user.username).update(color=request.POST.get("SEL"),pic=img,name=request.POST.get('name'),email=request.POST.get('email'),phone=request.POST.get('phone'))
     
     
     s=student.objects.filter()
@@ -373,29 +387,42 @@ def updatestud(request):
 
 
 
+def changet(request):
+    img=request.POST.get('foto')
+    os.path.join(settings.MEDIA_ROOT, 'media/' , img)
+
+    #images.add(img)
+    if img:
+        x=tutor.objects.filter(username=request.user.username).update(image=img,name=request.POST.get('name'),price=request.POST.get('price'),email=request.POST.get('email'),phone=request.POST.get('phone'))
+    t=tutor.objects.filter(username=request.user.username)
+    return render(request, 'app/profile.html',{'s':t[0]})
 
 
-
-class profile(UpdateView):
-    model = tutor
-    form = tutorChangeForm
+def profile(request):
+    #model = tutor
+    #form = tutorChangeForm
     
-    template_name = 'profile.html'
     #template_name = 'profile.html'
+    ##template_name = 'profile.html'
 
 
-    #print(form.idt)
-    fields = ['email','price','age','phone','idt','image']
+    ##print(form.idt)
+    #fields = ['email','price','age','phone','idt','image']
 
-    success_url = reverse_lazy('home') # This is where the user will be 
-                                       # redirected once the form
-                                       # is successfully filled in
+    #success_url = reverse_lazy('home') # This is where the user will be 
+    #                                   # redirected once the form
+    #                                   # is successfully filled in
 
-    def get_object(self):
-        '''This method will load the object
-           that will be used to load the form
-           that will be edited'''
-        return self.request.user
+    if request.method == 'POST':
+        form = tutorChangeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = tutorChangeForm()
+    return render(request, 'app/profile.html', {
+        'form': form
+    })
    
 def sendtomanager(request):
     print(request.POST.get('sendmess'))
@@ -417,25 +444,29 @@ def sendtomanager(request):
 def addchart(request,**kwargs):
     x=request.POST.getlist('course')
     s=student.objects.filter(username=request.user.username)
-    print(tutor.objects.filter(id=request.POST.get('stuname')))
+    print(tutor.objects.filter(username=request.POST.get('stuname')))
     print(s)
-    if s.count()==0:
-        print("noo")
+    if s:
+        t=tutor.objects.filter(username=request.POST.get('stuname'))
+        print('this t:',t)
+        if t:
+            y=cart.objects.create(student=s[0],tutor=t[0],price=t[0].price,numlessons=request.POST.get('numlessons'))
+            y.courses.create(name=request.POST.getlist('course'))
+            print('this is y : ',y)
+            y.save()
+            return render(request, 'app/addchart.html',{'s':s[0]})
     else:
-        t=tutor.objects.filter(id=request.POST.get('stuname'))
-        y=cart.objects.create(student=s[0],tutor=t[0],price=t[0].price)
-        y.courses.create(name=request.POST.getlist('course'))
-        
+        print("noo")
+        return render(request, 'app/show.html',{'stu':tutor.objects.filter(username=request.POST.get('stuname'))[0],'message':'You have to login to add to the cart!'})
+  
     # y.courses.set(request.POST.getlist('course'))
     #y.save()
-    if s:
-        return render(request, 'app/addchart.html',{'s':s[0]})
-    return render(request, 'app/addchart.html')
-
+    
 def ourcart(request):
     s=student.objects.filter(username=request.user.username)
     if s:
         stu = cart.objects.filter(student=s[0])
+        print(stu)
         return render(request, 'app/ourcart.html',{'stu':stu}) 
     return render(request, 'app/ourcart.html')
 
@@ -451,14 +482,22 @@ def tutorstud(request):
     return render(request, 'app/showstud.html') 
 
 def CheckOut(request):
-    s=tutor.objects.filter(username=request.user.username)
+    s=student.objects.filter(username=request.user.username)
     if s:
-        return render(request,'app/CheckOut.html',{'s':s[0]})
+        count=cart.objects.filter(student=s[0]).count()
+        stu = cart.objects.filter(student=s[0])
+        total=0
+        for t in stu:
+            total+=t.price
+        return render(request, 'app/CheckOut.html',{'stu':stu,'s':s[0],'total':total,'count':count}) 
     return render(request,'app/CheckOut.html')
 
 
-
-
+def buy(request):
+    s=student.objects.filter(username=request.user.username)
+    if s:
+        stu = cart.objects.filter(student=s[0]).delete()
+    return render(request, 'app/index.html',{'s':s[0]})
 
 def showimage(request):
 
@@ -492,7 +531,7 @@ def search_tutor(request):
     if request.method == "POST":
         query_name = request.POST.get('name', None)
         if query_name:
-            stu = tutor.objects.filter(name__contains=query_name)
+            stu = tutor.objects.filter(name__contains=query_name,is_ok=True)
             s=student.objects.filter(username=request.user.username)
             if s:
                 return render( request, 'app/index.html',  {'stu':stu,'s':s[0]})

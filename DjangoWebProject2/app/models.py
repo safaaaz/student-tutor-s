@@ -47,7 +47,7 @@ class tutor(User):
     price=models.IntegerField(default=45)
     #courses = models.ManyToManyField(course)
     field=models.FileField()
-    image=models.ImageField(upload_to='images', null=True, verbose_name="")
+    image=models.ImageField(upload_to='images/', null=True, verbose_name="")
     email0=models.EmailField(null=True)
     phone=models.IntegerField(default=00)
     is_ok= models.BooleanField(default=False)
@@ -109,7 +109,7 @@ class cart(models.Model):
     date_shop = models.DateField(default=datetime.now)
     courses=models.ManyToManyField(course)
     numlessons=models.IntegerField(default=1)
-    price=models.IntegerField()
+    price=models.IntegerField(default=5555555)
     done=models.BooleanField(default=False)
 
     

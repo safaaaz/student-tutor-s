@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 {% block content %}
 <html>
 
@@ -118,8 +117,8 @@ span.price {
 <div class="row">
   <div class="col-75">
     <div class="container">
-      <form action="/action_page.php">
-      
+      <form action="buy" method="post">
+      {% csrf_token %}
         <div class="row">
           <div class="col-50">
             <h3>Billing Address</h3>
@@ -182,13 +181,20 @@ span.price {
 
   <div class="col-25">
     <div class="container">
-      <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>4</b></span></h4>
-      <p><a href="#">Cours 1</a> <span class="price">$15</span></p>
-      <p><a href="#">Cours 2</a> <span class="price">$5</span></p>
-      <p><a href="#">Cours 3</a> <span class="price">$8</span></p>
-      <p><a href="#">Cours 4</a> <span class="price">$2</span></p>
+      <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>{{count}}</b></span></h4>
+        {% for t in stu %}
+      <p><a href="#" >{{t.tutor.name}}</a> 
+      <form id="form1" action="deleteitem" method="post">
+          {% csrf_token %}
+            <a href="javascript:;" onclick="document.getElementById('form1').submit();">delete</a>
+            <input type="hidden" name="tutor" value= {{ t.tutor.name }} />
+            <input type="hidden" name="date" value= {{ t.date_shop }} />
+       </form>
+        <span class="price">${{t.price}}</span></p>
       <hr>
-      <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
+  
+        {% endfor %}
+      <p>Total <span class="price" style="color:black"><b>${{total}}</b></span></p>
     </div>
   </div>
 </div>
