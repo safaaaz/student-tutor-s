@@ -41,7 +41,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 
 from django.shortcuts import render
-from .models import tutor
+from .models import tutor,AboutMss
 from DjangoWebProject2 import settings
 #from .forms import ImageForm
 
@@ -211,13 +211,14 @@ def about(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
     s=student.objects.filter(username=request.user.username)
+    b=AboutMss.objects.all()
     if s:
         return render(
         request,
         'app/about.html',
         {
             'title':'About',
-            'message':'Your application description page.',
+            'message':b[0].M,
             'year':datetime.now().year,'s':s[0],
         }
     )
@@ -226,7 +227,7 @@ def about(request):
         'app/about.html',
         {
             'title':'About',
-            'message':'Your application description page.',
+            'message':b[0].M,
             'year':datetime.now().year,
         }
     )

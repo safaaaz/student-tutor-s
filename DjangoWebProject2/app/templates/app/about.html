@@ -2,20 +2,15 @@
 
 {% block content %}
 
-
 <h2>{{ title }}.</h2>
 
-<h4>This site was designed in the time of the spread of the Corona virus</br>
-With the lower educational level of students, distance education has made the task more difficult to study and communicate with others</br>
-As a solution, we designed this site to be a helping hand for students at this stage</br>
-Here you can find a private tutor for you as a studentو in the courses you want at the right price</br>
-You can also register as a teacher for other students</br>
-For any help, you can contact us </br>
-Enjoy and be well :) </h4>
+<h4>{{message}}</h4>
   <form action="" method="POST">
 {% if s %}
         <body style="background-color:{{s.color}};">
     {% endif %}
             </form>
+
+
 
 {% endblock %}

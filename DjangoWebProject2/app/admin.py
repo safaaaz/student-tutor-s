@@ -5,7 +5,7 @@ from django.contrib.auth.models import Group,User
 
 
 from .forms import tutorForm,studentForm,studentChangeForm,tutorChangeForm
-from .models import student,tutor,course,cart,message
+from .models import student,tutor,course,cart,message,AboutMss
 
 
 #class studentAdmin(UserAdmin):
@@ -15,6 +15,7 @@ from .models import student,tutor,course,cart,message
 #    list_display = ['email', 'username']
 admin.site.unregister(Group)
 admin.site.unregister(User)
+admin.site.register(AboutMss)
 
 admin.site.register(student)
 admin.site.register(cart)

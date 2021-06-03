@@ -66,7 +66,13 @@ class tutor(User):
 
 
 
-
+class AboutMss(models.Model):
+    M=models.CharField(max_length=1000)
+    
+    def _str_(self):
+        return self.M
+    class Meta:
+        db_table = 'aboutmss'
 
 class student(User):
     
