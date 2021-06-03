@@ -145,7 +145,21 @@ def show(request):
     assert isinstance(request, HttpRequest)
 
     stu = tutor.objects.all()
+    if request.method == 'POST':
+        print(request.POST.get('thetutor'))
+        stu = tutor.objects.get(username=request.POST.get('thetutor'))
 
+    #stu = tutor.objects.get(name='Ayat')
+    if stu:
+        return render(
+        request,
+        'app/show.html',
+       {'stu':stu}
+    )
+    return render(
+        request,
+        'app/show.html'
+    )
    
     stu = tutor.objects.get(name="Ayat")
 
@@ -244,7 +258,7 @@ def signup_view(request):
             #form.coursees.add(request.POST.getlist('coursees'))
             #user = authenticate(username=username, password=raw_password)
             #login(request, user)
-            return redirect('about')
+            return redirect('about',status=302)
     context ={'form':form}
     
     return render(request, 'app/signup.html',context)   
@@ -273,6 +287,7 @@ def studentsignup(request):
             return redirect('about')
         context ={'form':form}
         return render(request, 'app/studentsignup.html',context)
+    return render(request, 'app/studentsignup.html')
 
 
 #@login_required
@@ -387,7 +402,7 @@ class profile(UpdateView):
                                        # redirected once the form
                                        # is successfully filled in
 
-    def get_object(self, **kwargs):
+    def get_object(self):
         '''This method will load the object
            that will be used to load the form
            that will be edited'''
@@ -396,7 +411,8 @@ class profile(UpdateView):
 def sendtomanager(request):
     print(request.POST.get('sendmess'))
     #s=student.objects.filter(username=request.user.username)
-    send_mail(
+    if request.user.is_authenticated:
+        send_mail(
     'message from user '+request.user.username,
     request.POST.get('sendmess'),
     [request.user.email],
@@ -429,10 +445,10 @@ def addchart(request,**kwargs):
 
 def ourcart(request):
     s=student.objects.filter(username=request.user.username)
-    stu = cart.objects.filter(student=s[0])
     if s:
-        return render(request, 'app/ourcart.html',{'stu':stu,'s':s[0]})
-    return render(request, 'app/ourcart.html',{'stu':stu})
+        stu = cart.objects.filter(student=s[0])
+        return render(request, 'app/ourcart.html',{'stu':stu}) 
+    return render(request, 'app/ourcart.html')
 
 def login_page(request):
 
@@ -440,8 +456,10 @@ def login_page(request):
 
 def tutorstud(request):
     s=tutor.objects.filter(username=request.user.username)
-    stu = cart.objects.filter(tutor=s[0])
-    return render(request, 'app/showstud.html',{'stu':stu}) 
+    if s:
+        stu = cart.objects.filter(tutor=s[0])
+        return render(request, 'app/showstud.html',{'stu':stu}) 
+    return render(request, 'app/showstud.html') 
 
 def CheckOut(request):
     s=tutor.objects.filter(username=request.user.username)
@@ -543,5 +561,7 @@ def product_list(request):
 
 def messagest(request):
     t=tutor.objects.filter(username=request.user.username)
-    return render(request, 'app/messagest.html', {'totur': t[0]})
+    if t:
+        return render(request, 'app/messagest.html', {'totur': t[0]})
+    return render(request, 'app/messagest.html')
 

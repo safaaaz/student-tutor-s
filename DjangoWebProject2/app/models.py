@@ -59,13 +59,12 @@ class tutor(User):
 
     messages = models.ManyToManyField(message)
     def __str__(self):
-        return self.name
+        return self.name +' ' + self.last_name
     class Meta:
         db_table = 'tutors'
 
 
-    def __str__(self):
-        return self.name + ": " + str(self.image)
+
 
 
 
