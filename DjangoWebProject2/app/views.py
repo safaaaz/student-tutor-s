@@ -115,7 +115,7 @@ def home(request):
             'sorting': sorting,'stu':stu}
     return render(request,'app/index.html',context)
 
-import datetime
+
 
 def deleteitem(request):
     print('the tutor is ',request.POST.get('tutor'))
@@ -384,16 +384,16 @@ def updatestud(request):
 
 
 
-def ratings(request):
-    oldrate=tutor.objects.filter(username=request.user.username).rate
+#def ratings(request):
+#    oldrate=tutor.objects.filter(username=request.user.username).rate
     
     
-    addrate=tutor.objects.filter(username=request.user.username).update(rate=(request.POST.get("rate")+oldrate))
-    oldnumrate=tutor.objects.filter(username=request.user.username).numrate
-    n=tutor.objects.filter(username=request.user.username).update(numrate=oldnumrate+1)
+#    addrate=tutor.objects.filter(username=request.user.username).update(rate=(request.POST.get("rate")+oldrate))
+#    oldnumrate=tutor.objects.filter(username=request.user.username).numrate
+#    n=tutor.objects.filter(username=request.user.username).update(numrate=oldnumrate+1)
 
-    s=tutor.objects.filter(username=request.user.username).update(avgrate=rate/numrate)
-    return render(request, 'app/profilestud.html',{'s':s[0]})
+#    s=tutor.objects.filter(username=request.user.username).update(avgrate=rate/numrate)
+#    return render(request, 'app/profilestud.html',{'s':s[0]})
     
 
 

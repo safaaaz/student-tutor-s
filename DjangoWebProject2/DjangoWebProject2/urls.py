@@ -55,7 +55,7 @@ urlpatterns = [
     path('app/login_page', views.login_page, name='login_page'),
     path('show/addchart', views.addchart, name='addchart'),
     path('show/show/addchart', views.addchart, name='addchart1'),
-    path('show/ratings', views.ratings, name='ratings'),
+   # path('show/ratings', views.ratings, name='ratings'),
     
     path('login/tutorstud', views.tutorstud, name='tutorstud'),
     path('login/messagest', views.messagest, name='messagest'),
