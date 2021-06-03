@@ -16,11 +16,16 @@
     <form method="post" action="updatestud" class="form-input">
         {% csrf_token %}
         
-        <img src='{{ MEDIA_URL }}{{ s.pic }}' height="70" width="70">
+        <img src='{{ MEDIA_URL }}{{ s.pic }}' height="400" width="400"></br>
+        choose new image to edit <input type="file" accept="image/*" name="foto" value={{s.image}}/>
+        name: <input type="text" name="name" value={{s.name}} /></br>
+        email: <input type="text" name="email" value={{s.email}} /></br>
+        username: <input type="text" name="username" value={{s.username}} /></br>
+        phone: <input type="text" name="phone" value={{s.phone}} /></br>
         <div class="submit">
             <input class="cta" type="submit" value="Save"/>
         </div>
-        Select color:
+        Select color for tour background:
   <select id="mySelect" name="SEL">
     <option value="red">red</option>
     <option value="green">green</option>

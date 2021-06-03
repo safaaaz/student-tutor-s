@@ -6,12 +6,30 @@
 {% for sts in stu %}
 
 <ul class="nav navbar-nav navbar-right">
-    <li><a href="{% url 'show' %}">{{sts.tutor.name}}</a></li>
+    <input type="hidden" name="thetutor" value={{sts.tutor.name}} />
+    <li><a href="{% url 'show' %}">{{sts.tutor.name}} </br>number of lessons: {{sts.numlessons}}</a></li>
     
 </ul>
 
 
 {% endfor %}
+{% if stu %}
+    <form action="CheckOut" method="post" class="form-horizontal">
+        {% csrf_token %}
+<input type="submit" class="cta" value="buy">
+    </form>
+
+{%else %}
+<h1>there are no items in the cart!!</h1>
+<form method="POST" action="back" enctype='multipart/form-data'>
+              {% csrf_token %}
+
+        <div class="submit">
+            <input class="cta" type="submit" value="go for shopping"/>
+        </div>
+          </form>
+{% endif %}
+
   <form action="" method="POST">
 {% if s %}
         <body style="background-color:{{s.color}};">

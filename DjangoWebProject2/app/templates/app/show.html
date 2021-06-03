@@ -181,6 +181,8 @@ path.two {
 }</style>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
+
+
     <form action="addchart" method="post" class="form-horizontal">
     <meta charset="utf-8" />
         {% csrf_token %}
@@ -218,8 +220,10 @@ path.two {
 
      <h1>{% for area in stu.coursees.all %}<input type="checkbox" id="cource" name="course" value={{ area }}>{{ area }}<br/>{% endfor %}</h1>
                 <div class="wrapper">
-  <a class="cta" href={% url 'ourcart' %}>
-    <span>Add to Cart</span>
+     how much lessons? <input type="number" name="numlessons" value="1" />
+     <input type="hidden" name="stuname" value={{stu.username}}>
+
+    <span><input class="cta" type="submit" value="add to Cart >"></span>
     <span>
       <svg width="33px" height="23px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <g id="arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -242,4 +246,6 @@ path.two {
         <body style="background-color:{{s.color}};">
     {% endif %}
             </form>
+
+ {{message}}
 {% endblock %}

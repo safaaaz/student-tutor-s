@@ -3,7 +3,6 @@
 
   
 
-{% block title %}Edit your profile{% endblock %}
 
 {% block content %}
 
@@ -12,11 +11,18 @@
         <p class="errors">Please correct the errors below: {{ form.non_field_errors }}</p>
     {% endif %}
 
-    <h1>Edit your profile</h1>
-    <form method="post" action="" class="form-input">
+    <form method="post" action="changet" class="form-input">
         {% csrf_token %}
-        
-        <img src='{{ MEDIA_URL }}{{ s.image }}' height="70" width="70">
+        <h1>Edit your profile</h1>
+        <img src='{{ MEDIA_URL }}{{ s.image }}' height="200" width="200" ></br>
+        <a accept="image/*" href="changet">edit image✎</a></br>
+        choose new image to edit <input type="file" accept="image/*" name="foto" value={{s.image}}/>
+        name: <input type="text" name="name" value={{s.name}} /></br>
+        price: <input type="text" name="price" value={{s.price}} /></br>
+        email: <input type="text" name="email" value={{s.email}} /></br>
+        username: <input type="text" name="username" value={{s.username}} /></br>
+        phone: <input type="text" name="phone" value={{s.phone}} /></br>
+
         <div class="submit">
             <input class="cta" type="submit" value="Save"/>
         </div>

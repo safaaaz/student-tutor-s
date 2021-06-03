@@ -1,4 +1,4 @@
-{% extends "app/layout.html" %}
+﻿{% extends "app/layout.html" %}
 {% block content %}
 
 
@@ -138,6 +138,13 @@ section .section-title {
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<form action="{% url 'updatestud' %}" method="POST">
+{% if s %}
+        <body style="background-color:{{s.color}};">
+        <a class="cta" href={% url 'ourcart' %}>
+           <h1>my cart🛒</h1></a>
+    {% endif %}
+ </form>
 
 <form action="{% url 'search' %}" method="POST">
     {% csrf_token %} 
@@ -146,11 +153,7 @@ section .section-title {
 </form>
 
 
-<form action="{% url 'updatestud' %}" method="POST">
-{% if s %}
-        <body style="background-color:{{s.color}};">
-    {% endif %}
- </form>
+
 
 
 
