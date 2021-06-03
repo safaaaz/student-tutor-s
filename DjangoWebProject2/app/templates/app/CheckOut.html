@@ -183,8 +183,16 @@ span.price {
     <div class="container">
       <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>{{count}}</b></span></h4>
         {% for t in stu %}
-      <p><a href="#">{{t.tutor.name}}</a> <span class="price">${{t.price}}</span></p>
+      <p><a href="#" >{{t.tutor.name}}</a> 
+      <form id="form1" action="deleteitem" method="post">
+          {% csrf_token %}
+            <a href="javascript:;" onclick="document.getElementById('form1').submit();">delete</a>
+            <input type="hidden" name="tutor" value= {{ t.tutor.name }} />
+            <input type="hidden" name="date" value= {{ t.date_shop }} />
+       </form>
+        <span class="price">${{t.price}}</span></p>
       <hr>
+  
         {% endfor %}
       <p>Total <span class="price" style="color:black"><b>${{total}}</b></span></p>
     </div>

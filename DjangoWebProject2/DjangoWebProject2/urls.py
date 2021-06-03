@@ -57,6 +57,7 @@ urlpatterns = [
     path('show/show/addchart', views.addchart, name='addchart1'),
     path('login/tutorstud', views.tutorstud, name='tutorstud'),
     path('login/messagest', views.messagest, name='messagest'),
+    path('messagest', views.messagest, name='messagest1'),
     path('CheckOut/buy', views.buy, name='buy'),
     path('show/buy', views.buy, name='buy1'),
     path('show/back', views.back, name='back'),
@@ -65,6 +66,9 @@ urlpatterns = [
     path('show/ourcart', views.ourcart, name='ourcart'),
     path('app/studentsignup', views.studentsignup, name='studentsignup'),
     path('app/profile', views.prof, name='profile'),
+    path('CheckOut/deleteitem',views.deleteitem, name='deleteitem'),
+    path('show/deleteitem',views.deleteitem, name='deleteitem1'),
+
     path('app/changet',views.changet, name='changet'),
     ###################################################################33
    # path('app/', include('django.contrib.auth.urls')),

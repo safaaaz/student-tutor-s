@@ -115,7 +115,20 @@ def home(request):
             'sorting': sorting,'stu':stu}
     return render(request,'app/index.html',context)
 
+import datetime
 
+def deleteitem(request):
+    print('the tutor is ',request.POST.get('tutor'))
+    print('the date is',request.POST.get('date'))
+    print('the student is ',student.objects.filter(username=request.user.username)[0])
+
+  
+
+    #d = datetime.date(1997, request.POST.get('date'), 19)
+    s=cart.objects.filter(student=student.objects.filter(username=request.user.username)[0],tutor=tutor.objects.filter(name=request.POST.get('tutor'))[0])
+    print(s)
+    s.delete()
+    return render(request,'app/CheckOut.html',{'stu':cart.objects.filter(student=student.objects.filter(username=request.user.username)[0])})
 
 
    
