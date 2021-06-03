@@ -87,6 +87,18 @@
 
 
 
+<form>
+	<div class="rating rating2" name="rate"><!--
+		--><a href={% url 'ratings' %}  title="Give 5 stars">★</a><!--
+		--><a href={% url 'ratings' %}  title="Give 4 stars">★</a><!--
+		--><a href={% url 'ratings' %}  title="Give 3 stars">★</a><!--
+		--><a href={% url 'ratings' %}  title="Give 2 stars">★</a><!--
+		--><a href={% url 'ratings' %}  title="Give 1 star">★</a>
+	</div>
+
+</form>
+
+
 
 <style><html>
 <head>
@@ -280,7 +292,7 @@ path.two {
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <form action="addchart" method="post" class="form-horizontal">
+    <form action="addchart" method="post" name="stuname" class="form-horizontal">
     <meta charset="utf-8" />
         {% csrf_token %}
    
@@ -341,16 +353,7 @@ path.two {
   <form action="" method="POST">
 {% if s %}
         <body style="background-color:{{s.color}};">
-               <form>
-	<div class="rating rating2" name="rate"><!--
-		--><a href={% url 'ratings' %}  title="Give 5 stars">★</a><!--
-		--><a href={% url 'ratings' %}  title="Give 4 stars">★</a><!--
-		--><a href={% url 'ratings' %}  title="Give 3 stars">★</a><!--
-		--><a href={% url 'ratings' %}  title="Give 2 stars">★</a><!--
-		--><a href={% url 'ratings' %}  title="Give 1 star">★</a>
-	</div>
-
-</form>
+               
     {% endif %}
             </form>
 {% endblock %}
