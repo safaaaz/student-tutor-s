@@ -186,7 +186,7 @@ class urlstest(SimpleTestCase):
 
     def test_Search(self):
         url=reverse('Search')
-        self.assertEquals(resolve(url).func,Search)
+        self.assertEquals(resolve(url).func,home)
 
     def test_contact(self):
         url=reverse('contact')
@@ -302,3 +302,81 @@ class formstest(TestCase):
         self.assertFalse(form.is_valid())
 
 
+class intgrationtest(TestCase):
+    def test_show_tutor(self):
+        response = self.client.get(reverse("show"))
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response,"app/show.html")
+
+        response = self.client.get(reverse('studentsignup'))
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response,"app/studentsignup.html")
+
+
+
+    def test_deleteuser_login(self):
+        self.client.login(username='soso', password='S263safa')
+        response = self.client.get('/login/')
+        self.assertContains(response, 'login', 4, 200)
+
+        self.client.login(username='soso', password='S263safa')
+        response = self.client.get(reverse("deleteuser"))
+        self.assertEquals(response.status_code, 302)
+
+
+
+
+    def test_search_tutor_prof(self):
+        response = self.client.get(reverse("profile"))
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response,"app/profile.html")
+
+        response = self.client.get(reverse("search"))
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response,"app/index.html")
+
+
+    def test_ourcart_addchart(self):
+         response = self.client.get(reverse("ourcart"))
+         self.assertEquals(response.status_code, 200)
+         self.assertTemplateUsed(response,"app/ourcart.html")
+
+         response = self.client.get(reverse("addchart"))
+         self.assertEquals(response.status_code, 200)
+         self.assertTemplateUsed(response,"app/addchart.html")
+
+    def test_sendtomanager_messagest(self):
+        response = self.client.get(reverse("sendtomanager"))
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response,"app/contact.html")
+
+        response = self.client.get(reverse("messagest"))
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response,"app/messagest.html")
+        
+    def test_create_tutor_tutor_stud_tutor_profile(self):
+        tutor1=tutor.objects.create(idt=555,name="safaa",age=7,phone=88,last_name="az")
+        tutor1.save()
+        self.assertEqual(str(tutor1),"safaa az")
+
+        url=reverse('tutorstud')
+        self.assertEquals(resolve(url).func,tutorstud)
+
+        url=reverse('profile')
+        self.assertEquals(resolve(url).func,prof)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      

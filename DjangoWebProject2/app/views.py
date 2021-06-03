@@ -553,6 +553,22 @@ def search_tutor(request):
 
 
 
+
+def ratings(request):
+
+
+    oldrate=tutor.objects.filter(username=request.user.username).rate
+    
+    
+    addrate=tutor.objects.filter(username=request.user.username).update(rate=(request.POST.get("rate")+oldrate))
+    oldnumrate=tutor.objects.filter(username=request.user.username).numrate
+    n=tutor.objects.filter(username=request.user.username).update(numrate=oldnumrate+1)
+
+    s=tutor.objects.filter(username=request.user.username).update(avgrate=rate/numrate)
+    return render(request, 'app/profilestud.html',{'s':s[0]})
+    
+
+
     #return render(request,'app/CheckOut.html')
 
 def Search(request):

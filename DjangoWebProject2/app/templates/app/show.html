@@ -87,6 +87,18 @@
 
 
 
+<form>
+	<div class="rating rating2" name="rate"><!--
+		--><a href={% url 'ratings' %}  title="Give 5 stars">★</a><!--
+		--><a href={% url 'ratings' %}  title="Give 4 stars">★</a><!--
+		--><a href={% url 'ratings' %}  title="Give 3 stars">★</a><!--
+		--><a href={% url 'ratings' %}  title="Give 2 stars">★</a><!--
+		--><a href={% url 'ratings' %}  title="Give 1 star">★</a>
+	</div>
+
+</form>
+
+
 
 <style><html>
 <head>
@@ -352,16 +364,7 @@ path.two {
   <form action="" method="POST">
 {% if s %}
         <body style="background-color:{{s.color}};">
-               <form>
-	<div class="rating rating2" name="rate"><!--
-		--><a href={% url 'ratings' %}  title="Give 5 stars">★</a><!--
-		--><a href={% url 'ratings' %}  title="Give 4 stars">★</a><!--
-		--><a href={% url 'ratings' %}  title="Give 3 stars">★</a><!--
-		--><a href={% url 'ratings' %}  title="Give 2 stars">★</a><!--
-		--><a href={% url 'ratings' %}  title="Give 1 star">★</a>
-	</div>
-
-</form>
+               
     {% endif %}
             </form>
 
