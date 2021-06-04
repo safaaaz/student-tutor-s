@@ -38,8 +38,8 @@ agent {
 			    stage('pylint') {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    dir("DjangoWebProject2/app"){
-                        sh "python -m pylint admin.py"
+                    dir("DjangoWebProject2/DjangoWebProject2"){
+                        sh "python -m pylint __init__.py"
 		    }
 		}
 	    }
