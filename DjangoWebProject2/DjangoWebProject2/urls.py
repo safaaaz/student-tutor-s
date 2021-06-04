@@ -4,6 +4,8 @@ from datetime import datetime
 from django.urls import path,include
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
+from app.views import tutorCourss_view
+
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -26,7 +28,7 @@ urlpatterns = [
     path('show/', views.show, name='show'),
     path('template/', views.product_list,name='template'),
     path('app/updatestud', views.updatestud, name='updatestud'),
-   
+    path('delete/', tutorCourss_view.as_view(), name='delete-pro'),
      path('CheckOut/', views.CheckOut, name='CheckOut'),
      path('show/CheckOut', views.CheckOut, name='CheckOut1'),
    # path('login/s', views.s, name='s'),

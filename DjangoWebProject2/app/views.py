@@ -20,6 +20,7 @@ from django.contrib import messages
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.views.generic import View
 from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
@@ -469,11 +470,40 @@ def addchart(request,**kwargs):
             return render(request, 'app/addchart.html',{'s':s[0]})
     else:
         print("noo")
-        return render(request, 'app/show.html',{'stu':tutor.objects.filter(username=request.POST.get('stuname'))[0],'message':'You have to login to add to the cart!'})
+        x=tutor.objects.filter(username=request.POST.get('stuname'))
+        if x:
+             return render(request, 'app/show.html',{'stu':x[0],'message':'You have to login to add to the cart!'})
   
     # y.courses.set(request.POST.getlist('course'))
     #y.save()
     
+    
+class tutorCourss_view(View):
+    def get(self,request):
+        stu=tutor.objects.get(name="rr")
+    
+        return render(request,
+                        'app/tutorCourss.html',
+                        {'stu':stu}
+                                )
+    
+    def post(self,request,*args,**kwargs):
+          
+        
+          if request.method=="POST":
+              product_ids=request.POST.getlist('id[]')
+              allposts = tutor.objects.all()
+              if request.user in allposts:
+                 for id in product_ids:
+                     co = request.user.courseees.remove(pk=id)
+                     request.save()
+                     #co.remove(pk=id)
+                
+            
+
+          
+          return redirect('delete-pro') 
+
 def ourcart(request):
     s=student.objects.filter(username=request.user.username)
     if s:

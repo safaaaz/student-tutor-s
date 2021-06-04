@@ -49,37 +49,70 @@ class ViewTest(TestCase):
         response = self.client.get(reverse("show"))
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response,"app/show.html")
+        
+
+    
 
 
     def test_studentsignup(self):
         """Tests the about page."""
         response = self.client.get(reverse('studentsignup'))
         self.assertEquals(response.status_code, 200)
+        
+
+
+     
+    def test_ssstudentsignup(self):
+        """Tests the about page."""
+        response = self.client.get(reverse('studentsignup'))
         self.assertTemplateUsed(response,"app/studentsignup.html")
+    
 
     def test_checkout(self):
         response = self.client.get(reverse("CheckOut"))
         self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response,"app/CheckOut.html")
+        
+
+    def test_cccheckout(self):
+        response = self.client.get(reverse("CheckOut"))
+        self.assertTemplateUsed(response,"app/CheckOut.html") 
 
 
     def test_tutorstud(self):
         response = self.client.get(reverse("tutorstud"))
         self.assertEquals(response.status_code, 200)
+        
+
+
+    def test_tttutorstud(self):
+        response = self.client.get(reverse("tutorstud"))
         self.assertTemplateUsed(response,"app/showstud.html")
+        
+
+  
 
 
     def test_ourcart(self):
         response = self.client.get(reverse("ourcart"))
         self.assertEquals(response.status_code, 200)
+        
+
+
+    def test_ooourcart(self):
+        response = self.client.get(reverse("ourcart"))
         self.assertTemplateUsed(response,"app/ourcart.html")
 
 
     def test_addchart(self):
         response = self.client.get(reverse("addchart"))
         self.assertEquals(response.status_code, 200)
+        
+
+    def test_adddchart(self):
+        response = self.client.get(reverse("addchart"))
         self.assertTemplateUsed(response,"app/addchart.html")
 
+          
 
     def test_back(self):
         response = self.client.get(reverse("back"))
@@ -92,9 +125,17 @@ class ViewTest(TestCase):
         #self.assertTemplateUsed(response,"app/delete_account.html")
         self.assertEquals(response.status_code, 302)
 
+
+ 
+       
     def test_signup_view(self):
         response = self.client.get(reverse("signup"))
         self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response,"app/signup.html")
+
+
+    def test_sssignup_view(self):
+        response = self.client.get(reverse("signup"))
         self.assertTemplateUsed(response,"app/signup.html")
 
     def test_prof(self):
@@ -102,30 +143,57 @@ class ViewTest(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response,"app/profile.html")
 
+
+
     def test_sendtomanager(self):
         response = self.client.get(reverse("sendtomanager"))
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response,"app/contact.html")
+
+
+    def test_sssendtomanager(self):
+        response = self.client.get(reverse("sendtomanager"))
+        self.assertTemplateUsed(response,"app/contact.html") 
 
     def test_search_tutor(self):
         response = self.client.get(reverse("search"))
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response,"app/index.html")
 
+
+
+    def test_sssearch_tutor(self):
+        response = self.client.get(reverse("search"))
+        self.assertTemplateUsed(response,"app/index.html") 
+
     def test_Search(self):
         response = self.client.get(reverse("Search"))
         self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response,"app/Search.html")
+        
+
+
+    def test_Sssearch(self):
+        response = self.client.get(reverse("Search"))
+        self.assertTemplateUsed(response,"app/Search.html") 
 
     def test_product_list(self):
         response = self.client.get(reverse("template"))
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response,"app/template.html")
 
+    def test_ppproduct_list(self):
+        response = self.client.get(reverse("template"))
+        self.assertTemplateUsed(response,"app/template.html")
+
     def test_messagest(self):
         response = self.client.get(reverse("messagest"))
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response,"app/messagest.html")
+
+
+    def test_mmmessagest(self):
+        response = self.client.get(reverse("messagest"))
+        self.assertTemplateUsed(response,"app/messagest.html") 
 
     def test_should_login_successfully(self):
         #user = self.create_test_user()
