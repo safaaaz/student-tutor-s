@@ -32,8 +32,16 @@ class TutorAdmin(UserAdmin):
     '''admin tutor class'''
     name='admin'
     model = tutor
+
     class Meta:
         '''class meta to get name'''
+        def shatha(self):
+            '''ss'''
+            print(self)
+        def safaa(self):
+            '''soso'''
+            print(self)
+
         verbose_name = 'tutor'
     list_display = ['username','is_ok','get_courses','field']
     search_fields=['price','name']

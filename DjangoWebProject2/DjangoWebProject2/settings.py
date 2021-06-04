@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-import posixpath
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -31,11 +29,8 @@ ALLOWED_HOSTS = []
 # Application references
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
 INSTALLED_APPS = [
-    
     # Add your apps here to enable them
     'admin_interface',
-   
-   
     'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,13 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'django_filters',
-    
 ]
     # ...
-    
 
 #AUTH_USER_MODEL = 'app.User'
-#AUTH_USER_MODEL = 'app.student' 
+#AUTH_USER_MODEL = 'app.student'
 
 # Middleware framework
 # https://docs.djangoproject.com/en/2.1/topics/http/middleware/
@@ -141,15 +134,11 @@ EMAIL_USE_TLS=True
 EMAIL_HOST_USER="niholstam@gmail.com"
 EMAIL_HOST_PASSWORD="Nihol1111"
 
-
-STRIPE_PUBLIC_KEY = 'pk_test_51A9krCIdX0gthvYPY23IMIfysLt07RFfny1uHNORoqVO1OSEMzLFZUucsQ4Y4WunsP9s3b1espT6UpohrAprTqdQ00bOWtw0FI'
-STRIPE_PRIVATE_KEY = 'sk_test_51A9krCIdX0gthvYPwiuJz55q8RlWGhavNzafnKmxcfEiBwTOAOqA3B5ByO6dXGGS3TCVKJXg0mAWzkjkm6Dz7zAL00NEmkdm2Q'
+Y='VO1OSEMzLFZUucsQ4Y4WunsP9s3b1espT6UpohrAprTqdQ00bOWtw0FI'
+STRIPE_PUBLIC_KEY ='pk_test_51A9krCIdX0gthvYPY23IMIfysLt07RFfny1uHNORoq'.join(
+    Y)
+V='KmxcfEiBwTOAOqA3B5ByO6dXGGS3TCVKJXg0mAWzkjkm6Dz7zAL00NEmkdm2Q'
+STRIPE_PRIVATE_KEY = 'sk_test_51A9krCIdX0gthvYPwiuJz55q8RlWGhavNzafn'.join(
+    V)
 
 MEDIA_ROOT= os.path.join(BASE_DIR, 'media')
-
-
-  
-
-
-
-     

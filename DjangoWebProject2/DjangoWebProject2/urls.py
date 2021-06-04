@@ -1,13 +1,12 @@
 """this is our urls"""
-
 from django.urls import path
 from django.contrib import admin
 from django.contrib.auth.views import LogoutView
-from app.views import tutorCourss_view
-from app import views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
+from app import views
+from app.views import tutorCourss_view
 
 
 urlpatterns = [
