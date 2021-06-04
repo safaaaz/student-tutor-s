@@ -18,7 +18,7 @@ agent {
 		        stage('test') {
 		            steps {
 		                withEnv(["HOME=${env.WORKSPACE}"]) {
-		                    dir("DjangoWebProject2/app"){
+		                    dir("DjangoWebProject2"){
 		                        sh "python manage.py test"
 		                    }
 		                }
