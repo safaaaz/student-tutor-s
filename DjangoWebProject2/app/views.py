@@ -469,7 +469,9 @@ def addchart(request,**kwargs):
             return render(request, 'app/addchart.html',{'s':s[0]})
     else:
         print("noo")
-        return render(request, 'app/show.html',{'stu':tutor.objects.filter(username=request.POST.get('stuname'))[0],'message':'You have to login to add to the cart!'})
+        x=tutor.objects.filter(username=request.POST.get('stuname'))
+        if x:
+             return render(request, 'app/show.html',{'stu':x[0],'message':'You have to login to add to the cart!'})
   
     # y.courses.set(request.POST.getlist('course'))
     #y.save()
