@@ -97,22 +97,13 @@ class ViewTest(TestCase):
         response = self.client.get(reverse("ourcart"))
         self.assertTemplateUsed(response,"app/ourcart.html")
 
-
-
-
-
-  
-
     def test_deleteuser(self):
         self.client.login(username='soso', password='S263safa')
         response = self.client.get(reverse("deleteuser"))
         #self.assertEquals(response.status_code, 200)
         #self.assertTemplateUsed(response,"app/delete_account.html")
         self.assertEquals(response.status_code, 302)
-
-
  
-       
     def test_signup_view(self):
         response = self.client.get(reverse("signup"))
         self.assertEquals(response.status_code, 200)

@@ -28,7 +28,7 @@ from django.template import Context
 from app.models import tutor,cart
 from django.shortcuts import render
 from .models import tutor
-from django.contrib import admin
+
 #########################################################
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail, BadHeaderError
@@ -108,13 +108,21 @@ def home(request):
         return HttpResponseRedirect('admin')
     b=changeview.objects.all()
     print('s is nothing')
-    context = {
+    if b:
+            context = {
             #'query': query,
             'products': products.order_by(sorting),
             'instock': instock,
             'price_from': price_from,
             'price_to': price_to,
             'sorting': sorting,'stu':stu,'color':b[0].color}
+    context = {
+            #'query': query,
+            'products': products.order_by(sorting),
+            'instock': instock,
+            'price_from': price_from,
+            'price_to': price_to,
+            'sorting': sorting,'stu':stu}
     return render(request,'app/index.html',context)
 
 

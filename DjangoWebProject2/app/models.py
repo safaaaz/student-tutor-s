@@ -5,18 +5,14 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
-import django_filters 
+import django_filters
 from django_filters import FilterSet
 from .models import *
 from datetime import datetime
 
-
-
-#User = settings.AUTH_USER_MODEL
-
+#User = settings.AUTH_USER_MODE
 # Create your models here.
 class message(models.Model):
-    
     title=models.CharField(max_length=90)
     content=models.CharField(max_length=300)
     def __str__(self):
@@ -25,15 +21,11 @@ class message(models.Model):
         db_table = 'message'
 
 class course(models.Model):
-    
     name=models.CharField(max_length=30)
-
     def __str__(self):
         return self.name
     class Meta:
         db_table = 'course'
-
-
 
 class tutor(User):
 
@@ -63,12 +55,8 @@ class tutor(User):
     class Meta:
         db_table = 'tutors'
 
-
-
-
 class AboutMss(models.Model):
     M=models.CharField(max_length=1000)
-    
     def _str_(self):
         return self.M
     class Meta:
@@ -76,14 +64,12 @@ class AboutMss(models.Model):
 
 class changeview(models.Model):
     color=models.CharField(max_length=1000,default='blue')
-    
     def _str_(self):
         return self.color
     class Meta:
         db_table = 'changeview'
 
 class student(User):
-    
     ids= models.IntegerField()
     name=models.CharField(max_length=50)
     #password=models.CharField(max_length=50)
@@ -97,13 +83,10 @@ class student(User):
     #tutors = models.ManyToManyField(tutor)
     color=models.CharField(max_length=50,default="white")
 
-
     def __str__(self):
         return self.name
     class Meta:
         db_table = 'students'
-
-        
 class ProductFilter(django_filters.FilterSet):
     price = django_filters.NumberFilter()
     price__gt = django_filters.NumberFilter(field_name='price', lookup_expr='gt')
@@ -112,7 +95,6 @@ class ProductFilter(django_filters.FilterSet):
     rate__gt = django_filters.NumberFilter(field_name='rate', lookup_expr='gt')
     rate__lt = django_filters.NumberFilter(field_name='rate', lookup_expr='lt')
     manufacturer__name = django_filters.CharFilter(lookup_expr='icontains')
-
     class Meta:
         model = tutor
         fields = ['price','rate']
@@ -125,8 +107,3 @@ class cart(models.Model):
     numlessons=models.IntegerField(default=1)
     price=models.IntegerField(default=5555555)
     done=models.BooleanField(default=False)
-
-    
-       
-
-
