@@ -10,7 +10,7 @@ agent {
 		        stage('build') {
 		            steps {
 		                withEnv(["HOME=${env.WORKSPACE}"]) {
-					sh "python -m pip install --upgrade pip"
+					sh "python -m pip install pip==18.1"
 		                    sh "python -m pip install -r DjangoWebProject2/requirements.txt --user"
 		                }
 		            }
