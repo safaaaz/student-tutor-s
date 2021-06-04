@@ -20,6 +20,7 @@ from django.contrib import messages
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.views.generic import View
 from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
@@ -213,17 +214,18 @@ def about(request):
     assert isinstance(request, HttpRequest)
     s=student.objects.filter(username=request.user.username)
     b=AboutMss.objects.all()
-    if s:
-        return render(
-        request,
-        'app/about.html',
+    if b:
+        if s:
+            return render(
+           request,
+            'app/about.html',
         {
             'title':'About',
             'message':b[0].M,
             'year':datetime.now().year,'s':s[0],
         }
     )
-    return render(
+        return render(
         request,
         'app/about.html',
         {
@@ -232,6 +234,13 @@ def about(request):
             'year':datetime.now().year,
         }
     )
+    return render(
+        request,
+        'app/about.html',
+        {
+            'title':'About',
+            'year':datetime.now().year,
+        })
 
 def s(request):
     """Renders the about page."""
@@ -372,7 +381,9 @@ def prof(request):
     #print(s[0].image)
         return render(request, 'app/profile.html',{'s':s[0]})
     s=student.objects.filter(username=request.user.username)
-    return render(request, 'app/profilestud.html',{'s':s[0]})
+    if s:
+        return render(request, 'app/profilestud.html',{'s':s[0]})
+    return render(request, 'app/profilestud.html')
 import os
 def updatestud(request):
     img=request.POST.get('foto')
@@ -384,7 +395,42 @@ def updatestud(request):
  
     return render(request, 'app/profilestud.html',{'s':s[0]})
 
+#####################################################ratings
+#####################################################
+def rate1(request):
+    s=tutor.objects.filter(username=request.POST.get('tutorn'))
+    t=tutor.objects.filter(username=request.POST.get('tutorn')).update(rate=s[0].rate+1)
+    
+    print(s[0].rate)
+    return render(request, 'app/show.html',{'stu':s[0],'rate':s[0].rate})
 
+def rate2(request):
+    s=tutor.objects.filter(username=request.POST.get('tutorn'))
+    t=tutor.objects.filter(username=request.POST.get('tutorn')).update(rate=s[0].rate+2)
+    
+    print(s[0].rate)
+    return render(request, 'app/show.html',{'stu':s[0],'rate':s[0].rate})
+
+def rate3(request):
+    s=tutor.objects.filter(username=request.POST.get('tutorn'))
+    t=tutor.objects.filter(username=request.POST.get('tutorn')).update(rate=s[0].rate+3)
+    
+    print(s[0].rate)
+    return render(request, 'app/show.html',{'stu':s[0],'rate':s[0].rate})
+
+def rate4(request):
+    s=tutor.objects.filter(username=request.POST.get('tutorn'))
+    t=tutor.objects.filter(username=request.POST.get('tutorn')).update(rate=s[0].rate+4)
+    
+    print(s[0].rate)
+    return render(request, 'app/show.html',{'stu':s[0],'rate':s[0].rate})
+
+def rate5(request):
+    s=tutor.objects.filter(username=request.POST.get('tutorn'))
+    t=tutor.objects.filter(username=request.POST.get('tutorn')).update(rate=s[0].rate+5)
+    
+    print(s[0].rate)
+    return render(request, 'app/show.html',{'stu':s[0],'rate':s[0].rate})
 
 #def ratings(request):
 #    oldrate=tutor.objects.filter(username=request.user.username).rate
@@ -470,11 +516,45 @@ def addchart(request,**kwargs):
             return render(request, 'app/addchart.html',{'s':s[0]})
     else:
         print("noo")
-        return render(request, 'app/show.html',{'stu':tutor.objects.filter(username=request.POST.get('stuname'))[0],'message':'You have to login to add to the cart!'})
+        x=tutor.objects.filter(username=request.POST.get('stuname'))
+        if x:
+             return render(request, 'app/show.html',{'stu':x[0],'message':'You have to login to add to the cart!'})
+<<<<<<< HEAD
   
+=======
+        return render(request, 'app/show.html',{'message':'You have to login to add to the cart!'})
+    return render(request, 'app/addchart.html')
+>>>>>>> b78cea3c621b6d76f92414f7394e13a3884641e6
     # y.courses.set(request.POST.getlist('course'))
     #y.save()
     
+    
+class tutorCourss_view(View):
+    def get(self,request):
+        stu=tutor.objects.get(name="rr")
+    
+        return render(request,
+                        'app/tutorCourss.html',
+                        {'stu':stu}
+                                )
+    
+    def post(self,request,*args,**kwargs):
+          
+        
+          if request.method=="POST":
+              product_ids=request.POST.getlist('id[]')
+              allposts = tutor.objects.all()
+              if request.user in allposts:
+                 for id in product_ids:
+                     co = request.user.courseees.remove(pk=id)
+                     request.save()
+                     #co.remove(pk=id)
+                
+            
+
+          
+          return redirect('delete-pro') 
+
 def ourcart(request):
     s=student.objects.filter(username=request.user.username)
     if s:
@@ -556,18 +636,18 @@ def search_tutor(request):
 
 
 
-def ratings(request):
+#def ratings(request):
 
 
-    oldrate=tutor.objects.filter(username=request.user.username).rate
+#    oldrate=tutor.objects.filter(username=request.user.username).rate
     
     
-    addrate=tutor.objects.filter(username=request.user.username).update(rate=(request.POST.get("rate")+oldrate))
-    oldnumrate=tutor.objects.filter(username=request.user.username).numrate
-    n=tutor.objects.filter(username=request.user.username).update(numrate=oldnumrate+1)
+#    addrate=tutor.objects.filter(username=request.user.username).update(rate=(request.POST.get("rate")+oldrate))
+#    oldnumrate=tutor.objects.filter(username=request.user.username).numrate
+#    n=tutor.objects.filter(username=request.user.username).update(numrate=oldnumrate+1)
 
-    s=tutor.objects.filter(username=request.user.username).update(avgrate=rate/numrate)
-    return render(request, 'app/profilestud.html',{'s':s[0]})
+#    s=tutor.objects.filter(username=request.user.username).update(avgrate=rate/numrate)
+#    return render(request, 'app/profilestud.html',{'s':s[0]})
     
 
 
