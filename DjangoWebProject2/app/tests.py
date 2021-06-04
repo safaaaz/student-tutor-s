@@ -110,7 +110,7 @@ class ViewTest(TestCase):
 
     def test_adddchart(self):
         response = self.client.get(reverse("addchart"))
-        self.assertTemplateUsed(response,"app/show.html")
+        self.assertTemplateUsed(response,"app/addchart.html")
 
           
 
@@ -174,7 +174,7 @@ class ViewTest(TestCase):
 
     def test_Sssearch(self):
         response = self.client.get(reverse("Search"))
-        self.assertTemplateUsed(response,"app/index.html") 
+        self.assertTemplateUsed(response,"app/Search.html") 
 
     def test_product_list(self):
         response = self.client.get(reverse("template"))

@@ -1,0 +1,164 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<style>
+body {
+    height:500px;
+   width: 120%;
+  background-image: url('https://cdn.hipwallpaper.com/i/8/53/vygBsh.jpg');
+  background-size: 1400px 700px;
+
+}
+
+.container {
+ padding: 0 16px;
+}
+
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: grey;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #555;
+}
+    table {
+        padding:15px;
+        width:60%;
+        height:auto;
+    }
+        table thead th {
+        margin-bottom:20px;
+        text-align:left;
+        padding:10px 0;
+        text-transform:capitalize;
+        font-size:10px;
+
+        }
+    table tbody td {
+    padding:10px 19px;
+    font-size:10px;
+    text-align:left;
+    }
+    .btn_delete {
+        padding: 4px 8px;
+        font-size: 15px;
+        text-align: center;
+        width: 100px;
+        display: block;
+        cursor: pointer;
+    }
+        
+
+</style>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+
+          <div class="container">
+                 <table>
+                     <thead>
+                         <th>course name</th>
+                         <th>delete</th>
+                     </thead>
+                     <tbody>
+                        {% csrf_token %}
+                        {% for area in stu.coursees.all %}
+                            <tr id="{{area.id}}">
+                                <td>{{area.name}} </td>
+                                <td><input type="checkbox" name="course_id[]" value="{{area.id}} "id="delete_course"</td>
+                            </tr>
+                        {% endfor %}
+                   
+                     </tbody>
+                  </table>
+              <div>
+                   <button type="submit" id="delete_btn" class="btn_delete">Delete</button>
+              </div>
+      
+      
+      
+      
+      
+      
+      
+      
+          </div>
+   
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#delete_btn').click(function () {
+                    if (confirm("are you sure?")) {
+                        var id = []
+                        var csrf = $('input[name=csrfmiddlewaretoken').val();
+                        $(':checkbox:checked').each(function (i) {
+                            id[i] = $(this).val()
+
+                        })
+                    if (id.length == 0) {
+                        alert("please select item to delete")
+
+                    } else {
+                        console.log(id)
+                        $.ajax({
+                            url: ".",
+                            method: "POST",
+                            data: {
+                                id,
+                                csrfmiddlewaretoken: csrf
+                            },
+                            success: function (response) {
+                                for (var i = 0; i < id.length; i++) {
+                                    $('tr#' + id[i] + '').css('background-color', '#ccc');
+                                    $('tr#' + id[i] + '').fadeOut('slow');
+                                }
+                            }
+
+
+                        })
+
+                    }
+
+                }
+
+
+            })
+
+
+        })
+
+
+
+
+
+
+    </script> 
+
+ 
+    
+<!-- designed by me... enjoy! -->
+
+    </form>
+
+</head>
+
+{% endblock %}
