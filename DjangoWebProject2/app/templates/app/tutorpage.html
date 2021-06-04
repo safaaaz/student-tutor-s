@@ -1,18 +1,95 @@
 ﻿{% extends "app/layout.html" %}
 
 {% block content %}
+<style>
+.b1 .glow-on-hover {
+    
+    height: 30px;
+     width: 15%;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 80px;
+    margin-bottom: 200px;
+    margin :3px;
+    margin-left: 300px;
+    
+   
+}
+.b1 .glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowingBone 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.b1 .glow-on-hover:active {
+    color: #000
+}
+
+.b1 .glow-on-hover:active:after {
+    background: transparent;
+}
+
+.b1 .glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.b1 .glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+ @keyframes glowingBone {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+</style>
+<style>
+
+</style>
+
+<h2>HELLO TOTUR</h2>
 
 
-<h1>HELLO TOTUR</h1>
- <form method="POST" action="tutorstud" enctype='multipart/form-data'>
+<center>
+    <form action="tutorstud" method="post" class="form-horizontal">
              {% csrf_token %}
-
-    <button type="submit">students</button>
-  </form>
- <form method="POST" action="messagest" enctype='multipart/form-data'>
+<div class="b1">
+<button class="glow-on-hover" type="submit">My Students</button>
+</div>
+      </form>
+</center><center>
+    <form action="messagest" method="post" class="form-horizontal">
              {% csrf_token %}
+<div class="b1">
+<button class="glow-on-hover" type="submit">Messages</button>
+</div>
+      </form>
+</center>
 
-    <button type="submit">messages</button>
-  </form>
-<h6><a href="{% url 'delete-pro' %}">your courses?</a></h6>
+
+<h2><a href="{% url 'delete-pro' %}">your courses?</a></h2>
 {% endblock %}

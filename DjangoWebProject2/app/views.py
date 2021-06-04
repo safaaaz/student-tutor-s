@@ -127,10 +127,15 @@ def deleteitem(request):
   
 
     #d = datetime.date(1997, request.POST.get('date'), 19)
+
     s=cart.objects.filter(student=student.objects.filter(username=request.user.username)[0],tutor=tutor.objects.filter(name=request.POST.get('tutor'))[0])
     print(s)
     s.delete()
-    return render(request,'app/CheckOut.html',{'stu':cart.objects.filter(student=student.objects.filter(username=request.user.username)[0])})
+    date1=request.POST.get('date')
+    if date1:
+
+        return render(request,'app/CheckOut.html',{'stu':cart.objects.filter(student=student.objects.filter(username=request.user.username)[0])})
+    return render(request,'app/ourcart.html',{'sts':cart.objects.filter(student=student.objects.filter(username=request.user.username)[0])})
 
 
    

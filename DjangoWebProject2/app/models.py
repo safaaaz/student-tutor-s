@@ -49,7 +49,7 @@ class tutor(User):
     field=models.FileField()
     image=models.ImageField(upload_to='images/', null=True, verbose_name="")
     email0=models.EmailField(null=True)
-    phone=models.IntegerField(default=00)
+    phone=models.CharField(max_length=10,default='')
     is_ok= models.BooleanField(default=False)
     courses=models.CharField(max_length=100,default='')
     coursees = models.ManyToManyField(course)
