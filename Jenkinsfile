@@ -9,14 +9,14 @@ agent {
 		    stages {
 		        stage('build') {
 		            steps {
-		                withEnv(["HOME=${Env.workspace}"]) {
+		                withEnv(["HOME=${env.WORKSPACE}"]) {
 		                    sh "python -m pip install -r DjangoWebProject2/requirements.txt --user"
 		                }
 		            }
 		        }
 		        stage('test') {
 		            steps {
-		                withEnv(["HOME=${Env.workspace}"]) {
+		                withEnv(["HOME=${env.WORKSPACE}"]) {
 		                    dir("DjangoWebProject2/app"){
 		                        sh "python manage.py test"
 		                    }
