@@ -84,21 +84,61 @@
 
 
 
+            <a href="#">delete</a>
+       {{rate}} 
 
 
+                <form id="form5" action="rate5" method="post">
+                                               {% csrf_token %}
+               <input type="hidden" name="tutorn" value= {{ stu.username }} />
+                    </form>
+                            <form id="form1" action="rate1" method="post">
+                                 {% csrf_token %}
+               <input type="hidden" name="tutorn" value= {{ stu.username }} />
+                                            </form>             
 
-<form>
+                            <form id="form2" action="rate2" method="post">
+                                 {% csrf_token %}
+               <input type="hidden" name="tutorn" value= {{ stu.username }} />
+                                 </form>             
+           <form id="form3" action="rate3" method="post">
+                {% csrf_token %}
+               <input type="hidden" name="tutorn" value= {{ stu.username }} />
+               </form>   
+                          <form id="form4" action="rate4" method="post">
+                               {% csrf_token %}
+               <input type="hidden" name="tutorn" value= {{ stu.username }} />
+        
+                              </form>
 	<div class="rating rating2" name="rate"><!--
-		--><a href={% url 'ratings' %}  title="Give 5 stars">★</a><!--
-		--><a href={% url 'ratings' %}  title="Give 4 stars">★</a><!--
-		--><a href={% url 'ratings' %}  title="Give 3 stars">★</a><!--
-		--><a href={% url 'ratings' %}  title="Give 2 stars">★</a><!--
-		--><a href={% url 'ratings' %}  title="Give 1 star">★</a>
-	</div>
+                                             
 
-</form>
+		--><a href="#" title="Give 4 stars">★</a><!--
+		--><a href="#"  title="Give 3 stars">★</a><!--
+		--><a href="#"  title="Give 2 stars">★</a><!--
+		--><a href="#"  title="Give 1 star">★</a><!--
 
+               --> <a href="javascript:;" onclick="document.getElementById('form5').submit();">★</a><!--
 
+                       
+                   
+
+               --><a href="javascript:;" onclick="document.getElementById('form4').submit();">★</a><!--
+                                  
+                   
+
+               --><a href="javascript:;" onclick="document.getElementById('form3').submit();">★</a><!--
+
+                       
+                   
+
+               --><a href="javascript:;" onclick="document.getElementById('form2').submit();">★</a><!--
+   
+
+               --><a href="javascript:;" onclick="document.getElementById('form1').submit();">★</a>
+                                  	</div>
+
+      
 
 <style><html>
 <head>

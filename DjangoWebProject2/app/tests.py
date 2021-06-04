@@ -110,7 +110,7 @@ class ViewTest(TestCase):
 
     def test_adddchart(self):
         response = self.client.get(reverse("addchart"))
-        self.assertTemplateUsed(response,"app/addchart.html")
+        self.assertTemplateUsed(response,"app/show.html")
 
           
 
@@ -141,7 +141,7 @@ class ViewTest(TestCase):
     def test_prof(self):
         response = self.client.get(reverse("profile"))
         self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response,"app/profile.html")
+        self.assertTemplateUsed(response,"app/profilestud.html")
 
 
 
@@ -174,7 +174,7 @@ class ViewTest(TestCase):
 
     def test_Sssearch(self):
         response = self.client.get(reverse("Search"))
-        self.assertTemplateUsed(response,"app/Search.html") 
+        self.assertTemplateUsed(response,"app/index.html") 
 
     def test_product_list(self):
         response = self.client.get(reverse("template"))
@@ -397,7 +397,7 @@ class intgrationtest(TestCase):
     def test_search_tutor_prof(self):
         response = self.client.get(reverse("profile"))
         self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response,"app/profile.html")
+        self.assertTemplateUsed(response,"app/profilestud.html")
 
         response = self.client.get(reverse("search"))
         self.assertEquals(response.status_code, 200)
@@ -411,7 +411,7 @@ class intgrationtest(TestCase):
 
          response = self.client.get(reverse("addchart"))
          self.assertEquals(response.status_code, 200)
-         self.assertTemplateUsed(response,"app/addchart.html")
+         self.assertTemplateUsed(response,"app/show.html")
 
     def test_sendtomanager_messagest(self):
         response = self.client.get(reverse("sendtomanager"))

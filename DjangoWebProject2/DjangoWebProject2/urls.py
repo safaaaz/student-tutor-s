@@ -60,6 +60,12 @@ urlpatterns = [
     
     path('login/tutorstud', views.tutorstud, name='tutorstud'),
     path('login/messagest', views.messagest, name='messagest'),
+    path('show/rate1', views.rate1, name='rate1'),
+    path('show/rate2', views.rate2, name='rate2'),
+    path('show/rate3', views.rate3, name='rate3'),
+    path('show/rate4', views.rate4, name='rate4'),
+    path('show/rate5', views.rate5, name='rate5'),
+
     path('messagest', views.messagest, name='messagest1'),
     path('CheckOut/buy', views.buy, name='buy'),
     path('show/buy', views.buy, name='buy1'),
