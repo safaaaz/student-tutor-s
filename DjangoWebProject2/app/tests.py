@@ -23,11 +23,6 @@ class ViewTest(TestCase):
             super(ViewTest, cls).setUpClass()
             django.setup()
 
-    def test_home(self):
-        """Tests the home page."""
-        response = self.client.get('')
-        self.assertContains(response,'index',1, 200)
-
     def test_contact(self):
         """Tests the contact page."""
         response = self.client.get('/contact/')
@@ -103,20 +98,10 @@ class ViewTest(TestCase):
         self.assertTemplateUsed(response,"app/ourcart.html")
 
 
-    def test_addchart(self):
-        response = self.client.get(reverse("addchart"))
-        self.assertEquals(response.status_code, 200)
-        
 
-    def test_adddchart(self):
-        response = self.client.get(reverse("addchart"))
-        self.assertTemplateUsed(response,"app/addchart.html")
 
-          
 
-    def test_back(self):
-        response = self.client.get(reverse("back"))
-        self.assertEquals(response.status_code, 200)
+  
 
     def test_deleteuser(self):
         self.client.login(username='soso', password='S263safa')
@@ -166,15 +151,8 @@ class ViewTest(TestCase):
         response = self.client.get(reverse("search"))
         self.assertTemplateUsed(response,"app/index.html") 
 
-    def test_Search(self):
-        response = self.client.get(reverse("Search"))
-        self.assertEquals(response.status_code, 200)
-        
 
 
-    def test_Sssearch(self):
-        response = self.client.get(reverse("Search"))
-        self.assertTemplateUsed(response,"app/Search.html") 
 
     def test_product_list(self):
         response = self.client.get(reverse("template"))
