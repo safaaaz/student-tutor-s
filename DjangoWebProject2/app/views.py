@@ -41,7 +41,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 
 from django.shortcuts import render
-from .models import tutor,AboutMss
+from .models import tutor,AboutMss,changeview
 from DjangoWebProject2 import settings
 #from .forms import ImageForm
 
@@ -105,6 +105,7 @@ def home(request):
             'app/index.html',context)
         print('s is admin')
         return HttpResponseRedirect('admin')
+    b=changeview.objects.all()
     print('s is nothing')
     context = {
             #'query': query,
@@ -112,7 +113,7 @@ def home(request):
             'instock': instock,
             'price_from': price_from,
             'price_to': price_to,
-            'sorting': sorting,'stu':stu}
+            'sorting': sorting,'stu':stu,'color':b[0].color}
     return render(request,'app/index.html',context)
 
 
@@ -173,7 +174,7 @@ def show(request):
         'app/show.html'
     )
    
-    stu = tutor.objects.get(name="Ayat")
+    stu = tutor.objects.get(name="shatha")
 
 
     s=student.objects.filter(username=request.user.username)

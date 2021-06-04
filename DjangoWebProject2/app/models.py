@@ -74,6 +74,14 @@ class AboutMss(models.Model):
     class Meta:
         db_table = 'aboutmss'
 
+class changeview(models.Model):
+    color=models.CharField(max_length=1000,default='blue')
+    
+    def _str_(self):
+        return self.color
+    class Meta:
+        db_table = 'changeview'
+
 class student(User):
     
     ids= models.IntegerField()
