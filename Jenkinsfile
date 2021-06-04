@@ -24,5 +24,18 @@ agent {
 		                }
 		            }
 		        }
+		     stage('coverage') {
+            steps {
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    dir("DjangoWebProject2"){
+                        sh "python -m coverage run --include='app/*' manage.py test"
+                        sh "python -m coverage report"
+                    }
+                }
+            }
+        }
+		    
 		    }
+	
+	
 }
