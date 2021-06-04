@@ -1,26 +1,14 @@
+"""this is our urls"""
 
-
-from datetime import datetime
-from django.urls import path,include
+from django.urls import path
 from django.contrib import admin
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LogoutView
 from app.views import tutorCourss_view
-
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-
-from app import forms, views
-
+from app import views
 from django.contrib.auth import views as auth_views
-
 from django.conf import settings
 from django.conf.urls.static import static
 
-from django.conf.urls import url, include
-
-
-
-from django_filters.views import object_filter
 admin.autodiscover()
 
 urlpatterns = [
@@ -59,7 +47,6 @@ urlpatterns = [
     path('show/addchart', views.addchart, name='addchart'),
     path('show/show/addchart', views.addchart, name='addchart1'),
    # path('show/ratings', views.ratings, name='ratings'),
-    
     path('login/tutorstud', views.tutorstud, name='tutorstud'),
     path('login/messagest', views.messagest, name='messagest'),
     path('show/rate1', views.rate1, name='rate1'),
@@ -79,26 +66,23 @@ urlpatterns = [
     path('app/profile', views.prof, name='profile'),
     path('CheckOut/deleteitem',views.deleteitem, name='deleteitem'),
     path('show/deleteitem',views.deleteitem, name='deleteitem1'),
-
     path('app/changet',views.changet, name='changet'),
     ###################################################################33
    # path('app/', include('django.contrib.auth.urls')),
- path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='app/password_reset_done.html'), name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="app/password_reset_confirm.html"), name='password_reset_confirm'),
-    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='app/password_reset_complete.html'), name='password_reset_complete'),  
- path("password_reset", auth_views.PasswordResetView.as_view(template_name='app/password_reset.html'), name="password_reset"),
-     path('app/deleteuser', views.deleteuser, name='deleteuser'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(
+     template_name='app/password_reset_done.html'), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
+        template_name="app/password_reset_confirm.html"), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(
+        template_name='app/password_reset_complete.html'), name='password_reset_complete'),
+    path("password_reset", auth_views.PasswordResetView.as_view(
+        template_name='app/password_reset.html'), name="password_reset"),
+    path('app/deleteuser', views.deleteuser, name='deleteuser'),
      ]+ static(settings.MEDIA_URL, document_root= settings.STATIC_MEDIA)
- 
-
 #urlpatterns = [
   #  path('r/admin/', admin.site.urls),
   #  path('r/accounts/', include('registration.backends.default.urls')),
   #  path('', include('social.apps.django_app.urls', namespace='social')),
    # path('r/Blog/', include('Blog.urls')),
    # path('r/growth/', include('growth.urls')),
-    
 #] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
-
-
-
