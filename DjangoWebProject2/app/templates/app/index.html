@@ -10,8 +10,7 @@
 <form action="{% url 'updatestud' %}" method="POST">
 {% if s %}
         <body style="background-color:{{s.color}};">
-        <a class="cta" href={% url 'ourcart' %}>
-           <h1>🛒</h1></a>
+
 {% else %}
             <body style="background-color:{{color}};">
     {% endif %}

@@ -1,4 +1,4 @@
-{% if user.is_authenticated %}
+﻿{% if user.is_authenticated %}
 <form id="
       outForm" action="/logout/" method="post" class="navbar-right">
     {% csrf_token %}
@@ -8,10 +8,11 @@
          <li>       <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a></li>
              <li>   <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a></li>
         <li>   <a class="nav-item nav-link" href="{% url 'deleteuser' %}"> Delete Account</a></li>
-    </ul>
+    
 
-
-
+        <li><a style="font-size:x-large;"  href={% url 'ourcart' %}>
+           🛒</a></li>
+        </ul>
 </form>
 
 

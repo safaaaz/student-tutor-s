@@ -12,27 +12,30 @@
         <p class="errors">Please correct the errors below: {{ form.non_field_errors }}</p>
     {% endif %}
     <body style="background-color:{{s.color}};">
-    <h1>Edit your profile</h1>
+    <h2>Edit your profile</h2>
     <form method="post" action="updatestud" class="form-input">
         {% csrf_token %}
         
-        <img src='{{ MEDIA_URL }}{{ s.pic }}' height="400" width="400"></br>
+        <img src='{{ MEDIA_URL }}{{ s.pic }}' height="300" width="350"></br>
         choose new image to edit <input type="file" accept="image/*" name="foto" value={{s.image}}/>
         name: <input type="text" name="name" value={{s.name}} /></br>
         email: <input type="text" name="email" value={{s.email}} /></br>
         username: <input type="text" name="username" value={{s.username}} /></br>
         phone: <input type="text" name="phone" value={{s.phone}} /></br>
-        <div class="submit">
-            <input class="cta" type="submit" value="Save"/>
-        </div>
+   
         Select color for tour background:
   <select id="mySelect" name="SEL">
-    <option value="red">red</option>
-    <option value="green">green</option>
-    <option value="white">white</option>
-    <option value="blue">blue</option>
-  </select>
+    <option value="Antiquewhite">Antiquewhite</option>
+    <option value="Peachpuff">Peachpuff</option>
+    <option value="Thistle">Thistle</option>
+    <option value="Silver">Silver</option>
+    <option value="Lightskyblue">Lightskyblue</option>
+    <option value="rosybrown">rosybrown</option>
 
+  </select>
+             <div class="submit">
+            <input class="cta" style=" display:inline" type="submit" value="Save"/>
+        </div>
     </form>
 </body>
 {% endblock %}

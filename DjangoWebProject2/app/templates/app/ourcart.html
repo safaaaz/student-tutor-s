@@ -1,130 +1,52 @@
 ﻿{% extends "app/layout.html" %}
 
 {% block content %}
-<style>
-.b1 .glow-on-hover {
-    
-    height: 80px;
-     width: 60%;
-    border: none;
-    outline: none;
-    color: #fff;
-    background: #111;
-    cursor: pointer;
-    position: relative;
-    z-index: 0;
-    border-radius: 80px;
-    margin-bottom: -100px;
-    margin :2px;
-    
-   
-}
-.b1 .glow-on-hover:before {
-    content: '';
-    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-    position: absolute;
-    top: -2px;
-    left:-2px;
-    background-size: 400%;
-    z-index: -1;
-    filter: blur(5px);
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    animation: glowingBone 20s linear infinite;
-    opacity: 0;
-    transition: opacity .3s ease-in-out;
-    border-radius: 10px;
-}
 
-.b1 .glow-on-hover:active {
-    color: #000
-}
-
-.b1 .glow-on-hover:active:after {
-    background: transparent;
-}
-
-.b1 .glow-on-hover:hover:before {
-    opacity: 1;
-}
-
-.b1 .glow-on-hover:after {
-    z-index: -1;
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: #111;
-    left: 0;
-    top: 0;
-    border-radius: 10px;
-}
-
- @keyframes glowingBone {
-    0% { background-position: 0 0; }
-    50% { background-position: 400% 0; }
-    100% { background-position: 0 0; }
-}
-</style>
+  <form action="" method="POST">
+{% if s %}
+        <body style="background-color:{{s.color}};">
+    {% endif %}
+            </form>
 
 
-<section id="team" class="pb-5">
-    <div class="container">  
-<div class="row">  
-{% for sts in stu %}
 
- <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="image-flip" >
-                    <div class="mainflip flip-0">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                             
-                                    <h1 class="card-title">{{ sts.tutor.name}}</h1>
-                                   
-                                    <h4><p class="card-text">Price | {{ sts.tutor.price}}$</p></h4>
-                                    <h4><p class="card-text">number of lessons | {{sts.numlessons}}</p></h4>
-                                     <form id="form1" action="deleteitem" method="post">
+   {% if stu %}
+<div class="container">
+
+    <table style="width:100%">
+      <thread>
+        <tr>
+          <th>tutor name&nbsp;</th>&nbsp;
+          <th>number lessons&nbsp;</th>&nbsp;
+          <th>price&nbsp;</th>&nbsp;
+          <th>&nbsp;&nbsp;</th>
+          <th></th>
+        </tr>
+        </thread>
+        {% for sts in stu %}
+        <tr>
+          <td>{{ sts.tutor.name}}</td>
+          <td>{{sts.numlessons}} </td>
+          <td>{{ sts.tutor.price}}$</td>
+          <td><form id="form1" action="deleteitem" method="post">
                                 {% csrf_token %}
                                 <a href="javascript:;" onclick="document.getElementById('form1').submit();">delete</a>
-                              <input type="hidden" name="tutor" value= {{ sts.tutor.name }} />
-                             
-                                </form>
+                                            <input type="hidden" name="tutor" value= {{ sts.tutor.name }} /></form></td>
+          <td></td>
+        </tr>
 
+     {% endfor %}
 
-                                </div>
-                            </div>
-                        </div>
-                         
+    </table>  </div></br>
+ <div style="float:right;color:antiquewhite;width:33%;outline-color:brown;">
 
-                
-                    </div>
-                </div>
-     </div>
-  </div>
- </div>
- 
-</section>
-
-
-{% endfor %}
-
-
-
-
-
-
-
-
-{% if stu %}
-
-    <form action="CheckOut" method="post" class="form-horizontal">
+    <form action="CheckOut" method="post" class="form-horizontal" >
              {% csrf_token %}
-<div class="b1">
-<button class="glow-on-hover" type="submit">Buy Now</button>
-</div>
-      </form>
+<button type="submit" >Buy Now</button>
+              </form>
 
+</div>
+     </table>
 
 {%else %}
 <h1>There are no items in the cart!!</h1>
@@ -138,10 +60,5 @@
           </form>
 {% endif %}
 
-  <form action="" method="POST">
-{% if s %}
-        <body style="background-color:{{s.color}};">
-    {% endif %}
-            </form>
 
 {% endblock %}

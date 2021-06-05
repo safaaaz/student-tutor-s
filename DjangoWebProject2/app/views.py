@@ -143,7 +143,7 @@ def deleteitem(request):
     if date1:
 
         return render(request,'app/CheckOut.html',{'stu':cart.objects.filter(student=student.objects.filter(username=request.user.username)[0])})
-    return render(request,'app/ourcart.html',{'sts':cart.objects.filter(student=student.objects.filter(username=request.user.username)[0])})
+    return render(request,'app/ourcart.html',{'stu':cart.objects.filter(student=student.objects.filter(username=request.user.username)[0])})
 
 
    
@@ -170,14 +170,20 @@ def show(request):
 
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
-
+    s=None
+    if(request.user.is_authenticated):
+        s = student.objects.get(username=request.user.username)
     stu = tutor.objects.all()
     if request.method == 'POST':
         print(request.POST.get('thetutor'))
         stu = tutor.objects.get(username=request.POST.get('thetutor'))
-
     #stu = tutor.objects.get(name='Ayat')
     if stu:
+        if s:
+            return render(
+            request,
+            'app/show.html',
+            {'stu':stu,'s':s})
         return render(
         request,
         'app/show.html',
@@ -404,7 +410,7 @@ def updatestud(request):
     s=student.objects.filter(username=request.user.username).update(color=request.POST.get("SEL"),pic=img,name=request.POST.get('name'),email=request.POST.get('email'),phone=request.POST.get('phone'))
     
     
-    s=student.objects.filter()
+    s=student.objects.filter(username=request.user.username)
  
     return render(request, 'app/profilestud.html',{'s':s[0]})
 
@@ -412,38 +418,48 @@ def updatestud(request):
 #####################################################
 def rate1(request):
     s=tutor.objects.filter(username=request.POST.get('tutorn'))
-    t=tutor.objects.filter(username=request.POST.get('tutorn')).update(rate=s[0].rate+1)
-    
-    print(s[0].rate)
-    return render(request, 'app/show.html',{'stu':s[0],'rate':s[0].rate})
+    rateplus=s[0].rate+1
+    numplus=s[0].numrate+1
+    t=tutor.objects.filter(username=request.POST.get('tutorn')).update(rate=rateplus,numrate=numplus,avgrate=rateplus/numplus)
+    print(s[0].avgrate)
+    print(rateplus/numplus)
+    return render(request, 'app/show.html',{'stu':s[0],'rate':s[0].avgrate})
 
 def rate2(request):
     s=tutor.objects.filter(username=request.POST.get('tutorn'))
-    t=tutor.objects.filter(username=request.POST.get('tutorn')).update(rate=s[0].rate+2)
+    rateplus=s[0].rate+2
+    numplus=s[0].numrate+1
+    t=tutor.objects.filter(username=request.POST.get('tutorn')).update(rate=rateplus,numrate=numplus,avgrate=rateplus/numplus)
     
     print(s[0].rate)
-    return render(request, 'app/show.html',{'stu':s[0],'rate':s[0].rate})
+    return render(request, 'app/show.html',{'stu':s[0],'rate':s[0].avgrate})
 
 def rate3(request):
     s=tutor.objects.filter(username=request.POST.get('tutorn'))
-    t=tutor.objects.filter(username=request.POST.get('tutorn')).update(rate=s[0].rate+3)
+    rateplus=s[0].rate+3
+    numplus=s[0].numrate+1
+    t=tutor.objects.filter(username=request.POST.get('tutorn')).update(rate=rateplus,numrate=numplus,avgrate=rateplus/numplus)
     
     print(s[0].rate)
-    return render(request, 'app/show.html',{'stu':s[0],'rate':s[0].rate})
+    return render(request, 'app/show.html',{'stu':s[0],'rate':s[0].avgrate})
 
 def rate4(request):
     s=tutor.objects.filter(username=request.POST.get('tutorn'))
-    t=tutor.objects.filter(username=request.POST.get('tutorn')).update(rate=s[0].rate+4)
+    rateplus=s[0].rate+4
+    numplus=s[0].numrate+1
+    t=tutor.objects.filter(username=request.POST.get('tutorn')).update(rate=rateplus,numrate=numplus,avgrate=rateplus/numplus)
     
     print(s[0].rate)
-    return render(request, 'app/show.html',{'stu':s[0],'rate':s[0].rate})
+    return render(request, 'app/show.html',{'stu':s[0],'rate':s[0].avgrate})
 
 def rate5(request):
     s=tutor.objects.filter(username=request.POST.get('tutorn'))
-    t=tutor.objects.filter(username=request.POST.get('tutorn')).update(rate=s[0].rate+5)
+    rateplus=s[0].rate+5
+    numplus=s[0].numrate+1
+    t=tutor.objects.filter(username=request.POST.get('tutorn')).update(rate=rateplus,numrate=numplus,avgrate=rateplus/numplus)
     
     print(s[0].rate)
-    return render(request, 'app/show.html',{'stu':s[0],'rate':s[0].rate})
+    return render(request, 'app/show.html',{'stu':s[0],'rate':s[0].avgrate})
 
 #def ratings(request):
 #    oldrate=tutor.objects.filter(username=request.user.username).rate
@@ -542,7 +558,7 @@ def addchart(request,**kwargs):
     
 class tutorCourss_view(View):
     def get(self,request):
-        stu=tutor.objects.get(name="rr")
+        stu=tutor.objects.get(username=request.user.username)
     
         return render(request,
                         'app/tutorCourss.html',
@@ -601,7 +617,8 @@ def buy(request):
     s=student.objects.filter(username=request.user.username)
     if s:
         stu = cart.objects.filter(student=s[0]).delete()
-    return render(request, 'app/index.html',{'s':s[0]})
+    t=tutors.objects.all()
+    return render(request, 'app/index.html',{'stu':t,'s':s[0]})
 
 def showimage(request):
 

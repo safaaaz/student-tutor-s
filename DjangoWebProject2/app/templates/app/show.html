@@ -109,7 +109,8 @@ html {
   padding: 0 40px;
 }
 
-.card {
+.
+{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 6px;
   margin-left: -200px;
@@ -124,6 +125,7 @@ html {
 
 .container {
   padding: 0 16px;
+  color:black;
 }
 
 .container::after, .row::after {
@@ -133,7 +135,7 @@ html {
 }
 
 .title {
-  color: grey;
+  color: black;
 }
 
 .button {
@@ -284,16 +286,18 @@ path.two {
         {% csrf_token %}
    
        
-
-        <div class="column">
-    <div class="card">
-      <img src="{{MEDIA_URL}}{{stu.image}}"  style="width:40%">
-      <div class="container">
+       
+        <div class="column" style="border-bottom-color:black;">
+    <div style="column-count:inherit;border-style:solid;
+ border-color:black;">
+      <img src="{{MEDIA_URL}}{{stu.image}}"  style="width:70%;resize:both;"> </div>
+      <div class="container" style="border-style:ridge; border-color:black;">
         <h2>{{stu.name}}</h2>
         <p class="title"> {{stu.phone}}</p>
          <p>{{stu.price}}$</p>
         <p>{{stu.email}}</p>
-      </div>
+
+     
     </div>
   </div>
 
@@ -311,7 +315,7 @@ path.two {
    <h5> how much lessons? <input type="number" name="numlessons" value="1" />
      <input type="hidden" name="stuname" value={{stu.username}}></h5> </h4>
 
-    <span><input class="cta" type="submit" value="add to Cart >"></span>
+    <span><input class="cta" style="font-size-adjust:0.8;font:700; " type="submit" value="add to Cart >"></span>
               
     <div class="wrapper">
   <a class="cta" href={% url 'CheckOut' %}>
@@ -327,41 +331,7 @@ path.two {
     </span> 
   </a>
 </div>
-    
-<!-- designed by me... enjoy! -->
-
-
-    </form>
- 
-
-    <h5>
-
-       {{rate}} 
-
-
-                <form id="form5" action="rate5" method="post">
-                                               {% csrf_token %}
-               <input type="hidden" name="tutorn" value= {{ stu.username }} />
-                    </form>
-                            <form id="form1" action="rate1" method="post">
-                                 {% csrf_token %}
-               <input type="hidden" name="tutorn" value= {{ stu.username }} />
-                                            </form>             
-
-                            <form id="form2" action="rate2" method="post">
-                                 {% csrf_token %}
-               <input type="hidden" name="tutorn" value= {{ stu.username }} />
-                                 </form>             
-           <form id="form3" action="rate3" method="post">
-                {% csrf_token %}
-               <input type="hidden" name="tutorn" value= {{ stu.username }} />
-               </form>   
-                          <form id="form4" action="rate4" method="post">
-                               {% csrf_token %}
-               <input type="hidden" name="tutorn" value= {{ stu.username }} />
-        
-                              </form>
-	<div class="rating rating2" name="rate"><!--
+    <br /> <br /><br /><div class="rating rating2" style="font-size:30px;float:initial;" name="rate">{{stu.avgrate}}<!--
                                              
 
 	
@@ -385,6 +355,45 @@ path.two {
 
                --><a href="javascript:;" onclick="document.getElementById('form1').submit();">★</a>
                                   	</div>
+<!-- designed by me... enjoy! -->
+
+
+    </form>
+ {% if s %}
+        <body style="background-color:{{s.color}};">
+
+{% else %}
+            <body style="background-color:{{color}};">
+    {% endif %}
+
+    <h5>
+
+      
+        
+
+                <form id="form5" action="rate5" method="post">
+                                               {% csrf_token %}
+               <input type="hidden" name="tutorn" value= {{ stu.username }} />
+                    </form>
+                            <form id="form1" action="rate1" method="post">
+                                 {% csrf_token %}
+               <input type="hidden" name="tutorn" value= {{ stu.username }} />
+                                            </form>             
+
+                            <form id="form2" action="rate2" method="post">
+                                 {% csrf_token %}
+               <input type="hidden" name="tutorn" value= {{ stu.username }} />
+                                 </form>             
+           <form id="form3" action="rate3" method="post">
+                {% csrf_token %}
+               <input type="hidden" name="tutorn" value= {{ stu.username }} />
+               </form>   
+                          <form id="form4" action="rate4" method="post">
+                               {% csrf_token %}
+               <input type="hidden" name="tutorn" value= {{ stu.username }} />
+        
+                              </form>
+	
 </h5>
 
 </head>
