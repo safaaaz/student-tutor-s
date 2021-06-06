@@ -3,14 +3,26 @@
 {% block content %}
 
 
-    {% for sts in stu %}
+ <table style="width:100%">
+      <thread>
+        <tr>
+          <th>student name&nbsp;</th>&nbsp;
+          <th>number lessons&nbsp;</th>&nbsp;
+          <th>phone&nbsp;</th>&nbsp;
+          <th>email&nbsp;</th>
+          <th></th>
+        </tr>
+        </thread>
+        {% for sts in stu %}
+        <tr>
+          <td>{{ sts.student.name}}</td>
+          <td>{{sts.numlessons}} </td>
+          <td>{{ sts.student.phone}}</td>
+          <td>{{sts.student.email}}</td>
+          <td></td>
+        </tr>
 
-<ul class="nav navbar-nav navbar-right">
-    <li><a >{{sts.student.name}}</a></li>
-    
-</ul>
+     {% endfor %}
 
-
-{% endfor %}
 {% endblock %}
 

@@ -617,7 +617,7 @@ def buy(request):
     s=student.objects.filter(username=request.user.username)
     if s:
         stu = cart.objects.filter(student=s[0]).delete()
-    t=tutors.objects.all()
+    t=tutor.objects.all()
     return render(request, 'app/index.html',{'stu':t,'s':s[0]})
 
 def showimage(request):
