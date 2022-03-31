@@ -1,4 +1,4 @@
 # student tutors
- website using python (dijango) in visual studio
+ website using python (django) in visual studio
  
  
